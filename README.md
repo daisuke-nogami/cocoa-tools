@@ -1,5 +1,5 @@
 # cocoa-tools
-Utility tools for COCOA ( Covid-19 Exposure Notification System in Japan ) using Web-Bluetooth
+Utility tools for COCOA ( Covid-19 Exposure Notification System in Japan ) using Web-Bluetooth / COCOA(Covid-19接触確認アプリ)の普及状況把握などに用いるためのツール群
 
 ## contents
 
@@ -9,6 +9,8 @@ Utility tools for COCOA ( Covid-19 Exposure Notification System in Japan ) using
 ## about
 
 COCOA(Covid-19接触確認アプリ)の普及状況把握などに用いるためのツールをWeb-Bluetoothで作成したものです。
+個人情報収集をしうるツールのため、HTML/Javascriptを用いて作成することで、処理内容を限りなくオープンにし、収集の懸念を無くすことを目的としています。
+
 Web-Bluetoothが使えるブラウザで動作することを期待しています。
 
 ## enviroment
@@ -21,5 +23,5 @@ Web-Bluetoothが使えるブラウザで動作することを期待していま�
 | Android 8 | HUAWEI P10lite | 問題なく動作 | Chrome開発中機能フラグをONにする |
 | Windows 10 | VAIO S13 | 問題があるが動作 | Chrome開発中機能フラグをONにする + Chrome DevToolsで navigator.bluetooth.requestLEScan を実行し、ダイアログを出現させる |
 
-- 注: Chrome開発中機能フラグをONにする =  chrome://flags/#enable-experimental-web-platform-features をEnabledにする 
+- 注: Chrome開発中機能フラグをONにする =  chrome://flags/#enable-experimental-web-platform-features をEnabledにする
 - Windows 10での動作不具合は、ページ内スクリプトで navigator.bluetooth.requestLEScan を読んだ時に許可ダイアログが表示されないというChromeのバグによるもの。Chrome DevToolsで実行するとダイアログがでて許可できるので許可をすると、その後ページ内スクリプトでの動作もされるようになる。
