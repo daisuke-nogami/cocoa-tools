@@ -1,0 +1,76 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>COCOAインストール状況チェッカー(Web-Bluetooth利用)</title>
+</head>
+
+<body>
+<h1>COCOAインストール状況チェッカー(Web-Bluetooth利用)</h1>
+  <p>
+    利用上の注意点：使用前にChromeの設定
+    <a href="chrome://flags/#enable-experimental-web-platform-features">chrome://flags/#enable-experimental-web-platform-features</a>
+    をEnabledにする必要があります。
+  </p>
+<hr>
+  <p>
+    <input type="button" value="COCOAインストール状況チェッカーを動かす" onclick="checkContactTracing();" />
+    <input type="button" value="COCOAインストール状況チェッカーを停止する" onclick="stopContactTracing();" /><br>
+    <input type="text" id="checker" size=25 value="動作停止中" />
+  </p>
+<hr>
+  <p>動作ログ</p>
+  <textarea id="log" cols="50" rows="20"></textarea>
+    
+<script>
+var LEscanobject;
+    
+function log( text ) {
+  let log_div = document.getElementById('log');
+  log_div.insertAdjacentText('beforeend', text + '\n');
+}
+
+async function checkContactTracing() {
+    // 現在時刻の取得
+    var nowtime = new Date();
+    const nowtimestring = nowtime.toLocaleTimeString('ja-JP');
+    // タイムアウトさせる関数を書く
+    const timeout_promise = new Promise((resolve, reject) => {
+        setTimeout(reject, 10000);
+    });
+    try{
+        // チェックを開始する
+        log('チェックを開始します');
+        document.getElementById('checker').value = "見つかりません";
+        const LEscanobject = await Promise.race([
+            navigator.bluetooth.requestLEScan({filters: [{ services: [0xFD6F]}]}),
+            timeout_promise
+        ]);
+        // 発見したときに、RSSIが-45dB以上なら「発見」と表示を変える
+        navigator.bluetooth.addEventListener('advertisementreceived', event => {
+            log(nowtimestring + ':\t' + event.device.id + '\t' + event.rssi);
+            if ( event.rssi > -45 ) {
+                document.getElementById('checker').value = "見つけました！";
+                setTimeout(change_checker, 1000);
+                function change_checker(){
+                    document.getElementById('checker').value = "見つかりません";
+                }
+            }
+        });
+    } catch (error) {
+        log('ERR: エラーがおきました : ' + error);
+    }
+}
+
+function stopContactTracing(){
+     try {
+         document.getElementById('checker').value = "動作停止中";
+         LEscanobject.stop();
+         log('スキャンを手動で終了しました');
+     } catch (error) {
+         log('ERR: スキャンを手動終了できませんでした');
+     }
+}
+</script>
+</body>
+</html>
