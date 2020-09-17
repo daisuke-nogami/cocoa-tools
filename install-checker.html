@@ -21,10 +21,10 @@
 <hr>
   <p>動作ログ</p>
   <textarea id="log" cols="50" rows="20"></textarea>
-    
+
 <script>
 var LEscanobject;
-    
+
 function log( text ) {
   let log_div = document.getElementById('log');
   log_div.insertAdjacentText('beforeend', text + '\n');
@@ -42,7 +42,7 @@ async function checkContactTracing() {
         // チェックを開始する
         log('チェックを開始します');
         document.getElementById('checker').value = "見つかりません";
-        const LEscanobject = await Promise.race([
+        LEscanobject = await Promise.race([
             navigator.bluetooth.requestLEScan({filters: [{ services: [0xFD6F]}]}),
             timeout_promise
         ]);
