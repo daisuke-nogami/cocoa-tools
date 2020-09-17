@@ -40,7 +40,7 @@ async function checkContactTracing() {
     });
     try{
         // チェックを開始する
-        log('チェックを開始します');
+        log(nowtimestring + ':\t チェックを開始します');
         document.getElementById('checker').value = "見つかりません";
         LEscanobject = await Promise.race([
             navigator.bluetooth.requestLEScan({filters: [{ services: [0xFD6F]}]}),
@@ -48,7 +48,7 @@ async function checkContactTracing() {
         ]);
         // 発見したときに、RSSIが-45dB以上なら「発見」と表示を変える
         navigator.bluetooth.addEventListener('advertisementreceived', event => {
-            log(nowtimestring + ':\t' + event.device.id + '\t' + event.rssi);
+            log(nowtimestring + ':\t Found! RSSI = ' + event.rssi + 'dB');
             if ( event.rssi > -45 ) {
                 document.getElementById('checker').value = "見つけました！";
                 setTimeout(change_checker, 1000);
