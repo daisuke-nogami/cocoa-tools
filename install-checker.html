@@ -15,8 +15,20 @@
 <hr>
   <p>
     <input type="button" value="COCOAインストール状況チェッカーを動かす" onclick="checkContactTracing();" />
-    <input type="button" value="COCOAインストール状況チェッカーを停止する" onclick="stopContactTracing();" /><br>
-    <input type="text" id="checker" size=25 value="動作停止中" />
+    <input type="button" value="COCOAインストール状況チェッカーを停止する" onclick="stopContactTracing();" /><br />
+    <br />
+    <span style="	font-size: xx-large; background-color: silver; font-weight: bold;" id="checker">チェック停止中</span>
+  </p>
+<hr>
+  <p>
+    <select name="rssi-threshold">
+      <option value="-35"> -35dB </option>
+      <option value="-40"> -40dB </option>
+      <option value="-45"> -45dB </option>
+      <option value="-50"> -50dB </option>
+      <option value="-55"> -55dB </option>
+      <option value="-60"> -60dB </option>
+    </select>
   </p>
 <hr>
   <p>動作ログ</p>
@@ -38,10 +50,13 @@ async function checkContactTracing() {
     const timeout_promise = new Promise((resolve, reject) => {
         setTimeout(reject, 10000);
     });
+    // 閾値を取得する
+    const threshold = document.getElementById('checker').options[document.getElementById('checker').selectedIndex].value;
     try{
         // チェックを開始する
         log(nowtimestring + ':\t チェックを開始します');
-        document.getElementById('checker').value = "見つかりません";
+        document.getElementById('checker').innerText = "見つかりません";
+        document.getElementById('checker').style.background = "yellow";
         LEscanobject = await Promise.race([
             navigator.bluetooth.requestLEScan({filters: [{ services: [0xFD6F]}]}),
             timeout_promise
@@ -49,11 +64,13 @@ async function checkContactTracing() {
         // 発見したときに、RSSIが-45dB以上なら「発見」と表示を変える
         navigator.bluetooth.addEventListener('advertisementreceived', event => {
             log(nowtimestring + ':\t Found! RSSI = ' + event.rssi + 'dB');
-            if ( event.rssi > -45 ) {
-                document.getElementById('checker').value = "見つけました！";
+            if ( event.rssi >= threshold ) {
+                document.getElementById('checker').innerText = "見つけました！";
+                document.getElementById('checker').style.background = "aqua";
                 setTimeout(change_checker, 1000);
                 function change_checker(){
-                    document.getElementById('checker').value = "見つかりません";
+                    document.getElementById('checker').innerText = "見つかりません";
+                    document.getElementById('checker').style.background = "yellow";
                 }
             }
         });
@@ -64,7 +81,8 @@ async function checkContactTracing() {
 
 function stopContactTracing(){
      try {
-         document.getElementById('checker').value = "動作停止中";
+         document.getElementById('checker').innerText = "チェック停止中";
+         document.getElementById('checker').style.background = "silver";
          LEscanobject.stop();
          log('スキャンを手動で終了しました');
      } catch (error) {
