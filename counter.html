@@ -20,7 +20,7 @@
     <br>
     <input type="button" value="カウント件数を増やす" onclick="countNumber();" /><br>
   </p>
-  <table id="summary" style="border:1px; border-collapse: collapse;	font-size: x-small">
+  <table id="summary" style="border:1px; border-collapse: collapse">
     <tbody>
       <tr><th>動作状況</th><td><input type="text" id="watcher_status" size=10 value="動作停止中" /></td></tr>
       <tr><th>発見件数</th><td><input type="text" id="found_count" size=10 value="0" /></td></tr>
@@ -32,7 +32,7 @@
   <p>
     <input type="button" value="探索結果をシェアする" onclick="sendContactTracing();" />
   </p>
-  <table id="found_list" style="border:1px; border-collapse: collapse">
+  <table id="found_list" style="border:1px; border-collapse: collapse;	font-size: x-small">
     <thead>
       <tr><th>Hash</th><th>初回発見時刻</th><th>最終発見時刻</th><th>電波強度(最大)</th><th>電波強度(最小)</th></tr>
     </thead>
