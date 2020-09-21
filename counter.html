@@ -20,7 +20,7 @@
     <br>
     <input type="button" value="カウント件数を増やす" onclick="countNumber();" /><br>
   </p>
-  <table id="summary" style="border:1px; border-collapse: collapse">
+  <table id="summary" style="border:1px; border-collapse: collapse;	font-size: x-small">
     <tbody>
       <tr><th>動作状況</th><td><input type="text" id="watcher_status" size=10 value="動作停止中" /></td></tr>
       <tr><th>発見件数</th><td><input type="text" id="found_count" size=10 value="0" /></td></tr>
@@ -41,18 +41,22 @@
     </tbody>
   </table>
 <hr>
+<p>
+  <a href="https://daisuke-nogami.github.io/cocoa-tools/">cocoa-toolsに戻る</a>
+</p>
+<hr>
   <p>動作ログ</p>
   <textarea id="log" cols="50" rows="20"></textarea>
-    
+
 <script>
 var LEscanobject;
 // スキャン結果を格納する配列
 // 　配列の配列にする
 // 　[hash, first_time, last_time, max_rssi, min_rssi] の構造にする
-var scandevicelist = []; 
+var scandevicelist = [];
 // 手動カウンターの数値
 var hand_counter = 0;
-    
+
 function log( text ) {
   let log_div = document.getElementById('log');
   log_div.insertAdjacentText('beforeend', text + '\n');
@@ -62,7 +66,7 @@ function countNumber(){
     hand_counter++;
     document.getElementById('push_count').value = hand_counter;
 }
-    
+
 async function searchContactTracing() {
     // タイムアウトさせる関数を書く
     const timeout_promise = new Promise((resolve, reject) => {
@@ -144,22 +148,22 @@ function stopContactTracing(){
          log('ERR: スキャンを手動終了できませんでした');
      }
 }
-    
+
 async function sendContactTracing(){
     var content = 'counter:' + document.getElementById('push_count').value + '\n';
     content = content + 'location:' + document.getElementById('scan_loc').value + '\n\n';
     for (var i=0; i < scandevicelist.length; i++) {
-        content = content + 
-            scandevicelist[i][0] + '\t' + 
-            scandevicelist[i][1].toLocaleTimeString('ja-JP') + '\t' + 
-            scandevicelist[i][2].toLocaleTimeString('ja-JP') + '\t' + 
-            scandevicelist[i][3] + '\t' + 
+        content = content +
+            scandevicelist[i][0] + '\t' +
+            scandevicelist[i][1].toLocaleTimeString('ja-JP') + '\t' +
+            scandevicelist[i][2].toLocaleTimeString('ja-JP') + '\t' +
+            scandevicelist[i][3] + '\t' +
             scandevicelist[i][4] + '\n';
     }
     const encoder = new TextEncoder();
     const blob = encoder.encode(content);
     const resultfile = new File([blob.buffer], 'COCOA.txt', {type: 'text/plain'})
-    
+
     navigator.share({
         text: 'COCOAスキャン結果',
         url: location.href,
