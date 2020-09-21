@@ -18,20 +18,69 @@
     <input type="button" value="周囲のCOCOAインストール数カウントを停止する" onclick="stopContactTracing();" />
     <br>
     <br>
-    <input type="button" value="カウント件数を増やす" onclick="countNumber();" /><br>
+    <input type="button" value="通過人数の手動カウント" onclick="countNumber();" /><br>
+    <br>
+    <br>
   </p>
   <table id="summary" style="border:1px; border-collapse: collapse">
     <tbody>
       <tr><th>動作状況</th><td><input type="text" id="watcher_status" size=10 value="動作停止中" /></td></tr>
-      <tr><th>発見件数</th><td><input type="text" id="found_count" size=10 value="0" /></td></tr>
-      <tr><th>カウント件数</th><td><input type="text" id="push_count" size=10 value="0" /></td></tr>
-      <tr><th>ロケーション</th><td><input type="text" id="scan_loc" size=10 value="-" /></td></tr>
+      <tr><th>計測内容メモ</th><td><input type="text" id="scan_loc" size=10 value="-" /></td></tr>
+      <tr><th>手動カウント件数</th><td><input type="text" id="push_count" size=10 value="0" /></td></tr>
+      <tr><th>発見した件数(閾値未適用)</th><td><input type="text" id="found_count" size=10 value="0" /></td></tr>
     </tbody>
   </table>
 <hr>
   <p>
-    <input type="button" value="探索結果をシェアする" onclick="sendContactTracing();" />
+    カウントする電波強度の閾値の設定：
+    <select id="rssi-threshold">
+      <option value="-60"> -60dB </option>
+      <option value="-65"> -65dB </option>
+      <option value="-70"> -70dB </option>
+      <option value="-75"> -75dB </option>
+      <option value="-80"> -80dB </option>
+      <option value="-85"> -85dB </option>
+      <option value="-90"> -90dB </option>
+      <option value="-95"> -95dB </option>
+      <option value="-100"> -100dB </option>
+      <option value="-200" selected> -200dB(≒閾値無し) </option>
+    </select>
+    <br />
+    カウントする検出時間の閾値の設定：
+    <select id="elapsedtime-min">
+      <option value="0"> 0秒（≒下限なし） </option>
+      <option value="5"> 5秒 </option>
+      <option value="10"> 10秒 </option>
+      <option value="15"> 15秒 </option>
+      <option value="20" selected> 20秒 </option>
+      <option value="25"> 25秒 </option>
+      <option value="30"> 30秒 </option>
+    </select>
+    ～
+    <select id="elapsedtime-max">
+      <option value="40"> 40秒 </option>
+      <option value="50"> 50秒 </option>
+      <option value="60"> 60秒=1分 </option>
+      <option value="120"> 120秒=2分 </option>
+      <option value="180"> 180秒=3分 </option>
+      <option value="300"> 300秒=5分 </option>
+      <option value="3600" selected> 3600秒=1時間（≒上限なし） </option>
+    </select>
   </p>
+<hr>
+  <p>
+    <input type="button" value="探索結果をカウントし、シェア機能を使って記録する" onclick="sendContactTracing();" />
+  </p>
+  <table style="border: solid 1px black; border-collapse: collapse">
+    <thead>
+      <tr><th>強度,検出時間別件数</th><th>強度_閾値以上</th><th>強度_閾値以下</th></tr>
+    </thead>
+    <tbody>
+      <tr><th>検出時間_最低時間未満</th><td><span id="cnt_strong_short">-</span></td><td><span id="cnt_weak_short">-</span></td></tr>
+      <tr><th>検出時間_範囲内</th>     <td><span id="cnt_strong_meet">-</span></td><td><span id="cnt_weak_meet">-</span></td></tr>
+      <tr><th>検出時間_最高時間越え</th><td><span id="cnt_strong_long">-</span></td><td><span id="cnt_weak_long">-</span></td></tr>
+    </tbody>
+  </table>
   <table id="found_list" style="border:1px; border-collapse: collapse;	font-size: x-small">
     <thead>
       <tr><th>Hash</th><th>初回発見時刻</th><th>最終発見時刻</th><th>電波強度(最大)</th><th>電波強度(最小)</th></tr>
@@ -150,16 +199,66 @@ function stopContactTracing(){
 }
 
 async function sendContactTracing(){
-    var content = 'counter:' + document.getElementById('push_count').value + '\n';
-    content = content + 'location:' + document.getElementById('scan_loc').value + '\n\n';
+    // 設定値を取得する
+    const threshold = document.getElementById('rssi-threshold').options[document.getElementById('rssi-threshold').selectedIndex].value;
+    const elapsedtime_min = document.getElementById('elapsedtime-min').options[document.getElementById('elapsedtime-min').selectedIndex].value;
+    const elapsedtime_max = document.getElementById('elapsedtime-max').options[document.getElementById('elapsedtime-max').selectedIndex].value;
+
+    // 結果を格納する変数を用意する
+    var cnt_weak_short = 0; var cnt_strong_short = 0;
+    var cnt_weak_meet  = 0; var cnt_strong_meet  = 0;
+    var cnt_weak_long  = 0; var cnt_strong_long  = 0;
+    var devicelist = '';
+    var content = '';
+
+    // 検知したデバイスを文字列にしつつ、条件に合わせてカウントする
     for (var i=0; i < scandevicelist.length; i++) {
-        content = content +
+        // 文字列にする
+        devicelist = devicelist +
             scandevicelist[i][0] + '\t' +
             scandevicelist[i][1].toLocaleTimeString('ja-JP') + '\t' +
             scandevicelist[i][2].toLocaleTimeString('ja-JP') + '\t' +
             scandevicelist[i][3] + '\t' +
             scandevicelist[i][4] + '\n';
+        // 検知時間を計算する
+        var tmp_elapsedtime = (scandevicelist[i][2].getTime() - scandevicelist[i][1].getTime())/1000;
+        // 判定して適切にカウントする
+        if (scandevicelist[i][3] >= threshold) {
+          if (tmp_elapsedtime < elapsedtime_min) {
+            cnt_strong_short++;
+          } else if (tmp_elapsedtime > elapsedtime_max) {
+            cnt_strong_long++;
+          } else {
+            cnt_strong_meet++;
+          }
+        } else {
+          if (tmp_elapsedtime < elapsedtime_min) {
+            cnt_weak_short++;
+          } else if (tmp_elapsedtime > elapsedtime_max) {
+            cnt_weak_long++;
+          } else {
+            cnt_weak_meet++;
+          }
+        }
     }
+
+    // 表にカウント結果を表示する
+    document.getElementById('cnt_weak_short').innerText = cnt_weak_short;
+    document.getElementById('cnt_weak_meet').innerText = cnt_weak_meet;
+    document.getElementById('cnt_weak_long').innerText = cnt_weak_long;
+    document.getElementById('cnt_strong_short').innerText = cnt_strong_short;
+    document.getElementById('cnt_strong_meet').innerText = cnt_strong_meet;
+    document.getElementById('cnt_strong_long').innerText = cnt_strong_long;
+
+    // 出力文字列を生成する
+    content = 'memo:' + document.getElementById('scan_loc').value + '\n';
+    content = content + 'hand count number:' + document.getElementById('push_count').value + '\n';
+    content = 'setting: RSSI threshold = ' + threshold + ' elapsed time : ' + elapsedtime_min + ' sec. ~ ' + elapsedtime_max + ' sec.\n';
+    content = 'results:\t'  + 'strong'         + '\t' +'weak'          + '\n';
+    content = 'too short\t' + cnt_strong_short + '\t' + cnt_weak_short + '\n';
+    content = 'meet\t'      + cnt_strong_meet  + '\t' + cnt_weak_meet  + '\n';
+    content = 'too long\t'  + cnt_strong_long  + '\t' + cnt_weak_long  + '\n';
+    content = content + '\n' + devicelist;
     const encoder = new TextEncoder();
     const blob = encoder.encode(content);
     const resultfile = new File([blob.buffer], 'COCOA.txt', {type: 'text/plain'})
