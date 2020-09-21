@@ -23,14 +23,14 @@ Web-Bluetoothが使えるブラウザで動作することを期待していま�
 
 - 条件1: Chromeのフラグで chrome://flags/#enable-experimental-web-platform-features をEnabledにする
 
-| 端末 | OS, Chrome | 動作状況 | 条件 |
+| 端末 | OS, Chrome version | 動作状況 | 条件 |
 | ---- | ------ | ----- | ------ |
 | Samsung Galaxy S9 | Android 10, Chrome 85.0.4183.101 | 動作 | 条件1 |
 | HUAWEI P10lite | Android 8, Chrome 85.0.4183.101 | 動作 | 条件1 |
 
 ### Desktop PC
 
-| OS | 端末 | 動作状況 | 条件 |
+| 機種 | OS, Chrome version | 動作状況 | 条件 |
 | ---- | ------ | ----- | ------ |
 | VAIO S13 | Windows 10 Pro (1903), Chrome 85.0.4183.102 | 動作 | 条件1,2 |
 | lenovo ThinkCentre M715q | Windows 10 Home (2004), Chrome 85.0.4183.102 | 動作 | 条件1,2 |
