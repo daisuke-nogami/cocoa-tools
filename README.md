@@ -1,10 +1,12 @@
 # cocoa-tools
 Utility tools for COCOA ( Covid-19 Exposure Notification System in Japan ) using Web-Bluetooth / COCOA(Covid-19接触確認アプリ)の普及状況把握などに用いるためのツール群
 
-## contents
+## tools list
 
-- [Install Checker](https://daisuke-nogami.github.io/cocoa-tools/install-checker.html)
-- [Counter](https://daisuke-nogami.github.io/cocoa-tools/counter.html)
+- [Install Checker - 端末のCOCOAインストール状況チェック](https://daisuke-nogami.github.io/cocoa-tools/install-checker.html)
+  - 端末にアプリを表示させることなく、COCOAのインストール状況をBluetooth Advertisingから確認するページ
+- [Counter - COCOAインストール済み端末カウント](https://daisuke-nogami.github.io/cocoa-tools/counter.html)
+  - 周囲のCOCOAインストール済みの端末数を計測するページ
 
 ## about
 
@@ -17,11 +19,22 @@ Web-Bluetoothが使えるブラウザで動作することを期待していま�
 
 動作確認をした環境は以下の通りです。
 
-| OS | 端末 | 動作状況 | 利用条件 |
-| ---- | ------ | ----- | ------ |
-| Android 10 | Galaxy S9 | 問題なく動作 | Chrome開発中機能フラグをONにする |
-| Android 8 | HUAWEI P10lite | 問題なく動作 | Chrome開発中機能フラグをONにする |
-| Windows 10 | VAIO S13 | 問題があるが動作 | Chrome開発中機能フラグをONにする + Chrome DevToolsで navigator.bluetooth.requestLEScan を実行し、ダイアログを出現させる |
+### Smartphones
 
-- 注: Chrome開発中機能フラグをONにする =  chrome://flags/#enable-experimental-web-platform-features をEnabledにする
-- Windows 10での動作不具合は、ページ内スクリプトで navigator.bluetooth.requestLEScan を読んだ時に許可ダイアログが表示されないというChromeのバグによるもの。Chrome DevToolsで実行するとダイアログがでて許可できるので許可をすると、その後ページ内スクリプトでの動作もされるようになる。
+- 条件1: Chromeのフラグで chrome://flags/#enable-experimental-web-platform-features をEnabledにする
+
+| 端末 | OS, Chrome | 動作状況 | 条件 |
+| ---- | ------ | ----- | ------ |
+| Samsung Galaxy S9 | Android 10, Chrome 85.0.4183.101 | 動作 | 条件1 |
+| HUAWEI P10lite | Android 8, Chrome 85.0.4183.101 | 動作 | 条件1 |
+
+### Desktop PC
+
+| OS | 端末 | 動作状況 | 条件 |
+| ---- | ------ | ----- | ------ |
+| VAIO S13 | Windows 10 Pro (1903), Chrome 85.0.4183.102 | 動作 | 条件1,2 |
+| lenovo ThinkCentre M715q | Windows 10 Home (2004), Chrome 85.0.4183.102 | 動作 | 条件1,2 |
+
+- 条件1: Chromeのフラグで chrome://flags/#enable-experimental-web-platform-features をEnabledにする
+- 条件2: Chrome DevToolsのconsoleで `navigator.bluetooth.requestLEScan({filters: [{ services: [0xFD6F]}]})` を実行し、スキャンを許可するダイアログを出して、許可をしてから実行
+  - ページ内スクリプトで navigator.bluetooth.requestLEScan を呼ぶと許可ダイアログが表示されない(一瞬出るがすぐにキャンセルされる)ため。この動作がChromeのバグなのか仕様なのかは不明。
