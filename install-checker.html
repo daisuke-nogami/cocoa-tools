@@ -52,7 +52,7 @@ async function checkContactTracing() {
         setTimeout(reject, 10000);
     });
     // 閾値を取得する
-    const threshold = document.getElementById('checker').options[document.getElementById('checker').selectedIndex].value;
+    const threshold = document.getElementById('rssi-threshold').options[document.getElementById('rssi-threshold').selectedIndex].value;
     try{
         // チェックを開始する
         log(nowtimestring + ':\t チェックを開始します');
