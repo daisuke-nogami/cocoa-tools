@@ -257,11 +257,11 @@ async function sendContactTracing(){
     // 出力文字列を生成する
     content = 'memo:' + document.getElementById('scan_loc').value + '\n';
     content = content + 'hand count number:' + document.getElementById('push_count').value + '\n';
-    content = 'setting: RSSI threshold = ' + threshold + ' elapsed time : ' + elapsedtime_min + ' sec. ~ ' + elapsedtime_max + ' sec.\n';
-    content = 'results:\t'  + 'strong'         + '\t' +'weak'          + '\n';
-    content = 'too short\t' + cnt_strong_short + '\t' + cnt_weak_short + '\n';
-    content = 'meet\t'      + cnt_strong_meet  + '\t' + cnt_weak_meet  + '\n';
-    content = 'too long\t'  + cnt_strong_long  + '\t' + cnt_weak_long  + '\n';
+    content = content + 'setting: RSSI threshold = ' + threshold + ' elapsed time : ' + elapsedtime_min + ' sec. ~ ' + elapsedtime_max + ' sec.\n';
+    content = content + 'results:\t'  + 'strong'         + '\t' +'weak'          + '\n';
+    content = content + 'too short\t' + cnt_strong_short + '\t' + cnt_weak_short + '\n';
+    content = content + 'meet\t'      + cnt_strong_meet  + '\t' + cnt_weak_meet  + '\n';
+    content = content + 'too long\t'  + cnt_strong_long  + '\t' + cnt_weak_long  + '\n';
     content = content + '\n' + devicelist;
     const encoder = new TextEncoder();
     const blob = encoder.encode(content);
