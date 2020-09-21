@@ -3,6 +3,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 <title>COCOAインストール数カウンター(Web-Bluetooth利用)</title>
+<style type="text/css">
+th {border:solid 1px silver; border-collapse: collapse}
+td {border:solid 1px silver; border-collapse: collapse}
+</style>
 </head>
 
 <body>
@@ -22,7 +26,7 @@
     <br>
     <br>
   </p>
-  <table id="summary" style="border:1px; border-collapse: collapse">
+  <table id="summary">
     <tbody>
       <tr><th>動作状況</th><td><input type="text" id="watcher_status" size=10 value="動作停止中" /></td></tr>
       <tr><th>計測内容メモ</th><td><input type="text" id="scan_loc" size=10 value="-" /></td></tr>
@@ -46,7 +50,7 @@
       <option value="-200" selected> -200dB(≒閾値無し) </option>
     </select>
     <br />
-    カウントする検出時間の閾値の設定：
+    カウントする検出時間の範囲の設定：
     <select id="elapsedtime-min">
       <option value="0"> 0秒（≒下限なし） </option>
       <option value="5"> 5秒 </option>
@@ -71,17 +75,17 @@
   <p>
     <input type="button" value="探索結果をカウントし、シェア機能を使って記録する" onclick="sendContactTracing();" />
   </p>
-  <table style="border: solid 1px black; border-collapse: collapse">
+  <table>
     <thead>
-      <tr><th>強度,検出時間別件数</th><th>強度_閾値以上</th><th>強度_閾値以下</th></tr>
+      <tr><th>件数(詳細)</th><th>閾値以上</th><th>閾値以下</th></tr>
     </thead>
     <tbody>
-      <tr><th>検出時間_最低時間未満</th><td><span id="cnt_strong_short">-</span></td><td><span id="cnt_weak_short">-</span></td></tr>
-      <tr><th>検出時間_範囲内</th>     <td><span id="cnt_strong_meet">-</span></td><td><span id="cnt_weak_meet">-</span></td></tr>
-      <tr><th>検出時間_最高時間越え</th><td><span id="cnt_strong_long">-</span></td><td><span id="cnt_weak_long">-</span></td></tr>
+      <tr><th>最低時間未満</th><td><span id="cnt_strong_short">-</span></td><td><span id="cnt_weak_short">-</span></td></tr>
+      <tr><th>範囲内</th>     <td><span id="cnt_strong_meet">-</span></td><td><span id="cnt_weak_meet">-</span></td></tr>
+      <tr><th>最高時間越え</th><td><span id="cnt_strong_long">-</span></td><td><span id="cnt_weak_long">-</span></td></tr>
     </tbody>
   </table>
-  <table id="found_list" style="border:1px; border-collapse: collapse;	font-size: x-small">
+  <table id="found_list" style="font-size: x-small">
     <thead>
       <tr><th>Hash</th><th>初回発見時刻</th><th>最終発見時刻</th><th>電波強度(最大)</th><th>電波強度(最小)</th></tr>
     </thead>
