@@ -167,7 +167,9 @@ async function searchContactTracing() {
                 var newRow = tableRef.insertRow(-1);
                 // id列
                 var cell_id = newRow.insertCell(-1);
-                var text_id = document.createTextNode(event.device.id);
+                var text_id = document.createElement('input');
+                text_id.type = 'button';
+                text_id.value = event.device.id;
                 text_id.onclick = setTarget(event.device.id);
                 cell_id.appendChild(text_id);
                 // first_time列
