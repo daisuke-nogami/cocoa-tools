@@ -28,6 +28,9 @@ td {border:solid 1px silver; border-collapse: collapse}
     </tbody>
   </table>
 <hr>
+  <p>
+    Hashに示されたIDをクリックすると、そのIDの電波の変化が、下段の表に15秒おきに記録されます。
+  </p>
   <table id="found_list" style="font-size: x-small">
     <thead>
       <tr><th>Hash</th><th>初回発見時刻</th><th>最終発見時刻</th><th>電波強度(最大)</th><th>電波強度(最小)</th></tr>
@@ -37,6 +40,9 @@ td {border:solid 1px silver; border-collapse: collapse}
     </tbody>
   </table>
 <hr>
+  <p>
+    ID <span id="target_selected_id">-</span> の電波変化
+  </p>
   <table id="target_rssi">
     <thead>
       <tr><th>初回発見時刻</th><th>最終発見時刻</th><th>電波強度(最大)</th><th>電波強度(最小)</th></tr>
@@ -74,6 +80,7 @@ function setTarget() {
   // 現在時刻をターゲット決定時刻に記録
   var target_select_time = new Date();
   target_select_id = this;
+  document.getElementById('target_selected_id').innerText = target_select_id;
   // イベントリスナーを追加
   navigator.bluetooth.addEventListener('advertisementreceived', event => {
     if (event.device.id == target_select_id) {
