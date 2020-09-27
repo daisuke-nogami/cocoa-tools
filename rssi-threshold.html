@@ -70,10 +70,10 @@ function log( text ) {
   log_div.insertAdjacentText('beforeend', text + '\n');
 }
 
-function setTarget( target_id ) {
+function setTarget() {
   // 現在時刻をターゲット決定時刻に記録
   var target_select_time = new Date();
-  target_select_id = target_id;
+  target_select_id = this;
   // イベントリスナーを追加
   navigator.bluetooth.addEventListener('advertisementreceived', event => {
     if (event.device.id == target_select_id) {
@@ -170,7 +170,7 @@ async function searchContactTracing() {
                 var text_id = document.createElement('input');
                 text_id.type = 'button';
                 text_id.value = event.device.id;
-                text_id.onclick = setTarget(event.device.id);
+                text_id.addEventListener("click", setTarget.bind(event.device.id));
                 cell_id.appendChild(text_id);
                 // first_time列
                 var cell_first_time = newRow.insertCell(-1);
