@@ -90,9 +90,9 @@ function setTarget() {
       // 出力先テーブルを用意
       var tableRef = document.getElementById("target_rssi");
       // スキャン結果を格納する配列を検索する
-      if ( targetdevicelist.find(element => element[0].getTime() + 30*1000 > nowtime.getTime() ) ) {
+      if ( targetdevicelist.find(element => element[0].getTime() + 15*1000 > nowtime.getTime() ) ) {
           // 発見したら既存のテーブルのセルを修正する
-          var found_index = targetdevicelist.findIndex(element => element[0].getTime() + 30*1000 > nowtime.getTime());
+          var found_index = targetdevicelist.findIndex(element => element[0].getTime() + 15*1000 > nowtime.getTime());
           var cell_id_prefix = targetdevicelist[found_index][0].getTime();
           targetdevicelist[found_index][1] = nowtime;
           document.getElementById(cell_id_prefix + '_time').innerText = nowtimestring;
