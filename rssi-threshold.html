@@ -1,0 +1,214 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>COCOA電波強度測定器(Web-Bluetooth利用)</title>
+<style type="text/css">
+th {border:solid 1px silver; border-collapse: collapse}
+td {border:solid 1px silver; border-collapse: collapse}
+</style>
+</head>
+
+<body>
+<h1>COCOA電波強度測定器(Web-Bluetooth利用)</h1>
+  <p>
+    利用上の注意点：使用前にChromeの設定
+    <a href="chrome://flags/#enable-experimental-web-platform-features">chrome://flags/#enable-experimental-web-platform-features</a>
+    をEnabledにする必要があります。
+  </p>
+<hr>
+  <p>
+    <input type="button" value="周囲のCOCOAインストール数をカウントする" onclick="searchContactTracing();" />
+    <input type="button" value="周囲のCOCOAインストール数カウントを停止する" onclick="stopContactTracing();" />
+  </p>
+  <table id="summary">
+    <tbody>
+      <tr><th>動作状況</th><td><input type="text" id="watcher_status" size=10 value="動作停止中" /></td></tr>
+      <tr><th>発見した件数(閾値未適用)</th><td><input type="text" id="found_count" size=10 value="0" /></td></tr>
+    </tbody>
+  </table>
+<hr>
+  <table id="found_list" style="font-size: x-small">
+    <thead>
+      <tr><th>Hash</th><th>初回発見時刻</th><th>最終発見時刻</th><th>電波強度(最大)</th><th>電波強度(最小)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+    </tbody>
+  </table>
+<hr>
+  <table id="target_rssi">
+    <thead>
+      <tr><th>初回発見時刻</th><th>最終発見時刻</th><th>電波強度(最大)</th><th>電波強度(最小)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+    </tbody>
+  </table>
+<hr>
+<p>
+  <a href="https://daisuke-nogami.github.io/cocoa-tools/">cocoa-toolsに戻る</a>
+</p>
+<hr>
+  <p>動作ログ</p>
+  <textarea id="log" cols="50" rows="20"></textarea>
+
+<script>
+var LEscanobject;
+// スキャン結果を格納する配列
+// 　配列の配列にする
+// 　[hash, first_time, last_time, max_rssi, min_rssi] の構造にする
+var scandevicelist = [];
+// ターゲット決定時刻
+var target_select_time = 0;
+var target_select_id = 0;
+// 　[first_time, last_time, max_rssi, min_rssi] の構造にする
+var targetdevicelist = [];
+
+function log( text ) {
+  let log_div = document.getElementById('log');
+  log_div.insertAdjacentText('beforeend', text + '\n');
+}
+
+function setTarget( target_id ) {
+  // 現在時刻をターゲット決定時刻に記録
+  var target_select_time = new Date();
+  target_select_id = target_id;
+  // イベントリスナーを追加
+  navigator.bluetooth.addEventListener('advertisementreceived', event => {
+    if (event.device.id == target_select_id) {
+      // 現在時刻の取得
+      var nowtime = new Date();
+      const nowtimestring = nowtime.toLocaleTimeString('ja-JP');
+      // 出力先テーブルを用意
+      var tableRef = document.getElementById("target_rssi");
+      // スキャン結果を格納する配列を検索する
+      if ( targetdevicelist.find(element => element[0].getTime() + 30*1000 > nowtime.getTime() ) ) {
+          // 発見したら既存のテーブルのセルを修正する
+          var found_index = targetdevicelist.findIndex(element => element[0].getTime() + 30*1000 > nowtime.getTime());
+          var cell_id_prefix = targetdevicelist[found_index][0].getTime();
+          targetdevicelist[found_index][1] = nowtime;
+          document.getElementById(cell_id_prefix + '_time').innerText = nowtimestring;
+          if ( targetdevicelist[found_index][2] < event.rssi ) {
+              targetdevicelist[found_index][2] = event.rssi;
+              document.getElementById(cell_id_prefix + '_max_rssi').innerText = event.rssi;
+          }
+          if ( targetdevicelist[found_index][3] > event.rssi ) {
+              targetdevicelist[found_index][3] = event.rssi;
+              document.getElementById(cell_id_prefix + '_min_rssi').innerText = event.rssi;
+          }
+      } else {
+        // 発見されなかったら配列に加えつつ新しく列を足して表示する
+        targetdevicelist.push([nowtime,nowtime,event.rssi,event.rssi]);
+        var newRow = tableRef.insertRow(-1);
+        // first_time列
+        var cell_first_time = newRow.insertCell(-1);
+        var text_first_time = document.createTextNode(nowtimestring);
+        cell_first_time.appendChild(text_first_time);
+        // last_time列(更新があるのでidを振る)
+        var cell_last_time = newRow.insertCell(-1);
+        var text_last_time = document.createTextNode(nowtimestring);
+        cell_last_time.appendChild(text_last_time);
+        cell_last_time.id = nowtime.getTime() + '_time';
+        // max_rssi列(更新があるのでidを振る)
+        var cell_max_rssi = newRow.insertCell(-1);
+        var text_max_rssi = document.createTextNode(event.rssi);
+        cell_max_rssi.appendChild(text_max_rssi);
+        cell_max_rssi.id = nowtime.getTime() + '_max_rssi';
+        // min_rssi列(更新があるのでidを振る)
+        var cell_min_rssi = newRow.insertCell(-1);
+        var text_min_rssi = document.createTextNode(event.rssi);
+        cell_min_rssi.appendChild(text_min_rssi);
+        cell_min_rssi.id = nowtime.getTime() + '_min_rssi';
+      }
+    }
+  }
+}
+
+async function searchContactTracing() {
+    // タイムアウトさせる関数を書く
+    const timeout_promise = new Promise((resolve, reject) => {
+        setTimeout(reject, 10000);
+    });
+    try{
+        // スキャンを開始する
+        log('スキャンを開始します');
+        document.getElementById('watcher_status').value = "スキャン中";
+        LEscanobject = await Promise.race([
+            navigator.bluetooth.requestLEScan({filters: [{ services: [0xFD6F]}]}),
+            timeout_promise
+        ]);
+        // スキャン出来たときの処理
+        navigator.bluetooth.addEventListener('advertisementreceived', event => {
+            // 現在時刻の取得
+            var nowtime = new Date();
+            const nowtimestring = nowtime.toLocaleTimeString('ja-JP');
+            // 結果をログ欄に足す
+            log(nowtimestring + ':\t' + event.device.id + '\t' + event.rssi);
+            // 出力先テーブルを用意
+            var tableRef = document.getElementById("found_list");
+            // スキャン結果を格納する配列を検索する
+            if ( scandevicelist.find(element => element[0] == event.device.id ) ) {
+                // 発見したら既存のテーブルのセルを修正する
+                var found_index = scandevicelist.findIndex(element => element[0] == event.device.id);
+                scandevicelist[found_index][2] = nowtime;
+                document.getElementById(event.device.id + '_time').innerText = nowtimestring;
+                if ( scandevicelist[found_index][3] < event.rssi ) {
+                    scandevicelist[found_index][3] = event.rssi;
+                    document.getElementById(event.device.id + '_max_rssi').innerText = event.rssi;
+                }
+                if ( scandevicelist[found_index][4] > event.rssi ) {
+                    scandevicelist[found_index][4] = event.rssi;
+                    document.getElementById(event.device.id + '_min_rssi').innerText = event.rssi;
+                }
+            } else {
+                // 発見されなかったら配列に加えつつ新しく列を足して表示する
+                scandevicelist.push([event.device.id,nowtime,nowtime,event.rssi,event.rssi]);
+                var newRow = tableRef.insertRow(-1);
+                // id列
+                var cell_id = newRow.insertCell(-1);
+                var text_id = document.createTextNode(event.device.id);
+                text_id.onclick = setTarget(event.device.id);
+                cell_id.appendChild(text_id);
+                // first_time列
+                var cell_first_time = newRow.insertCell(-1);
+                var text_first_time = document.createTextNode(nowtimestring);
+                cell_first_time.appendChild(text_first_time);
+                // last_time列(更新があるのでidを振る)
+                var cell_last_time = newRow.insertCell(-1);
+                var text_last_time = document.createTextNode(nowtimestring);
+                cell_last_time.appendChild(text_last_time);
+                cell_last_time.id = event.device.id + '_time';
+                // max_rssi列(更新があるのでidを振る)
+                var cell_max_rssi = newRow.insertCell(-1);
+                var text_max_rssi = document.createTextNode(event.rssi);
+                cell_max_rssi.appendChild(text_max_rssi);
+                cell_max_rssi.id = event.device.id + '_max_rssi';
+                // min_rssi列(更新があるのでidを振る)
+                var cell_min_rssi = newRow.insertCell(-1);
+                var text_min_rssi = document.createTextNode(event.rssi);
+                cell_min_rssi.appendChild(text_min_rssi);
+                cell_min_rssi.id = event.device.id + '_min_rssi';
+            }
+            // 個数表示する
+            document.getElementById("found_count").value = scandevicelist.length;
+        });
+    } catch (error) {
+        log('ERR: エラーがおきました : ' + error);
+    }
+}
+
+function stopContactTracing(){
+     try {
+         document.getElementById('watcher_status').value = "動作停止中";
+         LEscanobject.stop();
+         log('スキャンを手動で終了しました');
+     } catch (error) {
+         log('ERR: スキャンを手動終了できませんでした');
+     }
+}
+
+
+</script>
+</body>
+</html>
