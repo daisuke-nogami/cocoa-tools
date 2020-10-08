@@ -44,10 +44,10 @@ td {border:solid 1px silver; border-collapse: collapse}
       <option value="-75"> -75dB </option>
       <option value="-80"> -80dB </option>
       <option value="-85"> -85dB </option>
-      <option value="-90"> -90dB </option>
+      <option value="-90" selected> -90dB </option>
       <option value="-95"> -95dB </option>
       <option value="-100"> -100dB </option>
-      <option value="-200" selected> -200dB(≒閾値無し) </option>
+      <option value="-200"> -200dB(≒閾値無し) </option>
     </select>
     <br />
     カウントする検出時間の範囲の設定：
@@ -217,17 +217,23 @@ async function sendContactTracing(){
     var devicelist = '';
     var content = '';
 
+    // メモ情報を変数に格納する
+    const scan_loc   = document.getElementById('scan_loc').value;
+    const push_count = document.getElementById('push_count').value;
+
     // 検知したデバイスを文字列にしつつ、条件に合わせてカウントする
     for (var i=0; i < scandevicelist.length; i++) {
+        // 検知時間を計算する
+        var tmp_elapsedtime = (scandevicelist[i][2].getTime() - scandevicelist[i][1].getTime())/1000;
         // 文字列にする
         devicelist = devicelist +
+            scan_loc + '\t' + push_count + '\t' +
             scandevicelist[i][0] + '\t' +
             scandevicelist[i][1].toLocaleTimeString('ja-JP') + '\t' +
             scandevicelist[i][2].toLocaleTimeString('ja-JP') + '\t' +
             scandevicelist[i][3] + '\t' +
-            scandevicelist[i][4] + '\n';
-        // 検知時間を計算する
-        var tmp_elapsedtime = (scandevicelist[i][2].getTime() - scandevicelist[i][1].getTime())/1000;
+            scandevicelist[i][4] + '\t' +
+            tmp_elapsedtime + '\n';
         // 判定して適切にカウントする
         if (scandevicelist[i][3] >= threshold) {
           if (tmp_elapsedtime < elapsedtime_min) {
@@ -257,21 +263,19 @@ async function sendContactTracing(){
     document.getElementById('cnt_strong_long').innerText = cnt_strong_long;
 
     // 出力文字列を生成する
-    content = 'memo:' + document.getElementById('scan_loc').value + '\n';
-    content = content + 'hand count number:' + document.getElementById('push_count').value + '\n';
-    content = content + 'setting: RSSI threshold = ' + threshold + ' elapsed time : ' + elapsedtime_min + ' sec. ~ ' + elapsedtime_max + ' sec.\n';
-    content = content + 'results:\t'  + 'strong'         + '\t' +'weak'          + '\n';
-    content = content + 'too short\t' + cnt_strong_short + '\t' + cnt_weak_short + '\n';
-    content = content + 'meet\t'      + cnt_strong_meet  + '\t' + cnt_weak_meet  + '\n';
-    content = content + 'too long\t'  + cnt_strong_long  + '\t' + cnt_weak_long  + '\n';
+    content = '計測内容メモ:' + scan_loc + '\n';
+    content = content + '手動カウント件数:' + push_count + '\n';
+    content = content + '集計条件: 電波強度の閾値 = ' + threshold + ' 検出時間 : ' + elapsedtime_min + ' 秒 ~ ' + elapsedtime_max + ' 秒\n';
+    content = content + '結果:\t'  + '閾値以上'         + '\t' +'閾値未満'          + '\n';
+    content = content + '最低時間未満\t' + cnt_strong_short + '\t' + cnt_weak_short + '\n';
+    content = content + '範囲内\t'      + cnt_strong_meet  + '\t' + cnt_weak_meet  + '\n';
+    content = content + '最高時間越え\t'  + cnt_strong_long  + '\t' + cnt_weak_long  + '\n';
     content = content + '\n' + devicelist;
     const encoder = new TextEncoder();
     const blob = encoder.encode(content);
     const resultfile = new File([blob.buffer], 'COCOA.txt', {type: 'text/plain'})
 
     navigator.share({
-        text: 'COCOAスキャン結果',
-        url: location.href,
         files: [resultfile]
     }).then(() => {
         log('ファイル送信に成功')
