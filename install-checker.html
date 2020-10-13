@@ -45,6 +45,7 @@
 <script>
 var LEscanobject;
 var found_time;
+var checker_return;
 
 function log( text ) {
   let log_div = document.getElementById('log');
@@ -64,6 +65,15 @@ async function checkContactTracing() {
     try{
         // チェックを開始する
         log(nowtimestring + ':\t チェックを開始します');
+        found_time = new Date();
+        checker_return = setInterval(change_checker,1000);
+        function change_checker(){
+            var close_time = new Date();
+            if (close_time.getTime() > found_time.getTime() ) {
+                document.getElementById('checker').innerText = "見つかりません";
+                document.getElementById('checker').style.background = "yellow";
+            }
+        }
         document.getElementById('checker').innerText = "見つかりません";
         document.getElementById('checker').style.background = "yellow";
         LEscanobject = await Promise.race([
@@ -78,14 +88,6 @@ async function checkContactTracing() {
                 document.getElementById('checker').style.background = "aqua";
                 found_time = new Date();
                 found_time.setTime(found_time.getTime()+1000);
-                setTimeout(change_checker, 1000);
-                function change_checker(){
-                    var close_time = new Date();
-                    if (close_time.getTime() > found_time.getTime() ) {
-                        document.getElementById('checker').innerText = "見つかりません";
-                        document.getElementById('checker').style.background = "yellow";
-                    }
-                }
             }
         });
     } catch (error) {
@@ -98,6 +100,7 @@ function stopContactTracing(){
          document.getElementById('checker').innerText = "チェック停止中";
          document.getElementById('checker').style.background = "silver";
          LEscanobject.stop();
+         clearInterval(checker_return);
          log('スキャンを手動で終了しました');
      } catch (error) {
          log('ERR: スキャンを手動終了できませんでした');
