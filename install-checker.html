@@ -80,7 +80,7 @@ async function checkContactTracing() {
                 found_time.setTime(found_time.getTime()+1000);
                 setTimeout(change_checker, 1000);
                 function change_checker(){
-                    var close_time = now Date();
+                    var close_time = new Date();
                     if (close_time.getTime() > found_time.getTime() ) {
                         document.getElementById('checker').innerText = "見つかりません";
                         document.getElementById('checker').style.background = "yellow";
