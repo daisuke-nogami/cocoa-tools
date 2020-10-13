@@ -44,6 +44,7 @@
 
 <script>
 var LEscanobject;
+var found_time;
 
 function log( text ) {
   let log_div = document.getElementById('log');
@@ -75,10 +76,15 @@ async function checkContactTracing() {
             if ( event.rssi >= threshold ) {
                 document.getElementById('checker').innerText = "見つけました！";
                 document.getElementById('checker').style.background = "aqua";
+                found_time = new Date();
+                found_time.setTime(found_time.getTime()+1000);
                 setTimeout(change_checker, 1000);
                 function change_checker(){
-                    document.getElementById('checker').innerText = "見つかりません";
-                    document.getElementById('checker').style.background = "yellow";
+                    var close_time = now Date();
+                    if (close_time.getTime() > found_time.getTime() ) {
+                        document.getElementById('checker').innerText = "見つかりません";
+                        document.getElementById('checker').style.background = "yellow";
+                    }
                 }
             }
         });
