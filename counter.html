@@ -100,7 +100,7 @@ td {border:solid 1px silver; border-collapse: collapse}
   <a href="https://daisuke-nogami.github.io/cocoa-tools/">cocoa-toolsに戻る</a>
 </p>
 <hr>
-  <p>動作ログ</p>
+  <p>動作ログ <input type="checkbox" id="log_level" />出力する</p>
   <textarea id="log" cols="50" rows="20"></textarea>
 
 <script>
@@ -113,8 +113,11 @@ var scandevicelist = [];
 var hand_counter = 0;
 
 function log( text ) {
-  let log_div = document.getElementById('log');
-  log_div.insertAdjacentText('beforeend', text + '\n');
+  var log_onoff = document.getElementById('log_level');
+  if (log_onoff.checked){
+    let log_div = document.getElementById('log');
+    log_div.insertAdjacentText('beforeend', text + '\n');
+  }
 }
 
 function countNumber(){
