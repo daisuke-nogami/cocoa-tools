@@ -55,6 +55,16 @@ function log( text ) {
   }
 }
 
+function cocoa_found(event) {
+  log(nowtimestring + ':\t Found! RSSI = ' + event.rssi + 'dB');
+  if ( event.rssi >= threshold ) {
+      document.getElementById('checker').innerText = "見つけました！";
+      document.getElementById('checker').style.background = "aqua";
+      found_time = new Date();
+      found_time.setTime(found_time.getTime()+1000);
+  }
+}
+
 async function checkContactTracing() {
     // 現在時刻の取得
     var nowtime = new Date();
@@ -84,15 +94,7 @@ async function checkContactTracing() {
             timeout_promise
         ]);
         // 発見したときに、RSSIが-45dB以上なら「発見」と表示を変える
-        navigator.bluetooth.addEventListener('advertisementreceived', event => {
-            log(nowtimestring + ':\t Found! RSSI = ' + event.rssi + 'dB');
-            if ( event.rssi >= threshold ) {
-                document.getElementById('checker').innerText = "見つけました！";
-                document.getElementById('checker').style.background = "aqua";
-                found_time = new Date();
-                found_time.setTime(found_time.getTime()+1000);
-            }
-        });
+        navigator.bluetooth.addEventListener('advertisementreceived', cocoa_found );
     } catch (error) {
         log('ERR: エラーがおきました : ' + error);
     }
@@ -102,6 +104,7 @@ function stopContactTracing(){
      try {
          document.getElementById('checker').innerText = "チェック停止中";
          document.getElementById('checker').style.background = "silver";
+         navigator.bluetooth.removeEventListener('advertisementreceived', cocoa_found);
          LEscanobject.stop();
          clearInterval(checker_return);
          log('スキャンを手動で終了しました');
