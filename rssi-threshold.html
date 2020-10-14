@@ -86,7 +86,7 @@ function setTarget() {
     if (event.device.id == target_select_id) {
       // 現在時刻の取得
       var nowtime = new Date();
-      const nowtimestring = nowtime.toLocaleTimeString('ja-JP');
+      var nowtimestring = nowtime.toLocaleTimeString('ja-JP');
       // 出力先テーブルを用意
       var tableRef = document.getElementById("target_rssi");
       // スキャン結果を格納する配列を検索する
@@ -149,7 +149,7 @@ async function searchContactTracing() {
         navigator.bluetooth.addEventListener('advertisementreceived', event => {
             // 現在時刻の取得
             var nowtime = new Date();
-            const nowtimestring = nowtime.toLocaleTimeString('ja-JP');
+            var nowtimestring = nowtime.toLocaleTimeString('ja-JP');
             // 結果をログ欄に足す
             log(nowtimestring + ':\t' + event.device.id + '\t' + event.rssi);
             // 出力先テーブルを用意

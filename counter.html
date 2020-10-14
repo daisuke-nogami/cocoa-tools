@@ -139,7 +139,7 @@ async function searchContactTracing() {
         navigator.bluetooth.addEventListener('advertisementreceived', event => {
             // 現在時刻の取得
             var nowtime = new Date();
-            const nowtimestring = nowtime.toLocaleTimeString('ja-JP');
+            var nowtimestring = nowtime.toLocaleTimeString('ja-JP');
             // 結果をログ欄に足す
             log(nowtimestring + ':\t' + event.device.id + '\t' + event.rssi);
             // 出力先テーブルを用意
@@ -206,9 +206,9 @@ function stopContactTracing(){
 
 async function sendContactTracing(){
     // 設定値を取得する
-    const threshold = document.getElementById('rssi-threshold').options[document.getElementById('rssi-threshold').selectedIndex].value;
-    const elapsedtime_min = document.getElementById('elapsedtime-min').options[document.getElementById('elapsedtime-min').selectedIndex].value;
-    const elapsedtime_max = document.getElementById('elapsedtime-max').options[document.getElementById('elapsedtime-max').selectedIndex].value;
+    var threshold = document.getElementById('rssi-threshold').options[document.getElementById('rssi-threshold').selectedIndex].value;
+    var elapsedtime_min = document.getElementById('elapsedtime-min').options[document.getElementById('elapsedtime-min').selectedIndex].value;
+    var elapsedtime_max = document.getElementById('elapsedtime-max').options[document.getElementById('elapsedtime-max').selectedIndex].value;
 
     // 結果を格納する変数を用意する
     var cnt_weak_short = 0; var cnt_strong_short = 0;
@@ -218,8 +218,8 @@ async function sendContactTracing(){
     var content = '';
 
     // メモ情報を変数に格納する
-    const scan_loc   = document.getElementById('scan_loc').value;
-    const push_count = document.getElementById('push_count').value;
+    var scan_loc   = document.getElementById('scan_loc').value;
+    var push_count = document.getElementById('push_count').value;
 
     // 検知したデバイスを文字列にしつつ、条件に合わせてカウントする
     for (var i=0; i < scandevicelist.length; i++) {
@@ -272,8 +272,8 @@ async function sendContactTracing(){
     content = content + '最高時間越え\t'  + cnt_strong_long  + '\t' + cnt_weak_long  + '\n';
     content = content + '\n' + devicelist;
     const encoder = new TextEncoder();
-    const blob = encoder.encode(content);
-    const resultfile = new File([blob.buffer], 'COCOA.txt', {type: 'text/plain'})
+    var blob = encoder.encode(content);
+    var resultfile = new File([blob.buffer], 'COCOA.txt', {type: 'text/plain'})
 
     navigator.share({
         files: [resultfile]

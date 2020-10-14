@@ -55,13 +55,13 @@ function log( text ) {
 async function checkContactTracing() {
     // 現在時刻の取得
     var nowtime = new Date();
-    const nowtimestring = nowtime.toLocaleTimeString('ja-JP');
+    var nowtimestring = nowtime.toLocaleTimeString('ja-JP');
     // タイムアウトさせる関数を書く
     const timeout_promise = new Promise((resolve, reject) => {
         setTimeout(reject, 10000);
     });
     // 閾値を取得する
-    const threshold = document.getElementById('rssi-threshold').options[document.getElementById('rssi-threshold').selectedIndex].value;
+    var threshold = document.getElementById('rssi-threshold').options[document.getElementById('rssi-threshold').selectedIndex].value;
     try{
         // チェックを開始する
         log(nowtimestring + ':\t チェックを開始します');
