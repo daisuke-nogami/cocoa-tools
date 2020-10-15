@@ -60,11 +60,15 @@ function cocoa_found(event) {
   // 現在時刻の取得
   var nowtime = new Date();
   var nowtimestring = nowtime.toLocaleTimeString('ja-JP');
-  // ログ表示
-  log(nowtimestring + ':\t Found! RSSI = ' + event.rssi + 'dB');
+  // 閾値を取得する
+  var threshold = document.getElementById('rssi-threshold').options[document.getElementById('rssi-threshold').selectedIndex].value;
+  // ログ表示する
+  log(nowtimestring + ':\t Found! RSSI = ' + event.rssi + 'dB, Threshold = ' + threshold + ' dB');
+  // 閾値を超えたら表示を変える
   if ( event.rssi >= threshold ) {
       document.getElementById('checker').innerText = "見つけました！";
       document.getElementById('checker').style.background = "aqua";
+      // 表示終了時刻を設定する
       found_time = new Date();
       found_time.setTime(found_time.getTime()+1000);
   }
@@ -78,8 +82,6 @@ async function checkContactTracing() {
     const timeout_promise = new Promise((resolve, reject) => {
         setTimeout(reject, 10000);
     });
-    // 閾値を取得する
-    var threshold = document.getElementById('rssi-threshold').options[document.getElementById('rssi-threshold').selectedIndex].value;
     try{
         // チェックを開始する
         log(nowtimestring + ':\t チェックを開始します');
