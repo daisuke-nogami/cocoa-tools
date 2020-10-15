@@ -55,7 +55,12 @@ function log( text ) {
   }
 }
 
+// 発見したときに、RSSIが閾値以上なら「発見」と表示を変え、表示終了時刻を設定する
 function cocoa_found(event) {
+  // 現在時刻の取得
+  var nowtime = new Date();
+  var nowtimestring = nowtime.toLocaleTimeString('ja-JP');
+  // ログ表示
   log(nowtimestring + ':\t Found! RSSI = ' + event.rssi + 'dB');
   if ( event.rssi >= threshold ) {
       document.getElementById('checker').innerText = "見つけました！";
@@ -93,7 +98,7 @@ async function checkContactTracing() {
             navigator.bluetooth.requestLEScan({filters: [{ services: [0xFD6F]}]}),
             timeout_promise
         ]);
-        // 発見したときに、RSSIが-45dB以上なら「発見」と表示を変える
+        // 発見したときに、RSSIが閾値以上なら「発見」と表示を変えるイベントを仕込む
         navigator.bluetooth.addEventListener('advertisementreceived', cocoa_found );
     } catch (error) {
         log('ERR: エラーがおきました : ' + error);
