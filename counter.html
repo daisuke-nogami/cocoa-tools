@@ -22,9 +22,6 @@ td {border:solid 1px silver; border-collapse: collapse}
     <input type="button" value="周囲のCOCOAインストール数カウントを停止する" onclick="stopContactTracing();" />
     <br>
     <br>
-    <input type="button" value="通過人数の手動カウント" onclick="countNumber();" /><br>
-    <br>
-    <br>
   </p>
   <table id="summary">
     <tbody>
@@ -34,6 +31,11 @@ td {border:solid 1px silver; border-collapse: collapse}
       <tr><th>発見した件数(閾値未適用)</th><td><input type="text" id="found_count" size=10 value="0" /></td></tr>
     </tbody>
   </table>
+  <p>
+    <br>
+    <br>
+    <input type="button" value="通過人数の手動カウント" onclick="countNumber();" /><br>
+  </p>
 <hr>
   <p>
     カウントする電波強度の閾値の設定：
