@@ -44,6 +44,9 @@
     <a href="https://daisuke-nogami.github.io/cocoa-tools/">cocoa-toolsに戻る</a>
   </p>
 <hr>
+  <audio id="beep_sound" src="./assets/simple_beep.mp3">
+    このブラウザでは検知音を鳴らすことが出来ません。
+  </audio>
   <p>動作ログ <input type="checkbox" id="log_level" />出力する</p>
   <textarea id="log" cols="50" rows="20"></textarea>
 
@@ -73,6 +76,9 @@ function cocoa_found(event) {
   if ( event.rssi >= threshold ) {
       document.getElementById('checker').innerText = "見つけました！";
       document.getElementById('checker').style.background = "aqua";
+      // 検知音を再生する
+      var s = document.getElementById('beep_sound');
+      s.play();
       // 表示終了時刻を設定する
       found_time = new Date();
       found_time.setTime(found_time.getTime()+1000);
