@@ -18,6 +18,11 @@
     <input type="button" value="COCOAインストール状況チェッカーを停止する" onclick="stopContactTracing();" /><br />
     <br />
     <span style="	font-size: xx-large; background-color: silver; font-weight: bold;" id="checker">チェック停止中</span>
+    <br />
+    <br />
+    <video id="video" src="./assets/simple_movie.mp4" loop muted>
+      <p>ご使用のブラウザでは動画再生に対応しておらず、自動画面オフを止められない可能性があります。</p>
+    </video>
   </p>
 <hr>
   <p>
@@ -102,6 +107,9 @@ async function checkContactTracing() {
         ]);
         // 発見したときに、RSSIが閾値以上なら「発見」と表示を変えるイベントを仕込む
         navigator.bluetooth.addEventListener('advertisementreceived', cocoa_found );
+        // 動画を再生して画面Offを抑止する
+        var v = document.getElementById('video');
+        v.play();
     } catch (error) {
         log('ERR: エラーがおきました : ' + error);
     }
@@ -114,6 +122,9 @@ function stopContactTracing(){
          navigator.bluetooth.removeEventListener('advertisementreceived', cocoa_found);
          LEscanobject.stop();
          clearInterval(checker_return);
+         // 動画を再生して画面Offを抑止する
+         var v = document.getElementById('video');
+         v.pause();
          log('スキャンを手動で終了しました');
      } catch (error) {
          log('ERR: スキャンを手動終了できませんでした');
