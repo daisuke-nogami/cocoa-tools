@@ -32,6 +32,9 @@ td {border:solid 1px silver; border-collapse: collapse}
     </tbody>
   </table>
   <p style="text-align: right;">
+    <video id="video" loop muted>
+      <source src="./assets/simple_movie.mp4" type="video/mp4">
+    </video>
     <br>
     <br>
     <input type="button" value="通過人数の手動カウント" onclick="countNumber();" /><br>
@@ -196,6 +199,9 @@ async function searchContactTracing() {
         ]);
         // スキャン出来たときの処理
         navigator.bluetooth.addEventListener('advertisementreceived', cocoa_found );
+        // 動画を再生して画面Offを抑止する
+        var v = document.getElementById('video');
+        v.play();
     } catch (error) {
         log('ERR: エラーがおきました : ' + error);
     }
@@ -206,6 +212,9 @@ function stopContactTracing(){
          document.getElementById('watcher_status').value = "動作停止中";
          navigator.bluetooth.removeEventListener('advertisementreceived', cocoa_found);
          LEscanobject.stop();
+         // 動画を停止して画面Off抑止を終了する
+         var v = document.getElementById('video');
+         v.pause();
          log('スキャンを手動で終了しました');
      } catch (error) {
          log('ERR: スキャンを手動終了できませんでした');
