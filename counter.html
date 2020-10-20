@@ -41,6 +41,8 @@ td {border:solid 1px silver; border-collapse: collapse}
   </p>
 <hr>
   <p>
+    端末発見時のバイブレーション <input type="checkbox" id="vibrate" />する</p>
+    <br />
     カウントする電波強度の閾値の設定：
     <select id="rssi-threshold">
       <option value="-60"> -60dB </option>
@@ -182,6 +184,11 @@ function cocoa_found(event) {
   }
   // 個数表示する
   document.getElementById("found_count").value = scandevicelist.length;
+  // スマホを短時間振動させる
+  var vibrate_onoff = document.getElementById('vibrate');
+  if (vibrate_onoff.checked){
+    navigator.vibrate(100);
+  }
 }
 
 async function searchContactTracing() {
