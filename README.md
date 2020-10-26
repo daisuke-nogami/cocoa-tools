@@ -25,9 +25,11 @@ Web-Bluetoothが使えるブラウザで動作することを期待していま�
 
 | 端末 | OS, Chrome version | 動作状況 | 条件 |
 | ---- | ------ | ----- | ------ |
-| Samsung Galaxy S9 | Android 10, Chrome 85.0.4183.101 | 動作 | 条件1a |
-| HUAWEI P10lite | Android 8, Chrome 85.0.4183.101 | 動作 | 条件1a |
-| Samsung Galaxy S20 5G | Android 10, Chrome 85.0.4183.127 | 動作 | 条件1a |
+| Samsung Galaxy S20 5G | Android 10, Chrome 85.0.4183.127- | 動作 | 条件1a |
+| HUAWEI P10lite | Android 8, Chrome 85.0.4183.101- | 動作 | 条件1a |
+| Samsung Galaxy S9 | Android 10, Chrome 85.0.4183.101- | 動作 | 条件1a |
+| Samsung Galaxy S8 | Android 9, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Google Pixel3a | Android 11, Chrome 86.0.4240.110 | 動作 | 条件1a |
 
 ※[米ZDNetの報道"Apple declined to implement 16 Web APIs in Safari due to privacy concerns"](https://www.zdnet.com/article/apple-declined-to-implement-16-web-apis-in-safari-due-to-privacy-concerns/)によれば、SafariではWeb-bluetoothでのscanningは拒否されているとのことなので、おそらくiOSでは動作が難しいと思われる
 
