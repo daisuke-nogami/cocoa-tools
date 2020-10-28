@@ -31,7 +31,22 @@ Web-Bluetoothが使えるブラウザで動作することを期待していま�
 | Samsung Galaxy S8 | Android 9, Chrome 86.0.4240.110 | 動作 | 条件1a |
 | Google Pixel3a | Android 11, Chrome 86.0.4240.110 | 動作 | 条件1a |
 | Samsung Galaxy S7 edge | Android 8, Chrome 86.0.4240.110 | 動作 | 条件1a |
-
+| Xperia 10 II      | Android 10, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Google Pixel 5    | Android 11, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Google Pixel4a(5G)| Android 11, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Google Pixel 4 XL | Android 10, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Google Pixel 4    | Android 10, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Google Pixel 3 XL | Android 9.0, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Google Pixel 3    | Android 9.0, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Google Nexus 6p   | Android 8.1, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Google Nexus 5X   | Android 8.0, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Xperia 1          | Android 9.0, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Xperia X Performance | Android 8.0, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Xperia XZ2        | Android 8.0, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Xperia XZ         | Android 8.0, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| AQUOS R3          | Android 9.0, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| AQUOS sense3 plus | Android 9.0, Chrome 86.0.4240.110 | 動作 | 条件1a |
+| Galaxy Feel2      | Android 8.1, Chrome 86.0.4240.110 | 動作 | 条件1a |
 
 ※[米ZDNetの報道"Apple declined to implement 16 Web APIs in Safari due to privacy concerns"](https://www.zdnet.com/article/apple-declined-to-implement-16-web-apis-in-safari-due-to-privacy-concerns/)によれば、SafariではWeb-bluetoothでのscanningは拒否されているとのことなので、おそらくiOSでは動作が難しいと思われる
 
