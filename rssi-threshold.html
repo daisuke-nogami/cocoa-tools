@@ -20,6 +20,9 @@ td {border:solid 1px silver; border-collapse: collapse}
   <p>
     <input type="button" value="周囲のCOCOAインストール数をカウントする" onclick="searchContactTracing();" />
     <input type="button" value="周囲のCOCOAインストール数カウントを停止する" onclick="stopContactTracing();" />
+    <video id="video" loop muted>
+      <source src="./assets/simple_movie.webm" type="video/webm">
+    </video>
   </p>
   <table id="summary">
     <tbody>
@@ -212,6 +215,9 @@ async function searchContactTracing() {
         ]);
         // スキャン出来たときの処理
         navigator.bluetooth.addEventListener('advertisementreceived', cocoa_found);
+        // 動画を再生して画面Offを抑止する
+        var v = document.getElementById('video');
+        v.play();
     } catch (error) {
         log('ERR: エラーがおきました : ' + error);
     }
@@ -223,6 +229,9 @@ function stopContactTracing(){
          navigator.bluetooth.removeEventListener('advertisementreceived', cocoa_found);
          navigator.bluetooth.removeEventListener('advertisementreceived', target_found);
          LEscanobject.stop();
+         // 動画を停止して画面Off抑止を終了する
+         var v = document.getElementById('video');
+         v.pause();
          log('スキャンを手動で終了しました');
      } catch (error) {
          log('ERR: スキャンを手動終了できませんでした');
