@@ -119,6 +119,19 @@ var scandevicelist = [];
 // 手動カウンターの数値
 var hand_counter = 0;
 
+// オフラインでのリロードに対応させるためのService Worker登録
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./offline-cache-sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+
 function log( text ) {
   var log_onoff = document.getElementById('log_level');
   if (log_onoff.checked){
