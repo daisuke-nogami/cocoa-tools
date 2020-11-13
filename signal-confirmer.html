@@ -96,7 +96,7 @@ function found_signal(nowtimestring, deviceid, type, threshold) {
   checker_shutdown = setTimeout(func_shutdown, 15000);
 
   log(nowtimestring
-    + '\t found terminal. type: ' + type + ', id = ' + deviceid
+    + '\t 端末の信号を検知 found terminal. type: ' + type + ', id = ' + deviceid
     + 'detectcriteria: ' + detectcriteria[deviceid][type] + ' threshold: ' + threshold);
 }
 
@@ -137,14 +137,14 @@ function found_terminal(event) {
 
     // 計測ボタン押下直前の値との比較
     if ( detectcriteria[event.device.id].before_average ) {
-      if ( terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count
+      if ( (terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count)
            >= (detectcriteria[event.device.id].before_average + threshold) ) {
              found_signal(nowtimestring, event.device.id, "before_average", threshold)
            }
     }
     // 計測開始表示直前の値との比較
     if ( detectcriteria[event.device.id].first_average ) {
-      if ( terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count
+      if ( (terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count)
            >= (detectcriteria[event.device.id].first_average + threshold) ) {
              found_signal(nowtimestring, event.device.id, "first_average", threshold)
            }
@@ -272,6 +272,7 @@ function func_start_check(){
     // 値を計算して投入する
     detectcriteria[deviceids].first_average = tmp_terminal_list[deviceids].value / tmp_terminal_list[deviceids].count;
   }
+  log(nowtimestring + '\t func_start_check(); 信号確認準備完了、初期値あり端末数は' + Object.keys(detectcriteria).length + ' 個');
   // 表示を変更（計測したい端末を近づけてください）
   document.getElementById('checker').innerText = "信号確認の準備が出来ました、計測したい端末を近づけてください";
   document.getElementById('checker').style.background = "green";
