@@ -81,7 +81,7 @@ function log( text ) {
 }
 
 // リスナー(1)内の、信号確認時の処理を定義
-function found_signal(nowtime, deviceid, type) {
+function found_signal(nowtimestring, deviceid, type) {
   // リスナー(1)のフラグを下ろす
   check_process_ongoing = false;
   // 表示を変更
@@ -152,7 +152,7 @@ function found_terminal(event) {
   }
 }
 
-// タイマー(1) 10秒前~12秒前の変数を空にする
+// タイマー(1) 10秒前~11秒前の変数を空にする
 function func_cleaner(){
   // 変数の中身を空にするルーチン
   function func_assoc_array(num) {
@@ -175,9 +175,6 @@ function func_cleaner(){
   nowtime.setSeconds(nowtime.getSeconds() - 10);
   func_assoc_array(nowtime.getSeconds());
   // 11秒前の時刻を得て、変数の中身を空にする
-  nowtime.setSeconds(nowtime.getSeconds() - 1);
-  func_assoc_array(nowtime.getSeconds());
-  // 12秒前の時刻を得て、変数の中身を空にする
   nowtime.setSeconds(nowtime.getSeconds() - 1);
   func_assoc_array(nowtime.getSeconds());
 }
