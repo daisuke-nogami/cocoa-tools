@@ -195,7 +195,7 @@ async function checker_boot() {
             timeout_promise
         ]);
         // リスナー(1)を設定する
-        navigator.bluetooth.addEventListener('advertisementreceived', cocoa_found );
+        navigator.bluetooth.addEventListener('advertisementreceived', found_terminal );
         // タイマー(1)を設定する
         timer_cleaner = setInterval(func_cleaner,1000);
         // ボタン btn_confirm を操作可能にする
