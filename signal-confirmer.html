@@ -99,6 +99,7 @@ function found_signal(nowtime, deviceid, type) {
     + '\t found terminal. type: ' + type + ', id = ' + deviceid
     + 'detectcriteria' + detectcriteria[deviceid][type]);
 }
+
 // リスナー(1)
 function found_terminal(event) {
   // 現在時刻の取得
@@ -138,14 +139,14 @@ function found_terminal(event) {
     if ( detectcriteria[event.device.id].before_average ) {
       if ( terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count
            >= (detectcriteria[event.device.id].before_average + threshold) ) {
-             found_signal(nowtime, event.device.id, "before_average")
+             found_signal(nowtimestring, event.device.id, "before_average")
            }
     }
     // 計測開始表示直前の値との比較
     if ( detectcriteria[event.device.id].first_average ) {
       if ( terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count
            >= (detectcriteria[event.device.id].first_average + threshold) ) {
-             found_signal(nowtime, event.device.id, "first_average")
+             found_signal(nowtimestring, event.device.id, "first_average")
            }
     }
   }
