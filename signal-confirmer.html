@@ -12,9 +12,9 @@
   </p>
 <hr>
   <p>
-    <input type="button" id="btn_sysboot" value="COCOA信号確認システムを起動する" onclick="checker_boot();" />
+    <input type="button" id="btn_sysboot" value="COCOA信号確認システムを起動する" onclick="checker_boot();" /><br />
     <br />
-    <span style="	font-size: xx-large; background-color: silver; font-weight: bold;" id="checker">信号確認システム停止中</span>
+    <span style="	font-size: xx-large; background-color: silver; font-weight: bold;" id="checker">信号確認システム停止中</span><br />
     <br />
     <input type="button" id="btn_confirm" style="color: white;" value="COCOAの信号を確認する" onclick="check_process_start();" disabled /><br />
     <br />
@@ -80,6 +80,25 @@ function log( text ) {
   }
 }
 
+// リスナー(1)内の、信号確認時の処理を定義
+function found_signal(nowtime, deviceid, type) {
+  // リスナー(1)のフラグを下ろす
+  check_process_ongoing = false;
+  // 表示を変更
+  document.getElementById('checker').innerText = "COCOAの信号を発信している端末を確認しました!";
+  document.getElementById('checker').style.background = "aqua";
+  // 検知音を再生する
+  var s = document.getElementById('beep_sound');
+  s.play();
+  // タイマー④を一度解除してから、
+  clearInterval(checker_shutdown);
+  // 改めてタイマー④を15秒後に設定
+  checker_shutdown = setTimeout(func_shutdown, 15000);
+
+  log(nowtimestring
+    + '\t found terminal. type: ' + type + ', id = ' + deviceid
+    + 'detectcriteria' + detectcriteria[deviceid][type]);
+}
 // リスナー(1)
 function found_terminal(event) {
   // 現在時刻の取得
@@ -114,35 +133,19 @@ function found_terminal(event) {
     // 閾値を取得する
     var threshold = document.getElementById('rssi-threshold').options[document.getElementById('rssi-threshold').selectedIndex].value;
     // 発見した端末がdetectcriteriaを満たしているか確認する
-    // 満たしていたときの処理を定義しておき
-    function found_signal() {
-      // 表示を変更
-      document.getElementById('checker').innerText = "COCOAの信号を発信している端末を確認しました!";
-      document.getElementById('checker').style.background = "aqua";
-      // 検知音を再生する
-      var s = document.getElementById('beep_sound');
-      s.play();
-      // タイマー④を一度解除してから、
-      clearInterval(checker_shutdown);
-      // 改めてタイマー④を15秒後に設定
-      checker_shutdown = setTimeout(func_shutdown, 15000);
 
-      log(nowtimestring
-        + '\t found terminal. id = ' + event.device.id
-        + 'detectcriteria' + detectcriteria[event.device.id]);
-    }
     // 計測ボタン押下直前の値との比較
     if ( detectcriteria[event.device.id].before_average ) {
       if ( terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count
-           >= detectcriteria[event.device.id].before_average + threshold ) {
-             found_signal()
+           >= (detectcriteria[event.device.id].before_average + threshold) ) {
+             found_signal(nowtime, event.device.id, "before_average")
            }
     }
     // 計測開始表示直前の値との比較
     if ( detectcriteria[event.device.id].first_average ) {
       if ( terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count
-           >= detectcriteria[event.device.id].first_average + threshold ) {
-             found_signal()
+           >= (detectcriteria[event.device.id].first_average + threshold) ) {
+             found_signal(nowtime, event.device.id, "first_average")
            }
     }
   }
@@ -223,8 +226,6 @@ function func_shutdown(){
   // ボタン btn_confirm を操作可能にする
   document.getElementById('btn_confirm').removeAttribute("disabled");
   document.getElementById('btn_confirm').style.color = "black";
-  // リスナー①のフラグを下ろす
-  check_process_ongoing = false;
 }
 
 // タイマー(2)
