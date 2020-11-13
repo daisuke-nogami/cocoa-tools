@@ -81,7 +81,7 @@ function log( text ) {
 }
 
 // リスナー(1)内の、信号確認時の処理を定義
-function found_signal(nowtimestring, deviceid, type) {
+function found_signal(nowtimestring, deviceid, type, threshold) {
   // リスナー(1)のフラグを下ろす
   check_process_ongoing = false;
   // 表示を変更
@@ -97,7 +97,7 @@ function found_signal(nowtimestring, deviceid, type) {
 
   log(nowtimestring
     + '\t found terminal. type: ' + type + ', id = ' + deviceid
-    + 'detectcriteria' + detectcriteria[deviceid][type]);
+    + 'detectcriteria: ' + detectcriteria[deviceid][type] + ' threshold: ' + threshold);
 }
 
 // リスナー(1)
@@ -139,14 +139,14 @@ function found_terminal(event) {
     if ( detectcriteria[event.device.id].before_average ) {
       if ( terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count
            >= (detectcriteria[event.device.id].before_average + threshold) ) {
-             found_signal(nowtimestring, event.device.id, "before_average")
+             found_signal(nowtimestring, event.device.id, "before_average", threshold)
            }
     }
     // 計測開始表示直前の値との比較
     if ( detectcriteria[event.device.id].first_average ) {
       if ( terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count
            >= (detectcriteria[event.device.id].first_average + threshold) ) {
-             found_signal(nowtimestring, event.device.id, "first_average")
+             found_signal(nowtimestring, event.device.id, "first_average", threshold)
            }
     }
   }
