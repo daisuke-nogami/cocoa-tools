@@ -132,8 +132,7 @@ function found_terminal(event) {
   // もしフラグが立っていたら
   if ( check_process_ongoing ) {
     // 閾値を取得する
-    //var threshold = document.getElementById('rssi-threshold').options[document.getElementById('rssi-threshold').selectedIndex].value;
-    const threshold = 10;
+    var threshold = Number(document.getElementById('rssi-threshold').options[document.getElementById('rssi-threshold').selectedIndex].value);
     // 発見した端末がdetectcriteriaを満たしているか確認する
 
     // 計測ボタン押下直前の値との比較
