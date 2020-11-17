@@ -2,11 +2,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-<title>COCOA信号確認システム</title>
+<title>COCOA動作状況チェッカー</title>
 </head>
 
 <body>
-<h1>COCOA信号確認システム</h1>
+<h1>COCOA動作状況チェッカー</h1>
   <p>
     接触確認アプリ(COCOA)が接触確認に用いる信号が発信されているか確認するシステムです。
   </p>
@@ -46,6 +46,9 @@
   </audio>
   <p>動作ログ <input type="checkbox" id="log_level" />出力する</p>
   <textarea id="log" cols="30" rows="10"></textarea>
+  <p>
+    <input type="button" value="動作ログを、シェア機能を使って送信する" onclick="sendDebugLog();" />
+  </p>
 
 <script>
 var LEscanobject;            // Bluetooth LEスキャンをコントロールするためのobject
@@ -72,11 +75,17 @@ if ('serviceWorker' in navigator) {
  */
 
 // 動作ログへの文字出力
-function log( text ) {
+function log( timestr, logtype, deviceid, value1, value2, text ) {
   var log_onoff = document.getElementById('log_level');
   if (log_onoff.checked){
     let log_div = document.getElementById('log');
-    log_div.insertAdjacentText('beforeend', text + '\n');
+    log_div.insertAdjacentText('beforeend',
+      timestr + '\t' +
+      logtype + '\t' +
+      deviceid + '\t' +
+      value1 + '\t' +
+      value2 + '\t' +
+      text + '\n');
   }
 }
 
@@ -95,9 +104,7 @@ function found_signal(nowtimestring, deviceid, type, threshold) {
   // 改めてタイマー④を15秒後に設定
   checker_shutdown = setTimeout(func_shutdown, 15000);
 
-  log(nowtimestring
-    + '\t 端末の信号を検知 found terminal. type: ' + type + ', id = ' + deviceid
-    + 'detectcriteria: ' + detectcriteria[deviceid][type] + ' threshold: ' + threshold);
+  log(nowtimestring, 'found_approaching_signal', deviceid, detectcriteria[deviceid][type], threshold, 'criteria type: ' + type);
 }
 
 // リスナー(1)
@@ -123,11 +130,10 @@ function found_terminal(event) {
     };
   }
   // ログ表示する
-  log(nowtimestring
-    + '\t added terminalrssi. id = ' + event.device.id
-    + ', count = ' + terminalrssi[timenumber][event.device.id].count
-    + ', value = ' + terminalrssi[timenumber][event.device.id].value
-    + ', average = ' + terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count );
+  log(nowtimestring, 'log_signal_strength', event.device.id,
+    terminalrssi[timenumber][event.device.id].value,
+    terminalrssi[timenumber][event.device.id].count,
+    terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count );
 
   // もしフラグが立っていたら
   if ( check_process_ongoing ) {
@@ -158,14 +164,14 @@ function func_cleaner(){
   function func_assoc_array(num) {
     if ( !terminalrssi[num] ) {
       // 中身が存在しなければ、なにもしない
-      log(nowtimestring + '\t timenumber = ' + num + ' is undefined.');
+      log(nowtimestring, 'log_rotate', '', '', num, 'is undefined');
     } else if ( Object.keys(terminalrssi[num]).length == 0) {
       // 中身が空っぽでも、何もしない
-      log(nowtimestring + '\t timenumber = ' + num + ' is empty.');
+      log(nowtimestring, 'log_rotate', '', '', num, 'is empty');
     } else {
       // 中身があるので、空にする
       terminalrssi[num] = {};
-      log(nowtimestring + '\t timenumber = ' + num + ' is not empty, clear it.');
+      log(nowtimestring, 'log_rotate', '', '', num, ' is not empty, cleard it.');
     }
   }
   // 現在時刻の取得
@@ -189,7 +195,7 @@ async function checker_boot() {
         setTimeout(reject, 10000);
     });
     try{
-        log(nowtimestring + '\t checker_boot(); COCOA信号確認システムを起動します');
+        log(nowtimestring, 'checker_boot()', '', '', '', '');
         // スキャンを開始する
         LEscanobject = await Promise.race([
             navigator.bluetooth.requestLEScan({filters: [{ services: [0xFD6F]}]}),
@@ -212,7 +218,7 @@ async function checker_boot() {
         var v = document.getElementById('video');
         v.play();
     } catch (error) {
-        log('ERR: エラーがおきました : ' + error);
+        log(nowtimestring, 'ERR: エラーがおきました', '', '', '', error);
     }
 }
 
@@ -272,7 +278,7 @@ function func_start_check(){
     // 値を計算して投入する
     detectcriteria[deviceids].first_average = tmp_terminal_list[deviceids].value / tmp_terminal_list[deviceids].count;
   }
-  log(nowtimestring + '\t func_start_check(); 信号確認準備完了、初期値あり端末数は' + Object.keys(detectcriteria).length + ' 個');
+  log(nowtimestring, 'func_start_check()', '', '', Object.keys(detectcriteria).length, ' 個');
   // 表示を変更（計測したい端末を近づけてください）
   document.getElementById('checker').innerText = "信号確認の準備が出来ました、計測したい端末を近づけてください";
   document.getElementById('checker').style.background = "green";
@@ -331,9 +337,25 @@ function check_process_start(){
     detectcriteria[deviceids] = {};
     detectcriteria[deviceids].before_average = tmp_terminal_list[deviceids].value / tmp_terminal_list[deviceids].count;
   }
-  log(nowtimestring + '\t check_process_start(); 信号確認準備に入る、初期値あり端末数は' + Object.keys(detectcriteria).length + ' 個');
+  log(nowtimestring, 'check_process_start()', '', '', Object.keys(detectcriteria).length, ' 個');
   // タイマー(2)を4秒後に設定する
   timer_start_check = setTimeout(func_start_check,4000);
+}
+
+async function sendDebugLog(){
+    // メモ情報を変数に格納する
+    var content   = document.getElementById('log').value;
+    const encoder = new TextEncoder();
+    var blob = encoder.encode(content);
+    var resultfile = new File([blob.buffer], 'COCOA-signal-confirmer.txt', {type: 'text/plain'})
+
+    navigator.share({
+        files: [resultfile]
+    }).then(() => {
+        log(nowtimestring, 'ファイル送信', '', '', '','成功')
+    }).catch((error) => {
+        log(nowtimestring, 'ファイル送信', '', '', '','失敗: '+ error)
+    })
 }
 </script>
 </body>
