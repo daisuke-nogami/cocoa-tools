@@ -3,6 +3,13 @@ Utility tools for COCOA ( Covid-19 Exposure Notification System in Japan ) using
 
 ## tools list
 
+### 一般に提供予定で開発中のコード
+
+- [ENS Signal Confirmer - COCOA動作状況チェッカー](https://daisuke-nogami.github.io/cocoa-tools/signal-confirmer.html)
+  - 端末にアプリを表示させることなく、COCOAの動作状況をBluetooth LEの信号を受信することで確認するツール
+
+### 横浜スタジアムでの技術実証に用いたコード
+
 - [Install Checker - 端末のCOCOAインストール状況チェック](https://daisuke-nogami.github.io/cocoa-tools/install-checker.html)
   - 端末にアプリを表示させることなく、COCOAのインストール状況をBluetooth Advertisingから確認するページ
 - [Counter - COCOAインストール済み端末カウント](https://daisuke-nogami.github.io/cocoa-tools/counter.html)
@@ -11,9 +18,15 @@ Utility tools for COCOA ( Covid-19 Exposure Notification System in Japan ) using
 ## about
 
 COCOA(Covid-19接触確認アプリ)の普及状況把握などに用いるためのツールをWeb-Bluetoothで作成したものです。
-個人情報収集をしうるツールのため、HTML/Javascriptを用いて作成することで、処理内容を限りなくオープンにし、収集の懸念を無くすことを目的としています。
 
-Web-Bluetoothが使えるブラウザで動作することを期待しています。
+個人情報収集に繋がると懸念されうるツールのため、
+
+- HTML/Javascriptを用いて、コードが直接Webページに反映されるgithub-pagesを用いて公開することで、処理内容を限りなくオープンにする
+- 通信内容の取得に制約があるWeb-Bluetooth技術を用いることで、取得可能な情報に制約を掛ける
+
+の2つの観点から、Web-bluetoothを用いることで、個人情報収集の懸念の解消を目指しています。
+
+そのため、利用にはWeb-Bluetoothが使えるブラウザ/端末が必要となります。
 
 ## enviroment
 
