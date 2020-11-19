@@ -45,7 +45,8 @@
     このブラウザでは検知音を鳴らすことが出来ません。
   </audio>
   <p>動作ログ <input type="checkbox" id="log_level" />出力する</p>
-  <textarea id="log" cols="30" rows="10"></textarea>
+  <textarea id="log" cols="40" rows="10"></textarea>
+  <textarea id="log_detail" cols="40" rows="10"></textarea>
   <p>
     <input type="button" value="動作ログを、シェア機能を使って送信する" onclick="sendDebugLog();" />
   </p>
@@ -78,7 +79,7 @@ if ('serviceWorker' in navigator) {
 function log( timestr, logtype, deviceid, value1, value2, text ) {
   var log_onoff = document.getElementById('log_level');
   if (log_onoff.checked){
-    let log_div = document.getElementById('log');
+    let log_div = document.getElementById('log_detail');
     log_div.insertAdjacentText('beforeend',
       timestr + '\t' +
       logtype + '\t' +
@@ -86,6 +87,19 @@ function log( timestr, logtype, deviceid, value1, value2, text ) {
       value1 + '\t' +
       value2 + '\t' +
       text + '\n');
+    if (logtype == 'checker_boot' ||
+        logtype == 'check_process_start' ||
+        logtype == 'func_start_check' ||
+        logtype == 'found_approaching_signal') {
+      let log_summary_div = document.getElementById('log');
+      log_summary_div.insertAdjacentText('beforeend',
+        timestr + '\t' +
+        logtype + '\t' +
+        deviceid + '\t' +
+        value1 + '\t' +
+        value2 + '\t' +
+        text + '\n')
+    }
   }
 }
 
@@ -133,7 +147,7 @@ function found_terminal(event) {
   log(nowtimestring, 'log_signal_strength', event.device.id,
     terminalrssi[timenumber][event.device.id].value,
     terminalrssi[timenumber][event.device.id].count,
-    terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count );
+    (terminalrssi[timenumber][event.device.id].value / terminalrssi[timenumber][event.device.id].count)+'\t'+event.rssi );
 
   // もしフラグが立っていたら
   if ( check_process_ongoing ) {
@@ -195,7 +209,7 @@ async function checker_boot() {
         setTimeout(reject, 10000);
     });
     try{
-        log(nowtimestring, 'checker_boot()', '', '', '', '');
+        log(nowtimestring, 'checker_boot', '', '', '', '');
         // スキャンを開始する
         LEscanobject = await Promise.race([
             navigator.bluetooth.requestLEScan({filters: [{ services: [0xFD6F]}]}),
@@ -278,7 +292,7 @@ function func_start_check(){
     // 値を計算して投入する
     detectcriteria[deviceids].first_average = tmp_terminal_list[deviceids].value / tmp_terminal_list[deviceids].count;
   }
-  log(nowtimestring, 'func_start_check()', '', '', Object.keys(detectcriteria).length, ' 個');
+  log(nowtimestring, 'func_start_check', '', '', Object.keys(detectcriteria).length, ' 個');
   // 表示を変更（計測したい端末を近づけてください）
   document.getElementById('checker').innerText = "信号確認の準備が出来ました、計測したい端末を近づけてください";
   document.getElementById('checker').style.background = "green";
@@ -337,14 +351,16 @@ function check_process_start(){
     detectcriteria[deviceids] = {};
     detectcriteria[deviceids].before_average = tmp_terminal_list[deviceids].value / tmp_terminal_list[deviceids].count;
   }
-  log(nowtimestring, 'check_process_start()', '', '', Object.keys(detectcriteria).length, ' 個');
+  log(nowtimestring, 'check_process_start', '', '', Object.keys(detectcriteria).length, ' 個');
   // タイマー(2)を4秒後に設定する
   timer_start_check = setTimeout(func_start_check,4000);
 }
 
 async function sendDebugLog(){
     // メモ情報を変数に格納する
-    var content   = document.getElementById('log').value;
+    var content = document.getElementById('log').value;
+    content = content + '\n\ntimestr\tlogtype\tdeviceid\tvalue1\tvalue2\ttext\n';
+    content = content + document.getElementById('log_detail').value;
     const encoder = new TextEncoder();
     var blob = encoder.encode(content);
     var resultfile = new File([blob.buffer], 'COCOA-signal-confirmer.txt', {type: 'text/plain'})
