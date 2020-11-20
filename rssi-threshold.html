@@ -48,10 +48,10 @@ td {border:solid 1px silver; border-collapse: collapse}
   </p>
   <table id="target_rssi">
     <thead>
-      <tr><th>初回発見時刻</th><th>最終発見時刻</th><th>電波強度(最大)</th><th>電波強度(最小)</th></tr>
+      <tr><th>初回発見時刻</th><th>最終発見時刻</th><th>電波強度(最大)</th><th>電波強度(最小)</th><th>TxPower</th></tr>
     </thead>
     <tbody>
-      <tr><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+      <tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
     </tbody>
   </table>
 <hr>
@@ -183,6 +183,7 @@ function cocoa_found(event) {
           scandevicelist[found_index][4] = event.rssi;
           document.getElementById(event.device.id + '_min_rssi').innerText = event.rssi;
       }
+      document.getElementById(event.device.id + '_txpower').innerText = event.txPower;
   } else {
       // 発見されなかったら配列に加えつつ新しく列を足して表示する
       scandevicelist.push([event.device.id,nowtime,nowtime,event.rssi,event.rssi]);
@@ -213,6 +214,11 @@ function cocoa_found(event) {
       var text_min_rssi = document.createTextNode(event.rssi);
       cell_min_rssi.appendChild(text_min_rssi);
       cell_min_rssi.id = event.device.id + '_min_rssi';
+      // txpower列(更新があるのでidを振る)
+      var cell_txpower = newRow.insertCell(-1);
+      var text_txpower = document.createTextNode(event.txPower);
+      cell_txpower.appendChild(text_txpower);
+      cell_txpower.id = event.device.id + '_txpower';
   }
   // 個数表示する
   document.getElementById("found_count").value = scandevicelist.length;
