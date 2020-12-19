@@ -1,0 +1,193 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+    <title>COCOA動作状況チェッカー（レイアウト確認）</title>
+    <link rel="stylesheet" type="text/css" href="signal-checker.css" />
+    </head>
+<body>
+  <script src="signal-checker.js">
+  </script>
+
+  <article class="window_box_boot" id="1_setting_a">
+    <div style="height: 24px"></div>
+    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;">
+      よくあるご質問
+    </div>
+    <div style="height: 80px"></div>
+    <img src="logo.svg" alt="COCOA動作チェッカー" />
+    <div style="height: 40px"></div>
+    <div class="heading_16px_150p_bold">
+      「起動する」ボタンを押し、<br />押下後表示されるダイアログで「許可」を押して下さい。
+    </div>
+    <div style="height: 40px"></div>
+    <div class="touch_button" onclick="toggle_visible();">
+      <div class="touch_button_inner">起動する</div>
+    </div>
+  </article>
+
+  <article class="window_box_boot" id="1_setting_b_end">
+    <div style="height: 24px"></div>
+    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;">
+      よくあるご質問
+    </div>
+    <div style="height: 80px"></div>
+    <img src="logo.svg" alt="COCOA動作チェッカー" />
+    <div style="height: 40px"></div>
+    <div class="heading_20px_150p_bold">
+      COCOA動作状況チェッカーは、Androidのみ対応しています。<br />
+      ご利用の端末では動かすことができません。
+    </div>
+    <div style="height: 40px"></div>
+    <div class="touch_button" onclick="toggle_visible();">
+      <div class="touch_button_inner">TOPに戻る</div>
+    </div>
+  </article>
+
+  <article class="window_box_boot" id="1_setting_b">
+    <div style="height: 24px"></div>
+    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;">
+      よくあるご質問
+    </div>
+    <div style="height: 80px"></div>
+    <img src="logo.svg" alt="COCOA動作チェッカー" />
+    <div style="height: 40px"></div>
+    <div class="heading_20px_150p_bold">
+      ご利用の環境では、COCOA動作状況チェッカーを利用できません。<br />
+      下記の項目を確認し設定してください。
+    </div>
+    <div style="height: 24px"></div>
+
+    <div style="overflow-y: scroll; height: 40%;">
+      <div class="accordion_header" id="reason_1_header" onclick='toggle_accordion("reason_1");'>
+        <div class="heading_20px_150p_bold">Android 6.0以降のバージョンが必要です</div>
+        <div>▽</div>
+      </div>
+      <div class="accordion_content" id="reason_1_content">
+        <div class="text_16px_150p">
+          ご利用の環境を、Android 6.0以降にアップグレードしてください。
+        </div>
+      </div>
+
+      <div style="height: 8px"></div>
+
+      <div class="accordion_header" id="reason_2_header" onclick='toggle_accordion("reason_2");'>
+        <div class="heading_20px_150p_bold">最新版のChromeが必要です</div>
+        <div>▽</div>
+      </div>
+      <div class="accordion_content" id="reason_2_content">
+        <div class="text_16px_150p">
+          Google Chromeを最新版に更新してください。
+        </div>
+      </div>
+
+      <div style="height: 8px"></div>
+
+      <div class="accordion_header" id="reason_3_header" onclick='toggle_accordion("reason_3");'>
+        <div class="heading_20px_150p_bold">Chromeの設定で"テスト中機能"を有効にする必要があります</div>
+        <div>▽</div>
+      </div>
+      <div class="accordion_content" id="reason_3_content">
+        <div class="text_16px_150p">
+          あああああ。
+        </div>
+      </div>
+
+      <div style="height: 8px"></div>
+
+      <div class="accordion_header" id="reason_4_header" onclick='toggle_accordion("reason_4");'>
+        <div class="heading_20px_150p_bold">Chromeの設定でBluetoothのスキャンを許可する必要があります</div>
+        <div>▽</div>
+      </div>
+      <div class="accordion_content" id="reason_4_content">
+        <div class="text_16px_150p">
+          あああああ。
+        </div>
+      </div>
+
+      <div style="height: 8px"></div>
+
+      <div class="accordion_header" id="reason_5_header" onclick='toggle_accordion("reason_5");'>
+        <div class="heading_20px_150p_bold">BluetoothをOnにして、Chromeに位置情報の利用を許可する必要があります</div>
+        <div>▽</div>
+      </div>
+      <div class="accordion_content" id="reason_5_content">
+        <div class="text_16px_150p">
+          あああああ。
+        </div>
+      </div>
+    </div>
+
+    <div style="height: 40px"></div>
+    <div class="touch_button" onclick="toggle_visible();">
+      <div class="touch_button_inner">TOPに戻る</div>
+    </div>
+  </article>
+
+  <article class="window_box_main" id="2_top">
+    <div style="height: 24px"></div>
+    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;">
+      ?
+    </div>
+    <div style="height: 70px"></div>
+    <img src="top.svg" alt="COCOA動作チェッカー" />
+    <div style="height: 18px"></div>
+    <div class="heading_32px_150p_bold">
+      接触確認アプリが<br />
+      正常に機能しているかを確認しよう
+    </div>
+    <div style="height: 24px"></div>
+    <div class="text_16px_150p" style="text-align: center;">
+      あなたと、あなたの大切な人を守るために。<br />
+      ここでは、スマートフォンに入っている「接触確認アプリ（COCOA）」が正常に機能しているかを確認することができます。
+    </div>
+    <div style="height: 40px"></div>
+    <div class="touch_button" onclick="toggle_visible();">
+      <div class="touch_button_inner">確認する</div>
+    </div>
+    <div style="height: 80px"></div>
+    <div class="column_box">
+      <div style="height: 32px"></div>
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <img src="app_icon.png" height="62px" />
+        <div class="heading_20px_150p_bold" style="text-align: center;">
+          新型コロナウイルス接触確認アプリとは
+        </div>
+      </div>
+      <div class="content_box">
+        <div class="content_text_half" id="2_top_content_2_left">
+          <h3 class="heading_mark">できること</h3>
+          <div class="text_14px_150p">
+            厚生労働省が公式提供する、新型コロナウイルス陽性登録した人との接触をお知らせするアプリです。<br />
+            本アプリを端末に設定した人どうしの接触（1m以内、15分以上）を記録します。新型コロナウイルスに陽性と判定されたら本アプリに匿名で登録することができます。最近接触した人の中に陽性登録した人がいたら、通知と適切な行動をお知らせします。
+          </div>
+        </div>
+        <div class="content_text_half" id="2_top_content_2_right">
+          <h3 class="heading_mark">ダウンロード</h3>
+          <ul style="display: flex;  list-style: none;">
+            <li class="text_16px_150p">
+              Android版<br />
+              <img src="qr_android.png" /><br />
+              <img src="google-play-badge.png" style="width: 100px" />
+            </li>
+            <li class="text_16px_150p">
+              iOS版<br />
+              <img src="qr_ios.png" /><br />
+              <img src="Download_on_the_App_Store_Badge_JP_RGB_blk_100317.svg" style="width: 100px"  />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+
+
+  <script>
+    // 最初のウインドウを起動時に可視にする
+    var boot_window = document.getElementById("1_setting_a");
+    boot_window.style.visibility = 'visible';
+  </script>
+
+</body>
+</html>
