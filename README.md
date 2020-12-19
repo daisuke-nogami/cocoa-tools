@@ -5,7 +5,7 @@ Utility tools for COCOA ( Covid-19 Exposure Notification System in Japan ) using
 
 ### 一般に提供予定で開発中のコード
 
-- [ENS Signal Confirmer - COCOA動作状況チェッカー](https://daisuke-nogami.github.io/cocoa-tools/signal-confirmer.html)
+- [ENS Signal Confirmer - COCOA動作状況チェッカー](https://daisuke-nogami.github.io/cocoa-tools/signal-checker/index.html)
   - 端末にアプリを表示させることなく、COCOAの動作状況をBluetooth LEの信号を受信することで確認するツール
 
 ### 横浜スタジアムでの技術実証に用いたコード
