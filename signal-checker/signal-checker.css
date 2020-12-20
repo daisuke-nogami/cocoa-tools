@@ -164,7 +164,7 @@ body {
   background: var(--white);
   border-radius: 10px 10px 10px 10px;
 
-  display: flex;
+  display: none; /* スクリプトで display: flex; に切り替える */
   flex-direction: row;
   align-items: center;
 }

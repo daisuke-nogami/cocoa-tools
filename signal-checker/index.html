@@ -11,7 +11,7 @@
 
   <article class="window_box_boot" id="1_setting_a">
     <div style="height: 24px"></div>
-    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;">
+    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="toggle_visible();">
       よくあるご質問
     </div>
     <div class="window_box_content">
@@ -22,7 +22,7 @@
         「起動する」ボタンを押し、<br />押下後表示されるダイアログで「許可」を押して下さい。
       </div>
       <div style="height: 40px"></div>
-      <div class="touch_button" onclick="toggle_visible();">
+      <div class="touch_button" onclick="check_enviroment();">
         <div class="touch_button_inner">起動する</div>
       </div>
     </div>
@@ -102,8 +102,18 @@
       <div class="accordion_content" id="reason_3_content">
         <div class="text_16px_150p">
           Chromeの"experimental-web-platform-features"(テスト中機能)を"Enabled"(有効)にしてください。<br />
-
-          <input type="text" value="chrome://flags/#enable-experimental-web-platform-features" id="privileged_url" />
+          <ol>
+            <li>
+              アドレス <input type="text" value="chrome://flags/#enable-experimental-web-platform-features" id="privileged_url" /> を開きます。<br />
+              <span onclick="open_new_tab_with_privileged_url()">ここをクリック</span>すると、をクリップボードに格納して新しいウインドウを開くので、アドレス欄に「貼り付け」を行って下さい。
+            </li>
+            <li>
+              画面に表示される「Experimental Web Platform features」が、「Default」あるいは「Disabled」になっていますので、これを「Enabled」に変えます。
+            </li>
+            <li>
+              画面下部に現れる「Relaunch」というボタンをタップします。
+            </li>
+          </ol>
         </div>
       </div>
 
@@ -156,6 +166,18 @@
               </ol>
             </li>
           </ol>
+        </div>
+      </div>
+
+      <div style="height: 8px"></div>
+
+      <div class="accordion_header" id="reason_6_header" onclick='toggle_accordion("reason_6");'>
+        <div class="heading_20px_150p_bold">Bluetoothのスキャンを再度行ってください</div>
+        <div><img src="arrow_lower.svg" style="margin-right: 20px; margin-left: auto;" /></div>
+      </div>
+      <div class="accordion_content" id="reason_6_content">
+        <div class="text_16px_150p">
+          スキャンが実行されませんでした。
         </div>
       </div>
 
