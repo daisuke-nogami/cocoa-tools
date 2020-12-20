@@ -21,7 +21,7 @@ body {
 @media screen and (max-width:640px) {
   /*　画面サイズが640pxまではここを読み込む　*/
   :root {
-    --window-width: 327px;
+    --window-width: calc(100% - 24px * 2);
     --ul_align: column;
     --half_width: 80%;
   }
