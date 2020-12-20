@@ -102,7 +102,7 @@ async function check_enviroment(){
 
   // BLE scanningが走るかの確認
   try{
-    LEscanobject = navigator.bluetooth.requestLEScan({filters: [{ services: [0xFD6F]}]});
+    LEscanobject = await navigator.bluetooth.requestLEScan({filters: [{ services: [0xFD6F]}]});
     window_success.style.visibility = 'visible';
   } catch (error) {
     if (error.name == 'InvalidStateError') {
