@@ -5,7 +5,12 @@ function toggle_visible() {
     document.getElementById("1_setting_a"),
     document.getElementById("1_setting_b_end"),
     document.getElementById("1_setting_b"),
-    document.getElementById("2_top")
+    document.getElementById("2_top"),
+    document.getElementById("3_loading"),
+    document.getElementById("4_touch"),
+    document.getElementById("5_done_a"),
+    document.getElementById("5_done_b"),
+    document.getElementById("6_setting_FQA")
   ];
   windows_handle[windows_visible].style.visibility = 'hidden';
   if (windows_visible < windows_handle.length - 1) {

@@ -58,14 +58,15 @@
     </div>
     <div style="height: 24px"></div>
 
-    <div style="overflow-y: scroll; height: 40%;">
+    <div> <!-- style="overflow-y: scroll; height: 40%;" -->
       <div class="accordion_header" id="reason_1_header" onclick='toggle_accordion("reason_1");'>
         <div class="heading_20px_150p_bold">Android 6.0以降のバージョンが必要です</div>
-        <div>▽</div>
+        <img src="arrow_lower.svg" style="margin-right: 20px; margin-left: auto;" />
       </div>
       <div class="accordion_content" id="reason_1_content">
         <div class="text_16px_150p">
-          ご利用の環境を、Android 6.0以降にアップグレードしてください。
+          ご利用の環境を、Android 6.0以降にアップグレードしてください。<br />
+          ご利用の端末でのOSアップグレードの可否は、端末のメーカーまでお問い合わせ下さい。
         </div>
       </div>
 
@@ -73,11 +74,15 @@
 
       <div class="accordion_header" id="reason_2_header" onclick='toggle_accordion("reason_2");'>
         <div class="heading_20px_150p_bold">最新版のChromeが必要です</div>
-        <div>▽</div>
+        <div><img src="arrow_lower.svg" style="margin-right: 20px; margin-left: auto;" /></div>
       </div>
       <div class="accordion_content" id="reason_2_content">
         <div class="text_16px_150p">
-          Google Chromeを最新版に更新してください。
+          <ol>
+            <li>Playストアを開きます。</li>
+            <li>マイアプリ＆ゲームを開きます。</li>
+            <li>「全て更新」をタップしてアプリを更新します。</li>
+          </ol>
         </div>
       </div>
 
@@ -85,11 +90,13 @@
 
       <div class="accordion_header" id="reason_3_header" onclick='toggle_accordion("reason_3");'>
         <div class="heading_20px_150p_bold">Chromeの設定で"テスト中機能"を有効にする必要があります</div>
-        <div>▽</div>
+        <div><img src="arrow_lower.svg" style="margin-right: 20px; margin-left: auto;" /></div>
       </div>
       <div class="accordion_content" id="reason_3_content">
         <div class="text_16px_150p">
-          あああああ。
+          Chromeの"experimental-web-platform-features"(テスト中機能)を"Enabled"(有効)にしてください。<br />
+
+          <input type="text" value="chrome://flags/#enable-experimental-web-platform-features" id="privileged_url" />
         </div>
       </div>
 
@@ -97,11 +104,28 @@
 
       <div class="accordion_header" id="reason_4_header" onclick='toggle_accordion("reason_4");'>
         <div class="heading_20px_150p_bold">Chromeの設定でBluetoothのスキャンを許可する必要があります</div>
-        <div>▽</div>
+        <div><img src="arrow_lower.svg" style="margin-right: 20px; margin-left: auto;" /></div>
       </div>
       <div class="accordion_content" id="reason_4_content">
         <div class="text_16px_150p">
-          あああああ。
+          <ol>
+            <li>アドレスバーにある鍵マークをタップして下さい。</li>
+            <li>「Bluetoothのスキャン - ブロック中」と表示されている場合には、
+              <ol>
+                <li>「サイトの設定」をタップしてください。</li>
+                <li>「データを削除してリセット」をタップしてください。</li>
+              </ol>
+            </li>
+            <li>「Bluetoothのスキャン - ブロック中」と表示されていない場合には、
+              <ol>
+                <li>戻るボタンをタップしてください。</li>
+                <li>「…」をタップし「設定」をタップしてください。</li>
+                <li>「サイトの設定」をタップしてください。</li>
+                <li>「Bluetoothのスキャン」をタップしてください。</li>
+                <li>スイッチをタップし、「サイトから近くにあるBluetoothデバイスの検出を求められた時に確認する（推奨）」と表示されるようにしてください。</li>
+              </ol>
+            </li>
+          </ol>
         </div>
       </div>
 
@@ -109,79 +133,255 @@
 
       <div class="accordion_header" id="reason_5_header" onclick='toggle_accordion("reason_5");'>
         <div class="heading_20px_150p_bold">BluetoothをOnにして、Chromeに位置情報の利用を許可する必要があります</div>
-        <div>▽</div>
+        <div><img src="arrow_lower.svg" style="margin-right: 20px; margin-left: auto;" /></div>
       </div>
       <div class="accordion_content" id="reason_5_content">
         <div class="text_16px_150p">
-          あああああ。
+          <ol>
+            <li>端末のBluetoothのOn/Offを確認してください。</li>
+            <li>BluetoothがOffになっていたらOnにしてください。</li>
+            <li>BluetoothがOnになっていたら、Chromeの位置情報利用が許可されていませんので、
+              <ol>
+                <li>Androidの「設定」を開きます。</li>
+                <li>「アプリ」を開きます。</li>
+                <li>「Chrome」を探して開きます。</li>
+                <li>「権限」をタップし、「位置情報」を許可します。</li>
+              </ol>
+            </li>
+          </ol>
         </div>
       </div>
-    </div>
 
-    <div style="height: 40px"></div>
-    <div class="touch_button" onclick="toggle_visible();">
-      <div class="touch_button_inner">TOPに戻る</div>
+      <div style="height: 40px"></div>
+      <div class="touch_button" onclick="toggle_visible();">
+        <div class="touch_button_inner">TOPに戻る</div>
+      </div>
     </div>
   </article>
 
   <article class="window_box_main" id="2_top">
-    <div style="height: 24px"></div>
-    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;">
-      ?
+    <div style="height: 20px"></div>
+    <div style="text-align: right; margin-right: 23px;">
+      <img src="icon_FAQ.svg" />
     </div>
-    <div style="height: 70px"></div>
-    <img src="top.svg" alt="COCOA動作チェッカー" />
-    <div style="height: 18px"></div>
-    <div class="heading_32px_150p_bold">
-      接触確認アプリが<br />
-      正常に機能しているかを確認しよう
+    <div class="window_box_content">
+      <div style="height: 70px"></div>
+      <img src="top.svg" alt="COCOA動作チェッカー" />
+      <div style="height: 18px"></div>
+      <div class="heading_32px_150p_bold">
+        接触確認アプリが<br />
+        正常に機能しているかを確認しよう
+      </div>
+      <div style="height: 24px"></div>
+      <div class="text_16px_150p" style="text-align: center;">
+        あなたと、あなたの大切な人を守るために。<br />
+        ここでは、スマートフォンに入っている「接触確認アプリ（COCOA）」が正常に機能しているかを確認することができます。
+      </div>
+      <div style="height: 40px"></div>
+      <div class="touch_button" onclick="toggle_visible();">
+        <div class="touch_button_inner">確認する</div>
+      </div>
+      <div style="height: 80px"></div>
+      <div class="column_box">
+        <div style="height: 32px"></div>
+        <div style="display: flex; justify-content: center; align-items: center;">
+          <img src="app_icon.png" height="62px" />
+          <div class="heading_20px_150p_bold" style="text-align: center;">
+            新型コロナウイルス接触確認アプリとは
+          </div>
+        </div>
+        <div class="content_box">
+          <div class="content_text_half" id="2_top_content_2_left">
+            <h3 class="heading_mark">できること</h3>
+            <div class="text_14px_150p">
+              厚生労働省が公式提供する、新型コロナウイルス陽性登録した人との接触をお知らせするアプリです。<br />
+              本アプリを端末に設定した人どうしの接触（1m以内、15分以上）を記録します。新型コロナウイルスに陽性と判定されたら本アプリに匿名で登録することができます。最近接触した人の中に陽性登録した人がいたら、通知と適切な行動をお知らせします。
+            </div>
+          </div>
+          <div class="content_text_half" id="2_top_content_2_right">
+            <h3 class="heading_mark">ダウンロード</h3>
+            <ul style="display: flex;  list-style: none; padding: 0px;">
+              <li class="text_16px_150p" style="padding: 5px;">
+                Android版<br />
+                <img src="qr_android.png" /><br />
+                <img src="google-play-badge.png" style="width: 100px" />
+              </li>
+              <li class="text_16px_150p" style="padding: 5px;">
+                iOS版<br />
+                <img src="qr_ios.png" /><br />
+                <img src="Download_on_the_App_Store_Badge_JP_RGB_blk_100317.svg" style="width: 100px"  />
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-    <div style="height: 24px"></div>
-    <div class="text_16px_150p" style="text-align: center;">
-      あなたと、あなたの大切な人を守るために。<br />
-      ここでは、スマートフォンに入っている「接触確認アプリ（COCOA）」が正常に機能しているかを確認することができます。
+  </article>
+
+  <article class="window_box_main" id="3_loading">
+    <div style="height: 20px"></div>
+    <div class="working_header">
+      <div style="margin-left: 23px;">
+        <img src="top.svg" alt="COCOA動作チェッカー" />
+      </div>
+      <div style="text-align: right; margin-right: 23px;">
+        <img src="icon_FAQ.svg" />
+      </div>
     </div>
+    <div style="height: 80px"></div>
+      <div class="loader" id="loader">Loading...</div>
     <div style="height: 40px"></div>
-    <div class="touch_button" onclick="toggle_visible();">
-      <div class="touch_button_inner">確認する</div>
+    <div class="heading_28px_150p_bold">
+      信号確認の準備が出来るまで、お待ちください
     </div>
     <div style="height: 80px"></div>
     <div class="column_box">
       <div style="height: 32px"></div>
       <div style="display: flex; justify-content: center; align-items: center;">
         <img src="app_icon.png" height="62px" />
-        <div class="heading_20px_150p_bold" style="text-align: center;">
-          新型コロナウイルス接触確認アプリとは
+        <div class="heading_20px_150p_bold" style="text-align: center;" onclick="toggle_visible();">
+          厚生労働省からのお知らせ
         </div>
       </div>
       <div class="content_box">
-        <div class="content_text_half" id="2_top_content_2_left">
-          <h3 class="heading_mark">できること</h3>
+        <div class="content_text_full">
           <div class="text_14px_150p">
-            厚生労働省が公式提供する、新型コロナウイルス陽性登録した人との接触をお知らせするアプリです。<br />
-            本アプリを端末に設定した人どうしの接触（1m以内、15分以上）を記録します。新型コロナウイルスに陽性と判定されたら本アプリに匿名で登録することができます。最近接触した人の中に陽性登録した人がいたら、通知と適切な行動をお知らせします。
+            冬のコロナ対策へのご協力をお願いします！<br />
+  いつも感染予防ありがとうございます。マスクの着用・3密の回避・手洗い・消毒など、基本的な対策の徹底、会話の際にはいつでもマスクをつけて、会食の際は「静かなマスク会食」をお願いします。
           </div>
-        </div>
-        <div class="content_text_half" id="2_top_content_2_right">
-          <h3 class="heading_mark">ダウンロード</h3>
-          <ul style="display: flex;  list-style: none;">
-            <li class="text_16px_150p">
-              Android版<br />
-              <img src="qr_android.png" /><br />
-              <img src="google-play-badge.png" style="width: 100px" />
-            </li>
-            <li class="text_16px_150p">
-              iOS版<br />
-              <img src="qr_ios.png" /><br />
-              <img src="Download_on_the_App_Store_Badge_JP_RGB_blk_100317.svg" style="width: 100px"  />
-            </li>
-          </ul>
         </div>
       </div>
     </div>
   </article>
 
+  <article class="window_box_main" id="4_touch">
+    <div style="height: 20px"></div>
+    <div class="working_header">
+      <div style="margin-left: 23px;">
+        <img src="top.svg" alt="COCOA動作チェッカー" />
+      </div>
+      <div style="text-align: right; margin-right: 23px;">
+        <img src="icon_FAQ.svg" />
+      </div>
+    </div>
+    <div style="height: 80px"></div>
+    <img src="frame.svg" style="height: 140px; border: 1px" />
+    <div style="height: 80px"></div>
+    <div class="heading_28px_150p_bold" onclick="toggle_visible();">
+      信号確認の準備が出来ました。<br />
+      計測したいスマホを画面に近づけてください。
+    </div>
+  </article>
 
+  <article class="window_box_main" id="5_done_a">
+    <div style="height: 20px"></div>
+    <div class="working_header">
+      <div style="margin-left: 23px;">
+        <img src="top.svg" alt="COCOA動作チェッカー" />
+      </div>
+      <div style="text-align: right; margin-right: 23px;">
+        <img src="icon_FAQ.svg" />
+      </div>
+    </div>
+    <div class="window_box_content">
+      <div style="height: 80px"></div>
+      <img src="icon_check.svg" style="height: 100px;" />
+      <div style="height: 80px"></div>
+      <div class="heading_28px_150p_bold">
+        接触確認アプリが<br />
+        正常に機能していることを確認しました。
+      </div>
+      <div style="height: 24px"></div>
+      <div class="text_16px_150p" style="text-align: center;">
+        あなたのスマートフォンに入っている「接触確認アプリ（COCOA）」は正常に機能しています。今後もBluetoothをONにした状態で、安全にお過ごしください。
+      </div>
+      <div style="height: 40px"></div>
+      <div class="touch_button" onclick="toggle_visible();">
+        <div class="touch_button_inner">TOPに戻る</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="window_box_main" id="5_done_b">
+    <div style="height: 20px"></div>
+    <div class="working_header">
+      <div style="margin-left: 23px;">
+        <img src="top.svg" alt="COCOA動作チェッカー" />
+      </div>
+      <div style="text-align: right; margin-right: 23px;">
+        <img src="icon_FAQ.svg" />
+      </div>
+    </div>
+    <div class="window_box_content">
+      <div style="height: 80px"></div>
+        <img src="icon_error.svg" style="height: 100px;" />
+      <div style="height: 80px"></div>
+      <div class="heading_28px_150p_bold">
+        接触確認アプリが<br />
+        正常に機能していることを確認できませんでした。
+      </div>
+      <div style="height: 24px"></div>
+      <div class="text_16px_150p" style="text-align: center;">
+        代表的な、確認できない理由は以下の通りです。
+        <ul>
+          <li>BluetoothがOffになっている</li>
+          <li>接触確認アプリがインストールされていない</li>
+        </ul>
+        これらの項目を確認し、再度操作ください。
+      </div>
+      <div style="height: 40px"></div>
+      <div class="touch_button" onclick="toggle_visible();">
+        <div class="touch_button_inner">TOPに戻る</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="window_box_main" id="6_setting_FQA">
+    <div style="height: 20px"></div>
+    <div class="working_header">
+      <div style="margin-left: 23px;">
+        <img src="top.svg" alt="COCOA動作チェッカー" />
+      </div>
+      <div style="text-align: right; margin-right: 23px;">
+        <img src="icon_FAQ.svg" />
+      </div>
+    </div>
+    <div class="window_box_content">
+      <div style="height: 80px"></div>
+      <div class="heading_28px_150p_bold" style="text-align: left;" onclick="toggle_visible();">
+        よくある質問
+      </div>
+      <div style="height: 40px"></div>
+
+      <div class="heading_20px_150p_bold" style="text-align: left;">
+        Q. 質問文質問文質問文質問文
+      </div>
+      <div style="height: 8px"></div>
+      <div class="text_16px_150p" style="text-align: left;">
+        回答回答回答回答回答回答回答回答回答回答
+      </div>
+      <div style="height: 32px"></div>
+
+      <div class="heading_20px_150p_bold" style="text-align: left;">
+        Q. 質問文質問文質問文質問文
+      </div>
+      <div style="height: 8px"></div>
+      <div class="text_16px_150p" style="text-align: left;">
+        回答回答回答回答回答回答回答回答回答回答
+      </div>
+      <div style="height: 32px"></div>
+
+      <div class="heading_20px_150p_bold" style="text-align: left;">
+        Q. 質問文質問文質問文質問文
+      </div>
+      <div style="height: 8px"></div>
+      <div class="text_16px_150p" style="text-align: left;">
+        回答回答回答回答回答回答回答回答回答回答
+      </div>
+      <div style="height: 32px"></div>
+    </div>
+
+  </article>
 
   <script>
     // 最初のウインドウを起動時に可視にする
