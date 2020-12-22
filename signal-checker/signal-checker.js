@@ -1,26 +1,73 @@
-// UI構築時に使う仮の画面切り替え関数
+// グローバル変数
+// スキャン状況把握のための変数
+var LEscanobject;
+
+// TOPに戻るボタン
+function return_top(target_type) {
+  // 画面切り替え用の配列
+  var windows_handle = [
+    document.getElementById("1_setting_a"),     // 0
+    document.getElementById("1_setting_b_end"), // 1
+    document.getElementById("1_setting_b"),     // 2
+    document.getElementById("2_top"),           // 3
+    document.getElementById("3_loading"),       // 4
+    document.getElementById("4_touch"),         // 5
+    document.getElementById("5_done_a"),        // 6
+    document.getElementById("5_done_b"),        // 7
+    document.getElementById("6_setting_FQA"),    // 8
+    document.getElementById("7_FQA")            // 9
+  ];
+  // いったん全部隠す
+  for (var i=0; i<windows_handle.length; i++) {
+    windows_handle[i].style.visibility = 'hidden';
+  }
+  // typeに応じて戻る画面を選ぶ
+  if (target_type == "operator") {
+    windows_handle[0].style.visibility = 'visible';
+  } else if (target_type == "enduser") {
+    windows_handle[3].style.visibility = 'visible';
+  } else if (target_type == "faq_operator") {
+    windows_handle[8].style.visibility = 'visible';
+  } else if (target_type == "faq_enduser") {
+    windows_handle[9].style.visibility = 'visible';
+  } else {
+    windows_handle[target_type].style.visibility = 'visible';
+  }
+}
+
+// UI確認用の画面切り替え関数（デバッグ用）
 var windows_visible = 0;
 function toggle_visible() {
-  var windows_handle = [
-    document.getElementById("1_setting_a"),
-    document.getElementById("1_setting_b_end"),
-    document.getElementById("1_setting_b"),
-    document.getElementById("2_top"),
-    document.getElementById("3_loading"),
-    document.getElementById("4_touch"),
-    document.getElementById("5_done_a"),
-    document.getElementById("5_done_b"),
-    document.getElementById("6_setting_FQA")
-  ];
-  windows_handle[windows_visible].style.visibility = 'hidden';
-  if (windows_visible < windows_handle.length - 1) {
+  if (windows_visible < 9) {
     windows_visible++;
   } else {
     windows_visible = 0;
   }
-  windows_handle[windows_visible].style.visibility = 'visible';
+  return_top(windows_visible);
 }
 
+// スキャン全般関連
+// スキャン中にフォーカスが外れるなどしてスキャンが止まったのを検知する関数
+var advertising_scanning = false;
+var scan_running_checker;
+function check_scan_running() {
+  // スキャン中に
+  if (advertising_scanning) {
+    // スキャンが止まっていたら
+    if ( !(LEscanobject.active) ) {
+      // 問答無用で起動画面に戻す
+      for (var i=1; i<windows_handle.length; i++) {
+        windows_handle[i].style.visibility = 'hidden';
+      }
+      windows_handle[0].style.visibility = 'visible';
+      advertising_scanning = false;
+      clearInterval(scan_running_checker);
+    }
+  }
+}
+
+
+// 動作チェック関連
 // アコーディオン表示の開閉
 function toggle_accordion(target) {
   var target_accordion = document.getElementById(target+'_header');
@@ -36,9 +83,6 @@ function toggle_accordion(target) {
     target_accordion.style.borderBottomLeftRadius = '10px';
   }
 }
-
-// 以下本番用コード
-var LEscanobject;
 
 // クリップボードに特権URLを格納した上でウインドウを開く
 function open_new_tab_with_privileged_url() {
@@ -61,16 +105,17 @@ async function check_enviroment(){
   window_origin.style.visibility = 'hidden';
 
   // Androidかどうかを確認
-/*
   if (navigator.userAgent.indexOf("Android") == -1){
     window_fail.style.visibility = 'visible';
     return;
   }
-*/
+
   // Androidのバージョンを確認
-/*
-  document.getElementById("reason_2_header").style.display = 'flex';
- */
+  if ( parseFloat(navigator.userAgent.slice(navigator.userAgent.indexOf("Android")+8)) < 6 ) {
+    window_retry.style.visibility = 'visible';
+    document.getElementById("reason_1_header").style.display = 'flex';
+    return;
+  }
 
   // Chromeで起動しているかどうかを確認
   if (navigator.userAgent.indexOf("Chrome") == -1 || navigator.userAgent.indexOf("Edge") !== -1){
@@ -78,8 +123,12 @@ async function check_enviroment(){
     document.getElementById("reason_2_header").style.display = 'flex';
     return;
   } else {
-    // Chromeのバージョンを確認
-
+    // Chromeのバージョンを確認　(85以降)
+    if (parseFloat(navigator.userAgent.slice(navigator.userAgent.indexOf("Chrome")+7)) < 84) {
+      window_retry.style.visibility = 'visible';
+      document.getElementById("reason_2_header").style.display = 'flex';
+      return;
+    }
   }
 
   // #enable-experimental-web-platform-featuresの確認
@@ -104,6 +153,8 @@ async function check_enviroment(){
   try{
     LEscanobject = await navigator.bluetooth.requestLEScan({filters: [{ services: [0xFD6F]}]});
     window_success.style.visibility = 'visible';
+    advertising_scanning = false;
+    scan_running_checker = setInterval(check_scan_running,1000);
   } catch (error) {
     if (error.name == 'InvalidStateError') {
       // スキャンがキャンセルされた
@@ -122,20 +173,4 @@ async function check_enviroment(){
       return;
     }
   }
-}
-
-
-
-
-
-
-
-
-
-
-function check_scan_running() {
-  let log_div = document.getElementById('test_console');
-  log_div.insertAdjacentText('beforeend',' navigator.bluetooth.activeScans' +  navigator.bluetooth.activeScans + '\n');
-  log_div.insertAdjacentText('beforeend',' LEscanobject.active' + LEscanobject.active + '\n');
-  // これをちゃんと見続けて、スキャンが切れたらトップに戻すような処理を足すべき
 }

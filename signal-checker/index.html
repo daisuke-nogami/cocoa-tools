@@ -11,9 +11,9 @@
 
   <article class="window_box_boot" id="1_setting_a">
     <div style="height: 24px"></div>
-    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="toggle_visible();">
+    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="return_top('faq_operator');">
       よくあるご質問
-    </div>
+    </div><div onclick="toggle_visible();">★</div>
     <div class="window_box_content">
       <div style="height: 80px"></div>
       <img src="logo.svg" alt="COCOA動作チェッカー" />
@@ -30,9 +30,9 @@
 
   <article class="window_box_boot" id="1_setting_b_end">
     <div style="height: 24px"></div>
-    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;">
+    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="return_top('faq_operator');">
       よくあるご質問
-    </div>
+    </div><div onclick="toggle_visible();">★</div>
     <div style="height: 80px"></div>
     <img src="logo.svg" alt="COCOA動作チェッカー" />
     <div class="window_box_content">
@@ -42,7 +42,7 @@
         ご利用の端末では動かすことができません。
       </div>
       <div style="height: 40px"></div>
-      <div class="touch_button" onclick="toggle_visible();">
+      <div class="touch_button" onclick="return_top('operator');">
         <div class="touch_button_inner">TOPに戻る</div>
       </div>
     </div>
@@ -50,9 +50,9 @@
 
   <article class="window_box_boot" id="1_setting_b">
     <div style="height: 24px"></div>
-    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;">
+    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="return_top('faq_operator');">
       よくあるご質問
-    </div>
+    </div><div onclick="toggle_visible();">★</div>
     <div class="window_box_content">
 
       <div style="height: 80px"></div>
@@ -182,7 +182,7 @@
       </div>
 
       <div style="height: 40px"></div>
-      <div class="touch_button" onclick="toggle_visible();">
+      <div class="touch_button" onclick="return_top('operator');">
         <div class="touch_button_inner">TOPに戻る</div>
       </div>
     </div>
@@ -191,7 +191,7 @@
   <article class="window_box_main" id="2_top">
     <div style="height: 20px"></div>
     <div style="text-align: right; margin-right: 23px;">
-      <img src="icon_FAQ.svg" />
+      <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" /> <div onclick="toggle_visible();">★</div>
     </div>
     <div class="window_box_content">
       <div style="height: 70px"></div>
@@ -254,7 +254,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" />
+        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" /> <div onclick="toggle_visible();">★</div>
       </div>
     </div>
     <div class="window_box_content">
@@ -270,7 +270,7 @@
       <div style="height: 32px"></div>
       <div style="display: flex; justify-content: center; align-items: center;">
         <img src="app_icon.png" height="62px" />
-        <div class="heading_20px_150p_bold" style="text-align: center;" onclick="toggle_visible();">
+        <div class="heading_20px_150p_bold" style="text-align: center;">
           厚生労働省からのお知らせ
         </div>
       </div>
@@ -292,14 +292,14 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" />
+        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" /> <div onclick="toggle_visible();">★</div>
       </div>
     </div>
     <div class="window_box_content">
       <div style="height: 80px"></div>
       <img src="frame.svg" style="height: 140px; border: 1px" />
       <div style="height: 80px"></div>
-      <div class="heading_28px_150p_bold" onclick="toggle_visible();">
+      <div class="heading_28px_150p_bold">
         信号確認の準備が出来ました。<br />
         計測したいスマホを画面に近づけてください。
       </div>
@@ -313,7 +313,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" />
+        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" /> <div onclick="toggle_visible();">★</div>
       </div>
     </div>
     <div class="window_box_content">
@@ -329,7 +329,7 @@
         あなたのスマートフォンに入っている「接触確認アプリ（COCOA）」は正常に機能しています。今後もBluetoothをONにした状態で、安全にお過ごしください。
       </div>
       <div style="height: 40px"></div>
-      <div class="touch_button" onclick="toggle_visible();">
+      <div class="touch_button" onclick="return_top('enduser');">
         <div class="touch_button_inner">TOPに戻る</div>
       </div>
     </div>
@@ -342,7 +342,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" />
+        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" /> <div onclick="toggle_visible();">★</div>
       </div>
     </div>
     <div class="window_box_content">
@@ -363,25 +363,25 @@
         これらの項目を確認し、再度操作ください。
       </div>
       <div style="height: 40px"></div>
-      <div class="touch_button" onclick="toggle_visible();">
+      <div class="touch_button" onclick="return_top('enduser');">
         <div class="touch_button_inner">TOPに戻る</div>
       </div>
     </div>
   </article>
 
-  <article class="window_box_main" id="6_setting_FQA">
+  <article class="window_box_boot" id="6_setting_FQA">
     <div style="height: 20px"></div>
     <div class="working_header">
       <div style="margin-left: 23px;">
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" />
+        <img src="icon_FAQ.svg" /> <div onclick="toggle_visible();">★</div>
       </div>
     </div>
     <div class="window_box_content">
       <div style="height: 80px"></div>
-      <div class="heading_28px_150p_bold" style="text-align: left;" onclick="toggle_visible();">
+      <div class="heading_28px_150p_bold" style="text-align: left;">
         よくある質問
       </div>
       <div style="height: 40px"></div>
@@ -413,7 +413,60 @@
       </div>
       <div style="height: 32px"></div>
     </div>
+    <div style="height: 40px"></div>
+    <div class="touch_button" onclick="return_top('operator');">
+      <div class="touch_button_inner">TOPに戻る</div>
+    </div>
+  </article>
 
+  <article class="window_box_main" id="7_FQA">
+    <div style="height: 20px"></div>
+    <div class="working_header">
+      <div style="margin-left: 23px;">
+        <img src="top.svg" alt="COCOA動作チェッカー" />
+      </div>
+      <div style="text-align: right; margin-right: 23px;">
+        <img src="icon_FAQ.svg" /> <div onclick="toggle_visible();">★</div>
+      </div>
+    </div>
+    <div class="window_box_content">
+      <div style="height: 80px"></div>
+      <div class="heading_28px_150p_bold" style="text-align: left;">
+        よくある質問
+      </div>
+      <div style="height: 40px"></div>
+
+      <div class="heading_20px_150p_bold" style="text-align: left;">
+        Q. 質問文質問文質問文質問文
+      </div>
+      <div style="height: 8px"></div>
+      <div class="text_16px_150p" style="text-align: left;">
+        回答回答回答回答回答回答回答回答回答回答
+      </div>
+      <div style="height: 32px"></div>
+
+      <div class="heading_20px_150p_bold" style="text-align: left;">
+        Q. 質問文質問文質問文質問文
+      </div>
+      <div style="height: 8px"></div>
+      <div class="text_16px_150p" style="text-align: left;">
+        回答回答回答回答回答回答回答回答回答回答
+      </div>
+      <div style="height: 32px"></div>
+
+      <div class="heading_20px_150p_bold" style="text-align: left;">
+        Q. 質問文質問文質問文質問文
+      </div>
+      <div style="height: 8px"></div>
+      <div class="text_16px_150p" style="text-align: left;">
+        回答回答回答回答回答回答回答回答回答回答
+      </div>
+      <div style="height: 32px"></div>
+    </div>
+    <div style="height: 40px"></div>
+    <div class="touch_button" onclick="return_top('enduser');">
+      <div class="touch_button_inner">TOPに戻る</div>
+    </div>
   </article>
 
   <script>
