@@ -9,12 +9,12 @@
   --dark_gray: #D0D2E0;
   --light-gray: #EFF1F8;
   --black: #373845;
-  --boot: #9BA6BB;
 }
 
 /* 文書全体での共通書式 */
 body {
   color: var(--black);
+  margin: 0px;
 }
 
 /* 画面幅による切り分け */
@@ -23,7 +23,9 @@ body {
   :root {
     --window-width: calc(100% - 24px * 2);
     --ul_align: column;
-    --half_width: 80%;
+    --half_width: 100%;
+    --logo_pc: hidden;
+    --logo_sp: visible;
   }
 }
 @media screen and (min-width:640px) {
@@ -32,7 +34,15 @@ body {
     --window-width: 640px;
     --ul_align: row;
     --half_width: 40%;
+    --logo_pc: visible;
+    --logo_sp: hidden;
   }
+}
+.logo_pc {
+  visibility: var(--logo_pc);
+}
+.logo_sp {
+  visibility: var(--logo_sp);
 }
 
 /* 文字のスタイル */
@@ -42,9 +52,6 @@ body {
   font-size: 32px;
   line-height: 150%;
   text-align: center;
-  /* 枠との間を20px分空ける */
-  padding: 20px;
-
 }
 .heading_28px_150p_bold {
   font-style: normal;
@@ -52,8 +59,6 @@ body {
   font-size: 28px;
   line-height: 150%;
   text-align: center;
-  /* 枠との間を20px分空ける */
-  padding: 20px;
 }
 .heading_20px_150p_bold {
   font-style: normal;
@@ -61,8 +66,6 @@ body {
   font-size: 20px;
   line-height: 150%;
   text-align: center;
-  /* 枠との間を20px分空ける */
-  padding: 20px;
 }
 .heading_16px_150p_bold {
   font-style: normal;
@@ -70,8 +73,6 @@ body {
   font-size: 16px;
   line-height: 150%;
   text-align: center;
-  /* 枠との間を20px分空ける */
-  padding: 20px;
 }
 .text_16px_150p {
   font-style: normal;
@@ -79,8 +80,6 @@ body {
   font-size: 16px;
   line-height: 150%;
   text-align: left;
-  /* 枠との間を20px分空ける */
-  padding: 20px;
 }
 .text_14px_150p {
   font-style: normal;
@@ -100,7 +99,7 @@ body {
 
 /* 表示するオブジェクトを切り替えるための箱 */
 .window_box_boot {
-  background-color: var(--boot);
+  background-color: var(--light-gray);
   /* 画面中央に配置する */
   position: absolute;
   left: 50%;
@@ -163,6 +162,7 @@ body {
   margin: 0 auto;
   background: var(--white);
   border-radius: 10px 10px 10px 10px;
+  padding: 24px;
 
   display: none; /* スクリプトで display: flex; に切り替える */
   flex-direction: row;
@@ -174,6 +174,7 @@ body {
   background: var(--white);
   border-radius: 0px 0px 10px 10px;
   border-top: 1px solid var(--dark_gray);
+  padding: 24px;
 
   text-align: left;
   display: none;
@@ -222,10 +223,14 @@ https://opensource.org/licenses/mit-license.php
 */
 .loader,
 .loader:before,
-.loader:after {
+.loader:after,
+.loader2,
+.loader2:before,
+.loader2:after {
   border-radius: 50%;
 }
-.loader {
+.loader,
+.loader2 {
   color: var(--secondary_color);
   font-size: 11px;
   text-indent: -99999em;
@@ -239,14 +244,24 @@ https://opensource.org/licenses/mit-license.php
   transform: translateZ(0);
 }
 .loader:before,
-.loader:after {
+.loader:after,
+.loader2:before,
+.loader2:after {
   position: absolute;
   content: '';
 }
-.loader:before {
+.loader:before,
+.loader:after {
+  background: var(--BG);
+}
+.loader2:before,
+.loader2:after {
+  background: var(--light-gray);
+}
+.loader:before,
+.loader2:before {
   width: 5.2em;
   height: 10.2em;
-  background: var(--BG);
   border-radius: 10.2em 0 0 10.2em;
   top: -0.1em;
   left: -0.1em;
@@ -255,10 +270,10 @@ https://opensource.org/licenses/mit-license.php
   -webkit-animation: load2 2s infinite ease 1.5s;
   animation: load2 2s infinite ease 1.5s;
 }
-.loader:after {
+.loader:after,
+.loader2:after {
   width: 5.2em;
   height: 10.2em;
-  background: var(--BG);
   border-radius: 0 10.2em 10.2em 0;
   top: -0.1em;
   left: 4.9em;

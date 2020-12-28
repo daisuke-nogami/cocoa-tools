@@ -6,16 +6,17 @@ var LEscanobject;
 function return_top(target_type) {
   // 画面切り替え用の配列
   var windows_handle = [
-    document.getElementById("1_setting_a"),     // 0
-    document.getElementById("1_setting_b_end"), // 1
-    document.getElementById("1_setting_b"),     // 2
-    document.getElementById("2_top"),           // 3
-    document.getElementById("3_loading"),       // 4
-    document.getElementById("4_touch"),         // 5
-    document.getElementById("5_done_a"),        // 6
-    document.getElementById("5_done_b"),        // 7
-    document.getElementById("6_setting_FQA"),    // 8
-    document.getElementById("7_FQA")            // 9
+    document.getElementById("1_1"), // 0
+    document.getElementById("2_1"), // 1
+    document.getElementById("2_2"), // 2
+    document.getElementById("3_2"), // 3
+    document.getElementById("8_1"), // 4
+    document.getElementById("4_1"), // 5
+    document.getElementById("5_1"), // 6
+    document.getElementById("6_1"), // 7
+    document.getElementById("7_1"), // 8
+    document.getElementById("7_2"), // 9
+    document.getElementById("9_1")  // 10
   ];
   // いったん全部隠す
   for (var i=0; i<windows_handle.length; i++) {
@@ -23,25 +24,41 @@ function return_top(target_type) {
   }
   // typeに応じて戻る画面を選ぶ
   if (target_type == "operator") {
+    // 1_1
     windows_handle[0].style.visibility = 'visible';
   } else if (target_type == "enduser") {
-    windows_handle[3].style.visibility = 'visible';
+    // 4_1
+    windows_handle[5].style.visibility = 'visible';
   } else if (target_type == "faq_operator") {
-    windows_handle[8].style.visibility = 'visible';
+    // 8_1
+    windows_handle[4].style.visibility = 'visible';
   } else if (target_type == "faq_enduser") {
-    windows_handle[9].style.visibility = 'visible';
+    // 9_1
+    windows_handle[10].style.visibility = 'visible';
   } else {
+    // デバッグ用の画面番号指定
     windows_handle[target_type].style.visibility = 'visible';
   }
+  //
 }
 
 // UI確認用の画面切り替え関数（デバッグ用）
 var windows_visible = 0;
 function toggle_visible() {
-  if (windows_visible < 9) {
+  // 画面番号をインクリメントする
+  if (windows_visible < 10) {
     windows_visible++;
   } else {
     windows_visible = 0;
+  }
+  // 画面が 2_2 (2番) なら、Q&Aのアコーディオンを全部開く
+  if (windows_visible == 2) {
+    document.getElementById("reason_1_header").style.display = 'flex'
+    document.getElementById("reason_2_header").style.display = 'flex'
+    document.getElementById("reason_3_header").style.display = 'flex'
+    document.getElementById("reason_4_header").style.display = 'flex'
+    document.getElementById("reason_5_header").style.display = 'flex'
+    document.getElementById("reason_6_header").style.display = 'flex'    
   }
   return_top(windows_visible);
 }
@@ -93,13 +110,13 @@ function open_new_tab_with_privileged_url() {
   window.open();
 }
 
-// 動作環境テスト
+// 動作環境テスト(パフォーマンス測定以外)
 async function check_enviroment(){
   // 表示するwindowのハンドル
-  var window_origin  = document.getElementById("1_setting_a");
-  var window_fail    = document.getElementById("1_setting_b_end");
-  var window_retry   = document.getElementById("1_setting_b");
-  var window_success = document.getElementById("2_top");
+  var window_origin  = document.getElementById("1_1");
+  var window_fail    = document.getElementById("2_1");
+  var window_retry   = document.getElementById("2_2");
+  var window_success = document.getElementById("3_2");
 
   // 元のWindowを隠す
   window_origin.style.visibility = 'hidden';
@@ -152,9 +169,12 @@ async function check_enviroment(){
   // BLE scanningが走るかの確認
   try{
     LEscanobject = await navigator.bluetooth.requestLEScan({filters: [{ services: [0xFD6F]}]});
+    // 走ったら3_2(パフォーマンス測定)画面を開く
     window_success.style.visibility = 'visible';
+    // まだスキャン中ではないとフラグを下ろし
     advertising_scanning = false;
-    scan_running_checker = setInterval(check_scan_running,1000);
+    // パフォーマンス測定を3秒間回す
+    perfomance_checker = setInterval(perfomance_check,3000);
   } catch (error) {
     if (error.name == 'InvalidStateError') {
       // スキャンがキャンセルされた
@@ -173,4 +193,21 @@ async function check_enviroment(){
       return;
     }
   }
+}
+
+// 動作環境テスト(パフォーマンス測定)
+var perfomance_checker;
+function perfomance_check() {
+  // パフォーマンスを測定して
+
+
+
+  // 一定以上のパフォーマンスがあれば、
+  // パフォーマンス測定画面を閉じて利用者画面を開き
+  var window_performance_check = document.getElementById("3_2");
+  window_performance_check.style.visibility = 'hidden';
+  var window_enduser_start = document.getElementById("4_1");
+  window_enduser_start.style.visibility = 'visible';
+  // スキャン稼働チェックを回す
+  scan_running_checker = setInterval(check_scan_running,1000);
 }

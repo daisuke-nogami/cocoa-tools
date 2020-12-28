@@ -2,24 +2,26 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
-    <title>COCOA動作状況チェッカー（レイアウト確認）</title>
+    <title>COCOA動作状況チェッカー</title>
     <link rel="stylesheet" type="text/css" href="signal-checker.css" />
     </head>
 <body>
   <script src="signal-checker.js">
   </script>
 
-  <article class="window_box_boot" id="1_setting_a">
+  <article class="window_box_boot" id="1_1">
     <div style="height: 24px"></div>
     <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="return_top('faq_operator');">
       よくあるご質問
-    </div><div onclick="toggle_visible();">★</div>
+    </div>
+    <div style="text-align: right;" onclick="toggle_visible();">★</div>
     <div class="window_box_content">
       <div style="height: 80px"></div>
-      <img src="logo.svg" alt="COCOA動作チェッカー" />
+      <img src="logo.svg" class="logo_pc" alt="COCOA動作チェッカー" />
+      <img src="top.svg" class="logo_sp" alt="COCOA動作チェッカー" />
       <div style="height: 40px"></div>
       <div class="heading_16px_150p_bold">
-        「起動する」ボタンを押し、<br />押下後表示されるダイアログで「許可」を押して下さい。
+        「起動する」ボタンを押し、<br />押下後に表示されるダイアログで「許可」を押してください。
       </div>
       <div style="height: 40px"></div>
       <div class="touch_button" onclick="check_enviroment();">
@@ -28,38 +30,42 @@
     </div>
   </article>
 
-  <article class="window_box_boot" id="1_setting_b_end">
+  <article class="window_box_boot" id="2_1">
     <div style="height: 24px"></div>
     <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="return_top('faq_operator');">
       よくあるご質問
-    </div><div onclick="toggle_visible();">★</div>
-    <div style="height: 80px"></div>
-    <img src="logo.svg" alt="COCOA動作チェッカー" />
+    </div>
+    <div style="text-align: right;" onclick="toggle_visible();">★</div>
     <div class="window_box_content">
+      <div style="height: 80px"></div>
+      <img src="logo.svg" class="logo_pc" alt="COCOA動作チェッカー" />
+      <img src="top.svg" class="logo_sp" alt="COCOA動作チェッカー" />
       <div style="height: 40px"></div>
       <div class="heading_20px_150p_bold">
-        COCOA動作状況チェッカーは、Androidのみ対応しています。<br />
-        ご利用の端末では動かすことができません。
+        COCOA動作チェッカーは、Android端末にのみ対応しています。<br />
+        ご利用の端末ではお使いいただけません。
       </div>
       <div style="height: 40px"></div>
       <div class="touch_button" onclick="return_top('operator');">
-        <div class="touch_button_inner">TOPに戻る</div>
+        <div class="touch_button_inner">TOPにもどる</div>
       </div>
     </div>
   </article>
 
-  <article class="window_box_boot" id="1_setting_b">
+  <article class="window_box_boot" id="2_2">
     <div style="height: 24px"></div>
     <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="return_top('faq_operator');">
       よくあるご質問
-    </div><div onclick="toggle_visible();">★</div>
+    </div>
+    <div style="text-align: right;" onclick="toggle_visible();">★</div>
     <div class="window_box_content">
 
       <div style="height: 80px"></div>
-      <img src="logo.svg" alt="COCOA動作チェッカー" />
+      <img src="logo.svg" class="logo_pc" alt="COCOA動作チェッカー" />
+      <img src="top.svg" class="logo_sp" alt="COCOA動作チェッカー" />
       <div style="height: 40px"></div>
       <div class="heading_20px_150p_bold">
-        ご利用の環境では、COCOA動作状況チェッカーを利用できません。<br />
+        ご利用の環境では、COCOA動作チェッカーをお使いいただけません。<br />
         下記の項目を確認し設定してください。
       </div>
       <div style="height: 24px"></div>
@@ -67,8 +73,8 @@
 
     <div> <!-- style="overflow-y: scroll; height: 40%;" -->
       <div class="accordion_header" id="reason_1_header" onclick='toggle_accordion("reason_1");'>
-        <div class="heading_20px_150p_bold">Android 6.0以降のバージョンが必要です</div>
-        <img src="arrow_lower.svg" style="margin-right: 20px; margin-left: auto;" />
+        <div class="heading_20px_150p_bold" style="text-align: left;">Android 6.0以降のバージョンが必要です</div>
+        <img src="arrow_lower.svg" style="margin-right: 0px; margin-left: auto;" />
       </div>
       <div class="accordion_content" id="reason_1_content">
         <div class="text_16px_150p">
@@ -80,8 +86,8 @@
       <div style="height: 8px"></div>
 
       <div class="accordion_header" id="reason_2_header" onclick='toggle_accordion("reason_2");'>
-        <div class="heading_20px_150p_bold">最新版のChromeが必要です</div>
-        <div><img src="arrow_lower.svg" style="margin-right: 20px; margin-left: auto;" /></div>
+        <div class="heading_20px_150p_bold" style="text-align: left;">最新版のChromeが必要です</div>
+        <img src="arrow_lower.svg" style="margin-right: 0px; margin-left: auto;" />
       </div>
       <div class="accordion_content" id="reason_2_content">
         <div class="text_16px_150p">
@@ -96,8 +102,8 @@
       <div style="height: 8px"></div>
 
       <div class="accordion_header" id="reason_3_header" onclick='toggle_accordion("reason_3");'>
-        <div class="heading_20px_150p_bold">Chromeの設定で"テスト中機能"を有効にする必要があります</div>
-        <div><img src="arrow_lower.svg" style="margin-right: 20px; margin-left: auto;" /></div>
+        <div class="heading_20px_150p_bold" style="text-align: left;">Chromeの設定で"テスト中機能"を有効にする必要があります</div>
+        <img src="arrow_lower.svg" style="margin-right: 0px; margin-left: auto;" />
       </div>
       <div class="accordion_content" id="reason_3_content">
         <div class="text_16px_150p">
@@ -120,8 +126,8 @@
       <div style="height: 8px"></div>
 
       <div class="accordion_header" id="reason_4_header" onclick='toggle_accordion("reason_4");'>
-        <div class="heading_20px_150p_bold">Chromeの設定でBluetoothのスキャンを許可する必要があります</div>
-        <div><img src="arrow_lower.svg" style="margin-right: 20px; margin-left: auto;" /></div>
+        <div class="heading_20px_150p_bold" style="text-align: left;">Chromeの設定でBluetoothのスキャンを許可する必要があります</div>
+        <img src="arrow_lower.svg" style="margin-right: 0px; margin-left: auto;" />
       </div>
       <div class="accordion_content" id="reason_4_content">
         <div class="text_16px_150p">
@@ -149,15 +155,15 @@
       <div style="height: 8px"></div>
 
       <div class="accordion_header" id="reason_5_header" onclick='toggle_accordion("reason_5");'>
-        <div class="heading_20px_150p_bold">BluetoothをOnにして、Chromeに位置情報の利用を許可する必要があります</div>
-        <div><img src="arrow_lower.svg" style="margin-right: 20px; margin-left: auto;" /></div>
+        <div class="heading_20px_150p_bold" style="text-align: left;">BluetoothをONにして、Chromeに位置情報の利用を許可する必要があります</div>
+        <img src="arrow_lower.svg" style="margin-right: 0px; margin-left: auto;" />
       </div>
       <div class="accordion_content" id="reason_5_content">
         <div class="text_16px_150p">
           <ol>
-            <li>端末のBluetoothのOn/Offを確認してください。</li>
-            <li>BluetoothがOffになっていたらOnにしてください。</li>
-            <li>BluetoothがOnになっていたら、Chromeの位置情報利用が許可されていませんので、
+            <li>端末のBluetoothのON/OFFを確認してください。</li>
+            <li>BluetoothがOFFになっていたらONにしてください。</li>
+            <li>BluetoothがONになっていたら、Chromeの位置情報利用が許可されていませんので、
               <ol>
                 <li>Androidの「設定」を開きます。</li>
                 <li>「アプリ」を開きます。</li>
@@ -172,23 +178,45 @@
       <div style="height: 8px"></div>
 
       <div class="accordion_header" id="reason_6_header" onclick='toggle_accordion("reason_6");'>
-        <div class="heading_20px_150p_bold">Bluetoothのスキャンを再度行ってください</div>
-        <div><img src="arrow_lower.svg" style="margin-right: 20px; margin-left: auto;" /></div>
+        <div class="heading_20px_150p_bold" style="text-align: left;">Bluetoothのスキャンを許可してください</div>
+        <img src="arrow_lower.svg" style="margin-right: 0px; margin-left: auto;" />
       </div>
       <div class="accordion_content" id="reason_6_content">
         <div class="text_16px_150p">
-          スキャンが実行されませんでした。
+          ダイアログで「許可」が押されませんでした。TOPにもどり、再度操作して下さい。
         </div>
       </div>
 
       <div style="height: 40px"></div>
       <div class="touch_button" onclick="return_top('operator');">
-        <div class="touch_button_inner">TOPに戻る</div>
+        <div class="touch_button_inner">TOPにもどる</div>
       </div>
     </div>
   </article>
 
-  <article class="window_box_main" id="2_top">
+  <article class="window_box_boot" id="3_2">
+    <div style="height: 20px"></div>
+    <div class="working_header">
+      <div style="margin-left: 23px;">
+        <img src="top.svg" alt="COCOA動作チェッカー" />
+      </div>
+      <div style="text-align: right; margin-right: 23px;">
+        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" /> <div onclick="toggle_visible();">★</div>
+      </div>
+    </div>
+    <div class="window_box_content">
+      <div style="height: 80px"></div>
+        <div class="loader2" id="loader2">Loading...</div>
+      <div style="height: 40px"></div>
+      <div class="heading_28px_150p_bold">
+        COCOA動作チェッカーを起動中です。
+      </div>
+      <div style="height: 80px"></div>
+    </div>
+  </article>
+
+
+  <article class="window_box_main" id="4_1">
     <div style="height: 20px"></div>
     <div style="text-align: right; margin-right: 23px;">
       <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" /> <div onclick="toggle_visible();">★</div>
@@ -199,7 +227,7 @@
       <div style="height: 18px"></div>
       <div class="heading_32px_150p_bold">
         接触確認アプリが<br />
-        正常に機能しているかを確認しよう
+        正常に機能しているかを確認しよう。
       </div>
       <div style="height: 24px"></div>
       <div class="text_16px_150p" style="text-align: center;">
@@ -213,7 +241,7 @@
       <div style="height: 80px"></div>
       <div class="column_box">
         <div style="height: 32px"></div>
-        <div style="display: flex; justify-content: center; align-items: center;">
+        <div style="display: flex; justify-content: center; align-items: center; padding: 20px;">
           <img src="app_icon.png" height="62px" />
           <div class="heading_20px_150p_bold" style="text-align: center;">
             新型コロナウイルス接触確認アプリとは
@@ -247,7 +275,7 @@
     </div>
   </article>
 
-  <article class="window_box_main" id="3_loading">
+  <article class="window_box_main" id="5_1">
     <div style="height: 20px"></div>
     <div class="working_header">
       <div style="margin-left: 23px;">
@@ -262,14 +290,13 @@
         <div class="loader" id="loader">Loading...</div>
       <div style="height: 40px"></div>
       <div class="heading_28px_150p_bold">
-        信号確認の準備が出来るまで、お待ちください
+        信号確認の準備ができるまで、お待ちください。
       </div>
       <div style="height: 80px"></div>
     </div>
     <div class="column_box">
       <div style="height: 32px"></div>
       <div style="display: flex; justify-content: center; align-items: center;">
-        <img src="app_icon.png" height="62px" />
         <div class="heading_20px_150p_bold" style="text-align: center;">
           厚生労働省からのお知らせ
         </div>
@@ -285,7 +312,7 @@
     </div>
   </article>
 
-  <article class="window_box_main" id="4_touch">
+  <article class="window_box_main" id="6_1">
     <div style="height: 20px"></div>
     <div class="working_header">
       <div style="margin-left: 23px;">
@@ -300,13 +327,13 @@
       <img src="frame.svg" style="height: 140px; border: 1px" />
       <div style="height: 80px"></div>
       <div class="heading_28px_150p_bold">
-        信号確認の準備が出来ました。<br />
+        信号確認の準備ができました。<br />
         計測したいスマホを画面に近づけてください。
       </div>
     </div>
   </article>
 
-  <article class="window_box_main" id="5_done_a">
+  <article class="window_box_main" id="7_1">
     <div style="height: 20px"></div>
     <div class="working_header">
       <div style="margin-left: 23px;">
@@ -330,12 +357,12 @@
       </div>
       <div style="height: 40px"></div>
       <div class="touch_button" onclick="return_top('enduser');">
-        <div class="touch_button_inner">TOPに戻る</div>
+        <div class="touch_button_inner">TOPにもどる</div>
       </div>
     </div>
   </article>
 
-  <article class="window_box_main" id="5_done_b">
+  <article class="window_box_main" id="7_2">
     <div style="height: 20px"></div>
     <div class="working_header">
       <div style="margin-left: 23px;">
@@ -357,23 +384,23 @@
       <div class="text_16px_150p" style="text-align: center;">
         代表的な、確認できない理由は以下の通りです。
         <ul>
-          <li>BluetoothがOffになっている</li>
+          <li>BluetoothがOFFになっている</li>
           <li>接触確認アプリがインストールされていない</li>
         </ul>
         これらの項目を確認し、再度操作ください。
       </div>
       <div style="height: 40px"></div>
       <div class="touch_button" onclick="return_top('enduser');">
-        <div class="touch_button_inner">TOPに戻る</div>
+        <div class="touch_button_inner">TOPにもどる</div>
       </div>
     </div>
   </article>
 
-  <article class="window_box_boot" id="6_setting_FQA">
+  <article class="window_box_boot" id="8_1">
     <div style="height: 20px"></div>
     <div class="working_header">
       <div style="margin-left: 23px;">
-        <img src="top.svg" alt="COCOA動作チェッカー" />
+        <img src="top.svg" alt="COCOA動作チェッカー" onclick="return_top('operator');" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
         <img src="icon_FAQ.svg" /> <div onclick="toggle_visible();">★</div>
@@ -382,7 +409,7 @@
     <div class="window_box_content">
       <div style="height: 80px"></div>
       <div class="heading_28px_150p_bold" style="text-align: left;">
-        よくある質問
+        よくあるご質問
       </div>
       <div style="height: 40px"></div>
 
@@ -415,15 +442,15 @@
     </div>
     <div style="height: 40px"></div>
     <div class="touch_button" onclick="return_top('operator');">
-      <div class="touch_button_inner">TOPに戻る</div>
+      <div class="touch_button_inner">TOPにもどる</div>
     </div>
   </article>
 
-  <article class="window_box_main" id="7_FQA">
+  <article class="window_box_main" id="9_1">
     <div style="height: 20px"></div>
     <div class="working_header">
       <div style="margin-left: 23px;">
-        <img src="top.svg" alt="COCOA動作チェッカー" />
+        <img src="top.svg" alt="COCOA動作チェッカー" onclick="return_top('enduser');" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
         <img src="icon_FAQ.svg" /> <div onclick="toggle_visible();">★</div>
@@ -432,7 +459,7 @@
     <div class="window_box_content">
       <div style="height: 80px"></div>
       <div class="heading_28px_150p_bold" style="text-align: left;">
-        よくある質問
+        ご利用ガイド
       </div>
       <div style="height: 40px"></div>
 
@@ -465,13 +492,13 @@
     </div>
     <div style="height: 40px"></div>
     <div class="touch_button" onclick="return_top('enduser');">
-      <div class="touch_button_inner">TOPに戻る</div>
+      <div class="touch_button_inner">TOPにもどる</div>
     </div>
   </article>
 
   <script>
     // 最初のウインドウを起動時に可視にする
-    var boot_window = document.getElementById("1_setting_a");
+    var boot_window = document.getElementById("1_1");
     boot_window.style.visibility = 'visible';
   </script>
 
