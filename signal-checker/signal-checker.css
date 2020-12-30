@@ -26,8 +26,6 @@ nav {
   position: absolute;
   right: 0;
   bottom: 0;
-  /* サイズはほどほどのサイズ */
-  height: 5em;
 }
 
 /* 画面幅による切り分け */

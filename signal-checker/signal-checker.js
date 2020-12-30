@@ -260,6 +260,9 @@ function perfomance_check() {
     nowtime.setSeconds(nowtime.getSeconds() - 1);
   }
 
+  // デバッグ情報表示
+  document.getElementById("debug_performance").value = perfomance_count;
+
   // 測定結果を判定
   if ( perfomance_count < perfomance_check_seconds * 2) {
     // Bluetoothのスキャン頻度が不足していたら、
