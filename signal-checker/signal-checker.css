@@ -15,6 +15,19 @@
 body {
   color: var(--black);
   margin: 0px;
+  overflow-y: hidden;
+}
+
+/* デバッグ用情報表示場所 */
+nav {
+  /* 背景色 */
+  background-color: var(--dark_gray);
+  /* 位置は画面の右下 */
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  /* サイズはほどほどのサイズ */
+  height: 5em;
 }
 
 /* 画面幅による切り分け */
@@ -26,6 +39,8 @@ body {
     --half_width: 100%;
     --logo_pc: hidden;
     --logo_sp: visible;
+    --logo_pc_height: 0px;
+    --logo_sp_height: 29px;
   }
 }
 @media screen and (min-width:640px) {
@@ -36,13 +51,17 @@ body {
     --half_width: 40%;
     --logo_pc: visible;
     --logo_sp: hidden;
+    --logo_pc_height: 38px;
+    --logo_sp_height: 0px;
   }
 }
 .logo_pc {
   visibility: var(--logo_pc);
+  height: var(--logo_pc_height);
 }
 .logo_sp {
   visibility: var(--logo_sp);
+  height: var(--logo_sp_height);
 }
 
 /* 文字のスタイル */
@@ -97,38 +116,51 @@ body {
   padding-left: 8px;
 }
 
+/* 全画面共通のフッタの書式設定 */
+.footer {
+  height: 52px;
+  /* 文字サイズとセンタリングを指定 */
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  /* 画面最下部に配置する */
+  position: relative;
+  top: 80px;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%);
+}
+
 /* 表示するオブジェクトを切り替えるための箱 */
-.window_box_boot {
-  background-color: var(--light-gray);
+.window_box_boot,
+.window_box_main {
   /* 画面中央に配置する */
   position: absolute;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%);
-  /* 全画面を埋める */
-  min-height: 100%;
+  /* フッタ以外の全画面を埋める */
+  height: 100%;
   width: 100%;
+  padding: 0px;
   /* 中身は左右センタリングする */
   text-align: center;
   /* 最初は表示しない */
   visibility: hidden;
+  /* 縦にはみ出す場合はスクロールさせて縦にのばさせない */
+  overflow-y: auto;
+  /* 横のスクロールバーは消す */
+  overflow-x: hidden;
+}
+
+.window_box_boot {
+  background-color: var(--light-gray);
 }
 
 .window_box_main {
   background-color: var(--BG);
-  /* 画面中央に配置する */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  /* 全画面を埋める */
-  height: 100%;
-  width: 100%;
-  /* 中身は左右センタリングする */
-  text-align: center;
-  /* 最初は表示しない */
-  visibility: hidden;
 }
 
 .window_box_content {

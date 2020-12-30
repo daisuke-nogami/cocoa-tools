@@ -34,6 +34,10 @@
         <div class="touch_button_inner">起動する</div>
       </div>
     </div>
+    <div class="footer">
+      お問い合わせ　　ご利用にあたって<br />
+      Copyright &copy; DeNA Co., Ltd. All rights reserved.
+    </div>
   </article>
 
   <article class="window_box_boot" id="2_1">
@@ -56,6 +60,10 @@
         <div class="touch_button_inner">TOPにもどる</div>
       </div>
     </div>
+    <div class="footer">
+      お問い合わせ　　ご利用にあたって<br />
+      Copyright &copy; DeNA Co., Ltd. All rights reserved.
+    </div>
   </article>
 
   <article class="window_box_boot" id="2_2">
@@ -74,7 +82,7 @@
         ご利用の環境では、本サービスをお使いいただけません。<br />
         下記の項目を確認し設定してください。
       </div>
-      <div style="height: 24px"></div>
+      <div style="height: 32px"></div>
     </div>
 
     <div> <!-- style="overflow-y: scroll; height: 40%;" -->
@@ -192,6 +200,18 @@
       <div style="height: 8px"></div>
 
       <div class="accordion_header" id="reason_6_header" onclick='toggle_accordion("reason_6");'>
+        <div class="heading_20px_150p_bold" style="text-align: left;">信号の計測回数が少なくなっています</div>
+        <img src="arrow_lower.svg" style="margin-right: 0px; margin-left: auto;" />
+      </div>
+      <div class="accordion_content" id="reason_6_content">
+        <div class="text_16px_150p">
+          この端末にBluetoothで接続している機器（スピーカー、ヘッドセットなど）がある場合は、切断してください。<br />
+          Bluetoothで接続している機器がないときにもこのエラーが表示される場合は、Bluetoothの計測性能が不足しているため、ご利用の端末ではお使いいただけません。
+        </div>
+      </div>
+
+<!--
+      <div class="accordion_header" id="reason_6_header" onclick='toggle_accordion("reason_6");'>
         <div class="heading_20px_150p_bold" style="text-align: left;">Bluetoothのスキャンを許可してください</div>
         <img src="arrow_lower.svg" style="margin-right: 0px; margin-left: auto;" />
       </div>
@@ -200,11 +220,16 @@
           ダイアログで「許可」が押されませんでした。TOPにもどり、再度操作して下さい。
         </div>
       </div>
+ -->
 
       <div style="height: 40px"></div>
       <div class="touch_button" onclick="return_top('operator');">
         <div class="touch_button_inner">TOPにもどる</div>
       </div>
+    </div>
+    <div class="footer">
+      お問い合わせ　　ご利用にあたって<br />
+      Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
 
@@ -226,6 +251,10 @@
         COCOA動作チェッカーを起動中です。
       </div>
       <div style="height: 80px"></div>
+    </div>
+    <div class="footer">
+      お問い合わせ　　ご利用にあたって<br />
+      Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
 
@@ -287,6 +316,10 @@
         </div>
       </div>
     </div>
+    <div class="footer">
+      お問い合わせ　　ご利用にあたって<br />
+      Copyright &copy; DeNA Co., Ltd. All rights reserved.
+    </div>
   </article>
 
   <article class="window_box_main" id="5_1">
@@ -324,6 +357,10 @@
         </div>
       </div>
     </div>
+    <div class="footer">
+      お問い合わせ　　ご利用にあたって<br />
+      Copyright &copy; DeNA Co., Ltd. All rights reserved.
+    </div>
   </article>
 
   <article class="window_box_main" id="6_1">
@@ -344,6 +381,10 @@
         信号確認の準備ができました。<br />
         計測したいスマホを画面に近づけてください。
       </div>
+    </div>
+    <div class="footer">
+      お問い合わせ　　ご利用にあたって<br />
+      Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
 
@@ -373,6 +414,10 @@
       <div class="touch_button" onclick="return_top('enduser');">
         <div class="touch_button_inner">TOPにもどる</div>
       </div>
+    </div>
+    <div class="footer">
+      お問い合わせ　　ご利用にあたって<br />
+      Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
 
@@ -405,6 +450,10 @@
       <div class="touch_button" onclick="return_top('enduser');">
         <div class="touch_button_inner">TOPにもどる</div>
       </div>
+    </div>
+    <div class="footer">
+      お問い合わせ　　ご利用にあたって<br />
+      Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
 
@@ -456,6 +505,10 @@
     <div class="touch_button" onclick="return_top('operator');">
       <div class="touch_button_inner">TOPにもどる</div>
     </div>
+    <div class="footer">
+      お問い合わせ　　ご利用にあたって<br />
+      Copyright &copy; DeNA Co., Ltd. All rights reserved.
+    </div>
   </article>
 
   <article class="window_box_main" id="9_1">
@@ -506,7 +559,28 @@
     <div class="touch_button" onclick="return_top('enduser');">
       <div class="touch_button_inner">TOPにもどる</div>
     </div>
+    <div class="footer">
+      お問い合わせ　　ご利用にあたって<br />
+      Copyright &copy; DeNA Co., Ltd. All rights reserved.
+    </div>
   </article>
+
+  <nav>
+    <div class="heading_16px_150p_bold" style="text-align: right;">
+      デバッグ情報
+    </div>
+    <div  style="text-align: right;">
+      count:
+        <input type="text" id="debug_terminal_count1" value="" size="5" />
+        <input type="text" id="debug_terminal_count2" value="" size="5" />
+        <input type="text" id="debug_terminal_count3" value="" size="5" />
+      <br />
+      rssi:
+        <input type="text" id="debug_terminal_rssi1" value="" size="5" />
+        <input type="text" id="debug_terminal_rssi2" value="" size="5" />
+        <input type="text" id="debug_terminal_rssi3" value="" size="5" />
+    </div>
+  </nav>
 
   <script>
     // 最初のウインドウを起動時に可視にする
