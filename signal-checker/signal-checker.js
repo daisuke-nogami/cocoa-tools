@@ -253,7 +253,10 @@ function perfomance_check() {
   // perfomance_check_seconds秒前から現在までの測定回数を得る
   var perfomance_count = 0;
   for(var s=0; s < perfomance_check_seconds; s++) {
-    perfomance_count += terminal_count[nowtime.getSeconds()];
+    // 変数が定義されていたら加算する
+    if(terminal_count[nowtime.getSeconds()]) {
+      perfomance_count += terminal_count[nowtime.getSeconds()];
+    }
     nowtime.setSeconds(nowtime.getSeconds() - 1);
   }
 
