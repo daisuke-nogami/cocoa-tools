@@ -1,8 +1,14 @@
 <html>
-  <head>
+  <head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
-    <title>COCOA動作状況チェッカー</title>
+    <title>COCOA動作チェッカー</title>
+    <meta name="og:url" content="https://daisuke-nogami.github.io/cocoa-tools/signal-checker/">
+    <meta name="og:title" content="COCOA動作チェッカー">
+    <meta name="og:image" content="OGP.png">
+    <meta name="og:description" content="接触確認アプリCOCOAの動作状況をチェックするサービスです。">
+    <meta name="og:type" content="website">
+    <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" type="text/css" href="signal-checker.css" />
     </head>
 <body>
@@ -41,7 +47,7 @@
       <img src="logo.svg" class="logo_pc" alt="COCOA動作チェッカー" />
       <img src="top.svg" class="logo_sp" alt="COCOA動作チェッカー" />
       <div style="height: 40px"></div>
-      <div class="heading_20px_150p_bold">
+      <div class="heading_16px_150p_bold">
         COCOA動作チェッカーは、Android端末にのみ対応しています。<br />
         ご利用の端末ではお使いいただけません。
       </div>
@@ -65,7 +71,7 @@
       <img src="top.svg" class="logo_sp" alt="COCOA動作チェッカー" />
       <div style="height: 40px"></div>
       <div class="heading_20px_150p_bold">
-        ご利用の環境では、COCOA動作チェッカーをお使いいただけません。<br />
+        ご利用の環境では、本サービスをお使いいただけません。<br />
         下記の項目を確認し設定してください。
       </div>
       <div style="height: 24px"></div>
@@ -78,8 +84,7 @@
       </div>
       <div class="accordion_content" id="reason_1_content">
         <div class="text_16px_150p">
-          ご利用の環境を、Android 6.0以降にアップグレードしてください。<br />
-          ご利用の端末でのOSアップグレードの可否は、端末のメーカーまでお問い合わせ下さい。
+          ご利用の環境を、Android 6.0以降にアップグレードしてください。
         </div>
       </div>
 
@@ -92,9 +97,10 @@
       <div class="accordion_content" id="reason_2_content">
         <div class="text_16px_150p">
           <ol>
-            <li>Playストアを開きます。</li>
-            <li>マイアプリ＆ゲームを開きます。</li>
-            <li>「全て更新」をタップしてアプリを更新します。</li>
+            <li>Playストアアプリを開きます。</li>
+            <li><b>［マイアプリ＆ゲーム］</b>をタップします。</li>
+            <li><b>［アップデート］</b>でChromeを探します。</li>
+            <li>Chromeの横にある［更新］をタップします。</li>
           </ol>
         </div>
       </div>
@@ -102,24 +108,32 @@
       <div style="height: 8px"></div>
 
       <div class="accordion_header" id="reason_3_header" onclick='toggle_accordion("reason_3");'>
-        <div class="heading_20px_150p_bold" style="text-align: left;">Chromeの設定で"テスト中機能"を有効にする必要があります</div>
+        <div class="heading_20px_150p_bold" style="text-align: left;">Chromeのテスト中機能を有効にする必要があります</div>
         <img src="arrow_lower.svg" style="margin-right: 0px; margin-left: auto;" />
       </div>
       <div class="accordion_content" id="reason_3_content">
         <div class="text_16px_150p">
-          Chromeの"experimental-web-platform-features"(テスト中機能)を"Enabled"(有効)にしてください。<br />
-          <ol>
+          Chromeの<b>"experimental-web-platform-features"(テスト中機能)</b>を<b>"Enabled"(有効)</b>にしてください。<br />
+          <ul>
             <li>
               アドレス <input type="text" value="chrome://flags/#enable-experimental-web-platform-features" id="privileged_url" /> を開きます。<br />
               <span onclick="open_new_tab_with_privileged_url()">ここをクリック</span>すると、をクリップボードに格納して新しいウインドウを開くので、アドレス欄に「貼り付け」を行って下さい。
             </li>
             <li>
-              画面に表示される「Experimental Web Platform features」が、「Default」あるいは「Disabled」になっていますので、これを「Enabled」に変えます。
+              画面に表示される<b>［Experimental Web Platform features］</b>を<b>［Enabled］</b>に変えます。
             </li>
+          </ul>
+          <div style="text-align: center;">
+            <img src="reason3_screen1.png" style="width: 458px;" />
+          </div>
+          <ul>
             <li>
-              画面下部に現れる「Relaunch」というボタンをタップします。
+              画面下部に現れる<b>［Relaunch］</b>ボタンをタップします。
             </li>
-          </ol>
+          </ul>
+          <div style="text-align: center;">
+            <img src="reason3_screen2.png" style="width: 245px;" />
+          </div>
         </div>
       </div>
 
@@ -131,24 +145,24 @@
       </div>
       <div class="accordion_content" id="reason_4_content">
         <div class="text_16px_150p">
-          <ol>
+          <ul>
             <li>アドレスバーにある鍵マークをタップして下さい。</li>
-            <li>「Bluetoothのスキャン - ブロック中」と表示されている場合には、
+            <li><b>［Bluetoothのスキャン - ブロック中］</b>と表示されている場合には、
               <ol>
-                <li>「サイトの設定」をタップしてください。</li>
-                <li>「データを削除してリセット」をタップしてください。</li>
+                <li><b>［サイトの設定］</b>をタップしてください。</li>
+                <li><b>［データを削除してリセット］</b>をタップしてください。</li>
               </ol>
             </li>
-            <li>「Bluetoothのスキャン - ブロック中」と表示されていない場合には、
+            <li><b>［Bluetoothのスキャン - ブロック中］</b>と表示されていない場合には、
               <ol>
-                <li>戻るボタンをタップしてください。</li>
-                <li>「…」をタップし「設定」をタップしてください。</li>
-                <li>「サイトの設定」をタップしてください。</li>
-                <li>「Bluetoothのスキャン」をタップしてください。</li>
-                <li>スイッチをタップし、「サイトから近くにあるBluetoothデバイスの検出を求められた時に確認する（推奨）」と表示されるようにしてください。</li>
+                <li><b>［戻る］</b>ボタンをタップしてください。</li>
+                <li><b>［…］</b>をタップし<b>［設定］</b>をタップしてください。</li>
+                <li><b>［サイトの設定］</b>をタップしてください。</li>
+                <li><b>［Bluetoothのスキャン］</b>をタップしてください。</li>
+                <li>スイッチをタップし、<b>［サイトから近くにあるBluetoothデバイスの検出を求められた時に確認する（推奨）］</b>と表示されるようにしてください。</li>
               </ol>
             </li>
-          </ol>
+          </ul>
         </div>
       </div>
 
@@ -160,18 +174,18 @@
       </div>
       <div class="accordion_content" id="reason_5_content">
         <div class="text_16px_150p">
-          <ol>
+          <ul>
             <li>端末のBluetoothのON/OFFを確認してください。</li>
             <li>BluetoothがOFFになっていたらONにしてください。</li>
             <li>BluetoothがONになっていたら、Chromeの位置情報利用が許可されていませんので、
-              <ol>
-                <li>Androidの「設定」を開きます。</li>
-                <li>「アプリ」を開きます。</li>
-                <li>「Chrome」を探して開きます。</li>
-                <li>「権限」をタップし、「位置情報」を許可します。</li>
-              </ol>
+              <ul>
+                <li>Androidの<b>［設定］</b>を開きます。</li>
+                <li><b>［アプリ］</b>を開きます。</li>
+                <li><b>［Chrome］</b>を探して開きます。</li>
+                <li><b>［権限］</b>をタップし、<b>［位置情報］</b>を許可します。</li>
+              </ul>
             </li>
-          </ol>
+          </ul>
         </div>
       </div>
 
@@ -324,7 +338,7 @@
     </div>
     <div class="window_box_content">
       <div style="height: 80px"></div>
-      <img src="frame.svg" style="height: 140px; border: 1px" />
+      <img src="frame.svg" />
       <div style="height: 80px"></div>
       <div class="heading_28px_150p_bold">
         信号確認の準備ができました。<br />
@@ -381,13 +395,11 @@
         正常に機能していることを確認できませんでした。
       </div>
       <div style="height: 24px"></div>
-      <div class="text_16px_150p" style="text-align: center;">
-        代表的な、確認できない理由は以下の通りです。
+      <div class="text_16px_150p" style="text-align: left;">
         <ul>
-          <li>BluetoothがOFFになっている</li>
-          <li>接触確認アプリがインストールされていない</li>
+          <li>BluetoothがONになっているか確認してください。</li>
+          <li>接触確認アプリがインストールされているか確認してください。</li>
         </ul>
-        これらの項目を確認し、再度操作ください。
       </div>
       <div style="height: 40px"></div>
       <div class="touch_button" onclick="return_top('enduser');">
