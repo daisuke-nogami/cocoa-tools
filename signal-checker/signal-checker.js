@@ -308,3 +308,49 @@ function found_terminal(event) {
     terminal_rssi[timenumber][event.device.id].raw_value.push(event.rssi);
   }
 }
+
+// デバッグ用のシェア出力
+async function sendDebugLog(){
+    // デバッグ出力を作成する
+    var content = "";
+    // terminal_count(タブ区切り加工)
+    content += 'terminal_count\n';
+    content += '\n';
+    content += 'time_number\tterminal_count\n';
+    for(var i=0; i<60; i++) {
+      content += i + '\t' + terminal_count[i] + '\n';
+    }
+    content += '\n';
+    // terminal_rssi(タブ区切り加工)
+    content += 'terminal_rssi (tsv)\n';
+    content += '\n';
+    content += 'time_number\tdevice_id\tvalue_type\tvalue\n';
+    for(var i=0; i<60; i++) {
+      if ( terminal_rssi[i] ) {
+        Object.keys(terminal_rssi[i]).forEach(function (key) {
+          for(var j=0; j<terminal_rssi[i][key].raw_value.length; j++) {
+            content += i + '\t' + key + '\t' + 'raw_value' + '\t' + terminal_rssi[i][key].raw_value[j] + '\n';
+          }
+        });
+      }
+    }
+    content += '\n';
+    // terminal_rssi(JSON形式生出力)
+    content += 'terminal_rssi (raw)\n';
+    content += '\n';
+    content += JSON.stringify(terminal_rssi,null,2);
+
+    // 出力したログをファイルに加工する
+    const encoder = new TextEncoder();
+    var blob = encoder.encode(content);
+    var resultfile = new File([blob.buffer], 'COCOA-signal-confirmer.txt', {type: 'text/plain'})
+
+    // ブラウザのシェア機能を使って送信する
+    navigator.share({
+      files: [resultfile]
+    }).then(() => {
+      document.getElementById('debug_sendlog').value = 'ファイル送信成功';
+    }).catch((error) => {
+      document.getElementById('debug_sendlog').value = 'ファイル送信失敗';
+    })
+}
