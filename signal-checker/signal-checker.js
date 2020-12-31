@@ -329,6 +329,8 @@ function perfomance_check() {
   if (debug_mode) {
     // デバッグ用情報を表示し
     document.getElementById("debug_performance_result").value = perfomance_count;
+    // 現在時刻をデバッグ欄に表示し
+    document.getElementById("debug_performance_check_start_time").value = nowtime.getSeconds();
     // デバッグ条件を反映する
     if ( parseInt(document.getElementById("debug_performance_criteria").value, 10) ) {
       perfomance_check_criteria = parseInt(document.getElementById("debug_performance_criteria").value, 10);
@@ -407,6 +409,9 @@ function threshold_calculation() {
     if ( parseInt(document.getElementById("debug_detect_threshold").value, 10) ) {
       detect_threshold = parseInt(document.getElementById("debug_detect_threshold").value, 10);
     }
+    // 現在時刻をデバッグ欄に表示し
+    nowtime.setSeconds(nowtime.getSeconds() + 3);
+    document.getElementById("debug_detect_start_time").value = nowtime.getSeconds();
     // 判定条件を表示する
     document.getElementById("debug_detect_criteria").value = detect_criteria;
   }
