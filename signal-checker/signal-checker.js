@@ -445,7 +445,7 @@ async function sendDebugLog(){
     // デバッグ出力を作成する
     var content = "";
     // 端末名などを
-    content += 'モデル名\t' + navigator.appVersion.split(/[()]/)[1] + '\n';
+    content += 'モデル名\t' + navigator.appVersion.split(/[()]/)[1].split(';')[2] + '\n';
     content += 'Platform\t' + navigator.platform + '\n';
     content += 'Android Version\t' + parseFloat(navigator.userAgent.slice(navigator.userAgent.indexOf("Android")+8)) + '\n';
     content += 'Chrome Version\t' + parseFloat(navigator.userAgent.slice(navigator.userAgent.indexOf("Chrome")+7)) + '\n';
