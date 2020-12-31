@@ -5,8 +5,11 @@ var LEscanobject;
 var terminal_rssi   = [];     // 端末の検知結果を記録する変数
 var terminal_count  = [];     // 端末を検知した回数を記録する変数
 var detect_criteria = {};     // 端末の判定条件になるRSSI平均値を格納
-// 起動時のパフォーマンス測定時間(秒)
-const perfomance_check_seconds = 5;
+// 起動時のパフォーマンス測定の設定
+const perfomance_check_seconds  = 5; // 時間(秒)
+var   perfomance_check_criteria = 2; // 回/秒
+// デバッグ用ウインドウの表示/非表示切り替え
+var debug_mode = false;
 
 // TOPに戻るボタン
 function return_top(target_type) {
@@ -44,6 +47,15 @@ function return_top(target_type) {
   } else {
     // デバッグ用の画面番号指定
     windows_handle[target_type].style.visibility = 'visible';
+  }
+}
+
+// ご利用にあたって を開けたり閉じたりする
+function notice_popup_toggle() {
+  if ( document.getElementById("10_1").style.visibility == 'visible' ) {
+    document.getElementById("10_1").style.visibility = 'hidden';
+  } else {
+    document.getElementById("10_1").style.visibility = 'visible';
   }
 }
 
@@ -99,17 +111,38 @@ function check_scan_running() {
   nowtime.setSeconds(nowtime.getSeconds() + 1);
   func_assoc_array(nowtime.getSeconds());
 
-  // デバッグ情報表示
-  var debugtime = new Date();
-  debugtime.setSeconds(debugtime.getSeconds() - 1);
-  document.getElementById("debug_terminal_count1").value = terminal_count[debugtime.getSeconds()];
-  document.getElementById("debug_terminal_rssi1").value = JSON.stringify(terminal_rssi[debugtime.getSeconds()]);
-  debugtime.setSeconds(debugtime.getSeconds() - 1);
-  document.getElementById("debug_terminal_count2").value = terminal_count[debugtime.getSeconds()];
-  document.getElementById("debug_terminal_rssi2").value = JSON.stringify(terminal_rssi[debugtime.getSeconds()]);
-  debugtime.setSeconds(debugtime.getSeconds() - 1);
-  document.getElementById("debug_terminal_count3").value = terminal_count[debugtime.getSeconds()];
-  document.getElementById("debug_terminal_rssi3").value = JSON.stringify(terminal_rssi[debugtime.getSeconds()]);
+  // デバッグ情報表示をする作業の共通部分
+    function debug_mode_output(target_num) {
+      if (terminal_count[debugtime.getSeconds()]) {
+        document.getElementById("debug_terminal_count"+target_num).value = terminal_count[debugtime.getSeconds()];
+      } else {
+        document.getElementById("debug_terminal_count"+target_num).value = '0';
+      }
+      if (terminal_rssi[debugtime.getSeconds()]) {
+        var id_rssi = [];
+        var all_rssi = [];
+        Object.keys(terminal_rssi[debugtime.getSeconds()]).forEach(function (key) {
+          id_rssi = [];
+          for(var j=0; j<terminal_rssi[debugtime.getSeconds()][key].raw_value.length; j++) {
+            id_rssi.push(terminal_rssi[debugtime.getSeconds()][key].raw_value[j]);
+          }
+          all_rssi.push('[' + id_rssi.join(',') + ']');
+        });
+        document.getElementById("debug_terminal_rssi"+target_num).value = all_rssi.join(',');
+      } else {
+        document.getElementById("debug_terminal_rssi"+target_num).value = '[]';
+      }
+    }
+  // デバッグモードの時には
+  if (debug_mode) {
+    var debugtime = new Date();
+    debugtime.setSeconds(debugtime.getSeconds() - 1);
+    debug_mode_output('1');
+    debugtime.setSeconds(debugtime.getSeconds() - 1);
+    debug_mode_output('2');
+    debugtime.setSeconds(debugtime.getSeconds() - 1);
+    debug_mode_output('3');
+  }
 
   // スキャン停止時にトップに戻すモードの場合は
   if ( return_top_when_scan_stopped ) {
@@ -260,11 +293,18 @@ function perfomance_check() {
     nowtime.setSeconds(nowtime.getSeconds() - 1);
   }
 
-  // デバッグ情報表示
-  document.getElementById("debug_performance").value = perfomance_count;
+  // デバッグ用ウインドウ表示時には
+  if (debug_mode) {
+    // デバッグ用情報を表示し
+    document.getElementById("debug_performance_result").value = perfomance_count;
+    // デバッグ条件を反映する
+    if ( parseInt(document.getElementById("debug_performance_criteria").value, 10) ) {
+      perfomance_check_criteria = parseInt(document.getElementById("debug_performance_criteria").value, 10);
+    }
+  }
 
   // 測定結果を判定
-  if ( perfomance_count < perfomance_check_seconds * 2) {
+  if ( perfomance_count < perfomance_check_seconds * perfomance_check_criteria) {
     // Bluetoothのスキャン頻度が不足していたら、
     // パフォーマンス不足を伝えるエラー画面を開く
     return_top(2);

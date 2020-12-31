@@ -20,7 +20,6 @@
     <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="return_top('faq_operator');">
       よくあるご質問
     </div>
-    <div style="text-align: right;" onclick="toggle_visible();">★</div>
     <div class="window_box_content">
       <div style="height: 80px"></div>
       <img src="logo.svg" class="logo_pc" alt="COCOA動作チェッカー" />
@@ -45,7 +44,6 @@
     <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="return_top('faq_operator');">
       よくあるご質問
     </div>
-    <div style="text-align: right;" onclick="toggle_visible();">★</div>
     <div class="window_box_content">
       <div style="height: 80px"></div>
       <img src="logo.svg" class="logo_pc" alt="COCOA動作チェッカー" />
@@ -71,7 +69,6 @@
     <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="return_top('faq_operator');">
       よくあるご質問
     </div>
-    <div style="text-align: right;" onclick="toggle_visible();">★</div>
     <div class="window_box_content">
 
       <div style="height: 80px"></div>
@@ -240,7 +237,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" /> <div onclick="toggle_visible();">★</div>
+        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" />
       </div>
     </div>
     <div class="window_box_content">
@@ -262,7 +259,7 @@
   <article class="window_box_main" id="4_1">
     <div style="height: 20px"></div>
     <div style="text-align: right; margin-right: 23px;">
-      <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" /> <div onclick="toggle_visible();">★</div>
+      <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" />
     </div>
     <div class="window_box_content">
       <div style="height: 70px"></div>
@@ -329,7 +326,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" /> <div onclick="toggle_visible();">★</div>
+        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" />
       </div>
     </div>
     <div class="window_box_content">
@@ -370,7 +367,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" /> <div onclick="toggle_visible();">★</div>
+        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" />
       </div>
     </div>
     <div class="window_box_content">
@@ -395,7 +392,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" /> <div onclick="toggle_visible();">★</div>
+        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" />
       </div>
     </div>
     <div class="window_box_content">
@@ -428,7 +425,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" /> <div onclick="toggle_visible();">★</div>
+        <img src="icon_FAQ.svg" onclick="return_top('faq_enduser');" />
       </div>
     </div>
     <div class="window_box_content">
@@ -464,7 +461,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" onclick="return_top('operator');" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" /> <div onclick="toggle_visible();">★</div>
+        <img src="icon_FAQ.svg" />
       </div>
     </div>
     <div class="window_box_content">
@@ -518,7 +515,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" onclick="return_top('enduser');" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" /> <div onclick="toggle_visible();">★</div>
+        <img src="icon_FAQ.svg" />
       </div>
     </div>
     <div class="window_box_content">
@@ -560,37 +557,92 @@
       <div class="touch_button_inner">TOPにもどる</div>
     </div>
     <div class="footer">
-      お問い合わせ　　ご利用にあたって<br />
+      お問い合わせ　　<a onclick="notice_popup_toggle()">ご利用にあたって</a><br />
       Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
 
-  <nav>
-    <div class="heading_16px_150p_bold" style="text-align: left;">
-      デバッグ情報
+  <article class="notice_popup" id="10_1">
+    <div style="height: 20px"></div>
+    <div class="window_box_content">
+      <div class="heading_28px_150p_bold" style="text-align: left;">
+        ご利用にあたって
+      </div>
+      <div style="height: 40px"></div>
+
+      <div class="heading_20px_150p_bold" style="text-align: left;">
+        4. 推奨環境について
+      </div>
+      <div style="height: 8px"></div>
+      <div class="text_16px_150p" style="text-align: left;">
+        Android 6.0 以上で動作するChrome（最新版）
+      </div>
+      <div style="height: 32px"></div>
+
+      <div class="heading_20px_150p_bold" style="text-align: left;">
+        5. お問い合わせ
+      </div>
+      <div style="height: 8px"></div>
+      <div class="text_16px_150p" style="text-align: left;">
+        当サイトについてのお問い合わせは下記にお願いいたします。
+      </div>
+      <div style="height: 32px"></div>
+
+      <div class="heading_20px_150p_bold" style="text-align: left;">
+        6.プライバシーポリシー
+      </div>
+      <div style="height: 8px"></div>
+      <div class="text_16px_150p" style="text-align: left;">
+        当サイトでは、当サイトについてのお問い合わせをいただくときに限って、お問い合わせいただいた方の個人情報を収集・利用します。
+      </div>
+      <div style="height: 32px"></div>
+
     </div>
-    <div  style="text-align: right;">
-      count:
-        <input type="text" id="debug_terminal_count1" value="" size="5" />
-        <input type="text" id="debug_terminal_count2" value="" size="5" />
-        <input type="text" id="debug_terminal_count3" value="" size="5" />
-      <br />
-      rssi:
-        <input type="text" id="debug_terminal_rssi1" value="" size="5" />
-        <input type="text" id="debug_terminal_rssi2" value="" size="5" />
-        <input type="text" id="debug_terminal_rssi3" value="" size="5" />
-      <br />
-      performance_check:
-      <input type="text" id="debug_performance" value="" size="5" />
-      <input type="button" value="動作ログ送信" onclick="sendDebugLog();" />
-      <input type="text" id="debug_sendlog" value="" size="5" />
+    <div style="height: 40px"></div>
+    <div class="touch_button" onclick="notice_popup_toggle();">
+      <div class="touch_button_inner">閉じる</div>
     </div>
+    <div style="height: 20px"></div>
+  </article>
+
+  <nav id="debug_window" class="debug">
+    <details class="debug" style="text-align: left;">
+      <summary class="debug">デバッグ情報</summary>
+      <details class="debug" style="text-align: left;">
+        <summary class="debug">測定回数(1~3秒前):</summary>
+          <input type="text" id="debug_terminal_count1" value="" size="3" /> -
+          <input type="text" id="debug_terminal_count2" value="" size="3" /> -
+          <input type="text" id="debug_terminal_count3" value="" size="3" />
+      </details>
+      <details class="debug" style="text-align: left;">
+        <summary class="debug">測定結果:</summary>
+          1秒前 <input type="text" id="debug_terminal_rssi1" value="" size="25" /><br />
+          2秒前 <input type="text" id="debug_terminal_rssi2" value="" size="25" /><br />
+          3秒前 <input type="text" id="debug_terminal_rssi3" value="" size="25" />
+      </details>
+      <details class="debug" style="text-align: left;">
+        <summary class="debug">性能確認:</summary>
+        閾値 <input type="text" id="debug_performance_criteria" value="" size="5" />回/秒<br />
+        判定結果 <input type="text" id="debug_performance_result" value="" size="5" />回/5秒
+      </details>
+      <details class="debug" style="text-align: left;">
+        <summary class="debug">デバッグ用コマンド:</summary>
+        <input type="button" value="表示強制切り替え" onclick="toggle_visible();" /><br />
+        <input type="button" value="動作ログ送信" onclick="sendDebugLog();" />
+        結果 : <input type="text" id="debug_sendlog" value="" size="5" /><br />
+        <input type="button" value="サーバーから再読込" onclick="location.reload(true);" />
+      </details>
+    </details>
   </nav>
 
   <script>
     // 最初のウインドウを起動時に可視にする
-    var boot_window = document.getElementById("1_1");
-    boot_window.style.visibility = 'visible';
+    document.getElementById("1_1").style.visibility = 'visible';
+    // URLに ?debug と入っていたらデバッグ用ウインドウを表示する
+    if (document.location.search.substring(1) == 'debug') {
+      document.getElementById("debug_window").style.visibility = 'visible';
+      debug_mode = true;
+    }
   </script>
 
 </body>

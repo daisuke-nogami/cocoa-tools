@@ -9,6 +9,7 @@
   --dark_gray: #D0D2E0;
   --light-gray: #EFF1F8;
   --black: #373845;
+  --secondary_color_dark: #2247A7;
 }
 
 /* 文書全体での共通書式 */
@@ -17,15 +18,27 @@ body {
   margin: 0px;
   overflow-y: hidden;
 }
+a:hover {
+  color: var(--secondary_color_dark);
+}
 
 /* デバッグ用情報表示場所 */
-nav {
+nav.debug {
+  visibility: hidden;
   /* 背景色 */
   background-color: var(--dark_gray);
   /* 位置は画面の右下 */
   position: absolute;
   right: 0;
   bottom: 0;
+}
+details.debug {
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    padding: 0 0 0 .5em;
+}
+summary.debug {
+    font-weight: bold;
 }
 
 /* 画面幅による切り分け */
@@ -129,6 +142,32 @@ nav {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%);
+}
+
+/* ご利用にあたって 用ポップアップ */
+.notice_popup {
+  /* 背景色 ※別途指定を受ける */
+  background-color: var(--light-gray);
+  /* 画面中央に配置する */
+  position: absolute;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%);
+  top: 10%;
+  /* 画面の8割を埋める */
+  height: 80%;
+  width: 80%;
+  padding: 0px;
+  /* 角を丸める */
+  border-radius: 16px;
+  /* 中身は左右センタリングする */
+  text-align: center;
+  /* 最初は表示しない */
+  visibility: hidden;
+  /* 縦にはみ出す場合はスクロールさせて縦にのばさせない */
+  overflow-y: auto;
+  /* 横のスクロールバーは消す */
+  overflow-x: hidden;
 }
 
 /* 表示するオブジェクトを切り替えるための箱 */
