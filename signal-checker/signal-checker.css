@@ -158,7 +158,8 @@ summary.debug {
   height: 80%;
   width: 80%;
   padding: 0px;
-  /* 角を丸める */
+  /* 境界線は黒で角を丸める */
+  border: 1px solid var(--black);
   border-radius: 16px;
   /* 中身は左右センタリングする */
   text-align: center;

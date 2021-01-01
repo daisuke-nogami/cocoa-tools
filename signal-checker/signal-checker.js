@@ -386,6 +386,8 @@ function threshold_calculation() {
 
   // 現在時刻の取得
   var nowtime = new Date();
+  // 現在の時刻のRSSIの最大値と比較し、大きいものを残す
+  detect_criteria = get_max_rssi(nowtime.getSeconds(), detect_criteria);
   // 1秒前の時刻を得て、その時刻のRSSIの最大値と比較し、大きいものを残す
   nowtime.setSeconds(nowtime.getSeconds() - 1);
   detect_criteria = get_max_rssi(nowtime.getSeconds(), detect_criteria);
