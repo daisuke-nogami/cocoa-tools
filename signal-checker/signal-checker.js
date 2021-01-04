@@ -10,7 +10,7 @@ var detect_threshold = 5;      // detect_criteriaをどの程度上回れば検�
 var running_detection = false; // 検知を実施中か否か
 // 起動時のパフォーマンス測定の設定
 const perfomance_check_seconds  = 5; // 時間(秒)
-var   perfomance_check_criteria = 2; // 回/秒
+var   perfomance_check_criteria = 5; // 回/測定時間
 // デバッグ用ウインドウの表示/非表示切り替え
 var debug_mode = false;
 
@@ -275,6 +275,12 @@ async function check_enviroment(){
     navigator.bluetooth.addEventListener('advertisementreceived', found_terminal );
     // 3_2(パフォーマンス測定)画面を開く
     change_window("perfomance_checking");
+    // デバッグ用ウインドウ表示時には
+    if (debug_mode) {
+      // 現在時刻をデバッグ欄に表示し
+      var nowtime = new Date();
+      document.getElementById("debug_performance_check_start_time").value = nowtime.getSeconds();
+    }
     // スキャン停止時にトップに戻さない設定で
     return_top_when_scan_stopped = false;
     // スキャン稼働チェックを回しつつ
@@ -330,7 +336,7 @@ function perfomance_check() {
     // デバッグ用情報を表示し
     document.getElementById("debug_performance_result").value = perfomance_count;
     // 現在時刻をデバッグ欄に表示し
-    document.getElementById("debug_performance_check_start_time").value = nowtime.getSeconds();
+    document.getElementById("debug_performance_check_end_time").value = nowtime.getSeconds();
     // デバッグ条件を反映する
     if ( parseInt(document.getElementById("debug_performance_criteria").value, 10) ) {
       perfomance_check_criteria = parseInt(document.getElementById("debug_performance_criteria").value, 10);
@@ -338,7 +344,7 @@ function perfomance_check() {
   }
 
   // 測定結果を判定
-  if ( perfomance_count < perfomance_check_seconds * perfomance_check_criteria) {
+  if ( perfomance_count < perfomance_check_criteria) {
     // Bluetoothのスキャン頻度が不足していたら、
     // パフォーマンス不足を伝えるエラー画面を開く
     change_window("boot_retry");
@@ -427,6 +433,12 @@ function device_detection(rssi_score) {
     running_detection = false;
     // 計測成功画面に変更する
     change_window("detect_succeed");
+    // デバッグ用ウインドウ表示時には
+    if (debug_mode) {
+      // 現在時刻をデバッグ欄に表示
+      var nowtime = new Date();
+      document.getElementById("debug_detect_found_time").value = nowtime.getSeconds();
+    }
   }
 }
 
@@ -459,9 +471,12 @@ async function sendDebugLog(){
     content += '性能評価時間(sec)\t' + perfomance_check_seconds + '\n';
     content += '性能評価条件(回/sec)\t' + perfomance_check_criteria + '\n';
     content += '性能評価開始時刻(秒)\t' + document.getElementById("debug_performance_check_start_time").value + '\n';
+    content += '性能評価終了時刻(秒)\t' + document.getElementById("debug_performance_check_end_time").value + '\n';
     content += '判定基準値(dB)\t' + detect_criteria + '\n';
     content += '判定閾値(dB)\t' + detect_threshold + '\n';
     content += '判定開始時刻(秒)\t' + document.getElementById("debug_detect_start_time").value + '\n';
+    content += '判定終了時刻(秒)\t' + document.getElementById("debug_detect_found_time").value + '\n';
+    content += '\n';
     // terminal_count(タブ区切り加工)
     content += 'terminal_count\n';
     content += '\n';

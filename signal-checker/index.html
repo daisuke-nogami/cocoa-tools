@@ -622,21 +622,23 @@
       </details>
       <details class="debug" style="text-align: left;">
         <summary class="debug">性能確認:</summary>
-        閾値 <input type="text" id="debug_performance_criteria" value="" size="5" />回/秒 /
-        開始時刻 <input type="text" id="debug_performance_check_start_time" value="" size="5" />秒 /
-        判定結果 <input type="text" id="debug_performance_result" value="" size="5" />回/5秒
+        閾値 <input type="text" id="debug_performance_criteria" value="" size="2" />回/秒 /
+        開始時刻 <input type="text" id="debug_performance_check_start_time" value="" size="2" />秒<br />
+        判定結果 <input type="text" id="debug_performance_result" value="" size="2" />回 /
+        判定時刻 <input type="text" id="debug_performance_check_end_time" value="" size="2" />秒
       </details>
       <details class="debug" style="text-align: left;">
         <summary class="debug">動作判定:</summary>
-        閾値 <input type="text" id="debug_detect_threshold" value="" size="5" />dB /
-        開始時刻 <input type="text" id="debug_detect_start_time" value="" size="5" />秒 /
-        判定条件 <input type="text" id="debug_detect_criteria" value="" size="5" />dB
+        閾値 <input type="text" id="debug_detect_threshold" value="" size="2" />dB /
+        開始時刻 <input type="text" id="debug_detect_start_time" value="" size="2" />秒<br />
+        判定条件 <input type="text" id="debug_detect_criteria" value="" size="2" />dB /
+        判定時刻 <input type="text" id="debug_detect_found_time" value="" size="2" />秒
       </details>
       <details class="debug" style="text-align: left;">
         <summary class="debug">デバッグ用コマンド:</summary>
         <input type="button" value="表示強制切り替え" onclick="toggle_visible();" /><br />
         <input type="button" value="動作ログ送信" onclick="sendDebugLog();" />
-        結果 : <input type="text" id="debug_sendlog" value="" size="5" /><br />
+        結果 : <input type="text" id="debug_sendlog" value="" size="2" /><br />
         <input type="button" value="サーバーから再読込" onclick="location.reload(true);" />
       </details>
     </details>
