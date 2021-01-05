@@ -11,6 +11,8 @@ var running_detection = false; // 検知を実施中か否か
 // 起動時のパフォーマンス測定の設定
 const perfomance_check_seconds  = 5; // 時間(秒)
 var   perfomance_check_criteria = 5; // 回/測定時間
+// 検知条件算出時間(端末を話した状態でのRSSIを収集する秒数)
+var   threshold_calculation_seconds = 4; // 秒
 // デバッグ用ウインドウの表示/非表示切り替え
 var debug_mode = false;
 
@@ -343,6 +345,7 @@ function perfomance_check() {
     // デバッグ用情報を表示し
     document.getElementById("debug_performance_result").value = perfomance_count;
     // 現在時刻をデバッグ欄に表示し
+    nowtime.setSeconds(nowtime.getSeconds() + 5);
     document.getElementById("debug_performance_check_end_time").value = nowtime.getSeconds();
     // デバッグ条件を反映する
     if ( parseInt(document.getElementById("debug_performance_criteria").value, 10) ) {
@@ -371,7 +374,8 @@ function set_detect_timer() {
   // 画面を切り替える
   change_window("waiting_detect_criteria");
   // 検知条件の算出をする関数をタイマーで仕掛ける
-  setTimeout(threshold_calculation, 6000);
+  // 2秒余分にするのは、端末からスマホを離して貰う時間確保のため
+  setTimeout(threshold_calculation, (threshold_calculation_seconds + 2) * 1000);
 }
 
 // 検知条件の算出
@@ -401,15 +405,12 @@ function threshold_calculation() {
   var nowtime = new Date();
   // 現在の時刻のRSSIの最大値と比較し、大きいものを残す
   detect_criteria = get_max_rssi(nowtime.getSeconds(), detect_criteria);
-  // 1秒前の時刻を得て、その時刻のRSSIの最大値と比較し、大きいものを残す
-  nowtime.setSeconds(nowtime.getSeconds() - 1);
-  detect_criteria = get_max_rssi(nowtime.getSeconds(), detect_criteria);
-  // 2秒前の時刻を得て、その時刻のRSSIの最大値と比較し、大きいものを残す
-  nowtime.setSeconds(nowtime.getSeconds() - 1);
-  detect_criteria = get_max_rssi(nowtime.getSeconds(), detect_criteria);
-  // 3秒前の時刻を得て、その時刻のRSSIの最大値と比較し、大きいものを残す
-  nowtime.setSeconds(nowtime.getSeconds() - 1);
-  detect_criteria = get_max_rssi(nowtime.getSeconds(), detect_criteria);
+  // 検知条件算出時間(threshold_calculation_seconds)から2引いた回数だけ遡る
+  for (var i=0; i<(threshold_calculation_seconds-2); i++) {
+    // 時刻を1秒前戻し、その時刻のRSSIの最大値と比較し、大きいものを残す
+    nowtime.setSeconds(nowtime.getSeconds() - 1);
+    detect_criteria = get_max_rssi(nowtime.getSeconds(), detect_criteria);
+  }
 
   // 画面を切り替えて
   change_window("starting_detection");
