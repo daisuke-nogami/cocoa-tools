@@ -409,7 +409,7 @@ function threshold_calculation() {
   // 判定しなさいフラグを立てて
   running_detection = true;
   // タイムアウト時の処理をするタイマーをセットする
-  setTimeout(detect_timeout, 15000);
+  timeout_checker = setTimeout(detect_timeout, 15000);
 
   // デバッグモードの時には
   if (debug_mode) {
@@ -431,6 +431,8 @@ function device_detection(rssi_score) {
   if ( rssi_score > detect_criteria + detect_threshold ) {
     // 判定しなさいフラグを下ろし
     running_detection = false;
+    // タイムアウト処理も解除して
+    clearTimeout(timeout_checker);
     // 計測成功画面に変更する
     change_window("detect_succeed");
     // デバッグ用ウインドウ表示時には
@@ -443,6 +445,7 @@ function device_detection(rssi_score) {
 }
 
 // タイムアウト時の処理をする
+var timeout_checker;
 function detect_timeout() {
   // 判定しなさいフラグが立っていたら
   if (running_detection) {
