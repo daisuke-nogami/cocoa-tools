@@ -18,6 +18,10 @@ body {
   margin: 0px;
   overflow-y: hidden;
 }
+a {
+  color: var(--secondary_color);
+  text-decoration: underline;
+}
 a:hover {
   color: var(--secondary_color_dark);
 }
@@ -46,8 +50,11 @@ summary.debug {
   /*　画面サイズが640pxまではここを読み込む　*/
   :root {
     --window-width: calc(100% - 24px * 2);
+    --window-width-narrow: calc(100% - 24px * 2);
     --ul_align: column;
-    --half_width: 100%;
+    --half_padding: 32px;
+    --half_width: calc(100% - var(--half_padding) * 2);
+    --full_width: calc(100% - var(--half_padding) * 2);
     --logo_pc: hidden;
     --logo_sp: visible;
     --logo_pc_height: 0px;
@@ -58,8 +65,11 @@ summary.debug {
   /*　画面サイズが640px以上はここを読み込む　*/
   :root {
     --window-width: 640px;
+    --window-width-narrow: 600px;
     --ul_align: row;
-    --half_width: 40%;
+    --half_padding: 20px;
+    --half_width: calc(50% - var(--half_padding) * 2);
+    --full_width: calc(100% - var(--half_padding) * 2);
     --logo_pc: visible;
     --logo_sp: hidden;
     --logo_pc_height: 38px;
@@ -83,12 +93,18 @@ summary.debug {
   line-height: 150%;
   text-align: center;
 }
-.heading_28px_150p_bold {
+.heading_28px_150p_bold,
+.heading_28px_150p_bold_narrow {
   font-style: normal;
   font-weight: bold;
   font-size: 28px;
   line-height: 150%;
   text-align: center;
+}
+.heading_28px_150p_bold_narrow {
+  width: var(--window-width-narrow);
+  margin-right: auto;
+  margin-left: auto;
 }
 .heading_20px_150p_bold {
   font-style: normal;
@@ -118,13 +134,14 @@ summary.debug {
   line-height: 150%;
   text-align: left;
   /* 枠との間を020px分空ける */
-  padding: 20px;
+/*  padding: var(--half_padding); */
 }
 
 /* 見出しの左脇に付ける線 */
 .heading_mark {
   border-left: solid 4px var(--black);
   padding-left: 8px;
+/*  margin-left: var(--half_padding); */
 }
 
 /* 全画面共通のフッタの書式設定 */
@@ -221,6 +238,9 @@ summary.debug {
   display: table;
   color: var(--white);
 }
+.touch_button:hover {
+  background-color: var(--secondary_color_dark);
+}
 .touch_button_inner {
   display: table-cell;
   vertical-align: middle;
@@ -272,14 +292,14 @@ summary.debug {
   flex-direction: var(--ul_align);
 }
 .content_text_full {
-  padding: 0.5em;
   text-align: left;
-  width: 80%;
+  width: var(--full_width);
+  padding: var(--half_padding);
 }
 .content_text_half {
-  padding: 0.5em;
   text-align: left;
   width: var(--half_width);
+  padding: var(--half_padding);
 }
 
 /*
