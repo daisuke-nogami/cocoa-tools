@@ -29,7 +29,8 @@ function change_window(target_type) {
     document.getElementById("6_1"), // 7
     document.getElementById("7_1"), // 8
     document.getElementById("7_2"), // 9
-    document.getElementById("9_1")  // 10
+    document.getElementById("9_1"), // 10
+    document.getElementById("10_1") // 11
   ];
   // いったん全部隠す
   for (var i=0; i<windows_handle.length; i++) {
@@ -48,6 +49,7 @@ function change_window(target_type) {
     case "detect_succeed":          windows_handle[8].style.visibility  = 'visible'; break;
     case "detect_failed" :          windows_handle[9].style.visibility  = 'visible'; break;
     case "faq_enduser":             windows_handle[10].style.visibility = 'visible'; break;
+    case "notice":                  windows_handle[11].style.visibility = 'visible'; break;
     default:
       // デバッグ用の画面番号指定
       windows_handle[target_type].style.visibility = 'visible';
@@ -55,11 +57,16 @@ function change_window(target_type) {
 }
 
 // ご利用にあたって を開けたり閉じたりする
-function notice_popup_toggle() {
-  if ( document.getElementById("10_1").style.visibility == 'visible' ) {
-    document.getElementById("10_1").style.visibility = 'hidden';
+var prev_window_notice = 0;
+function notice_window_toggle(target) {
+  if (target != '') {
+    // ご利用にあたって　を呼び出した画面を記憶して
+    prev_window_notice = target;
+    // ご利用にあたって　を表示する
+    change_window('notice');
   } else {
-    document.getElementById("10_1").style.visibility = 'visible';
+    // ご利用にあたって　を表示する元の画面にもどす
+    change_window(prev_window_notice);
   }
 }
 

@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="footer">
-      お問い合わせ　　<a onclick="notice_popup_toggle()">ご利用にあたって</a><br />
+      お問い合わせ　　<a onclick="notice_window_toggle('operator')">ご利用にあたって</a><br />
       Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="footer">
-      お問い合わせ　　<a onclick="notice_popup_toggle()">ご利用にあたって</a><br />
+      お問い合わせ　　<a onclick="notice_window_toggle('operator')">ご利用にあたって</a><br />
       Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
@@ -118,14 +118,13 @@
       </div>
       <div class="accordion_content" id="reason_3_content">
         <div class="text_16px_150p">
-          Chromeの<b>"experimental-web-platform-features"(テスト中機能)</b>を<b>"Enabled"(有効)</b>にしてください。<br />
           <ul>
             <li>
               アドレス <input type="text" value="chrome://flags/#enable-experimental-web-platform-features" id="privileged_url" /> を開きます。<br />
               <a onclick="open_new_tab_with_privileged_url()">ここをクリック</a>すると、上記のアドレスをクリップボードに格納して新しいウインドウを開くので、アドレス欄に「貼り付け」を行って下さい。
             </li>
             <li>
-              画面に表示される<b>［Experimental Web Platform features］</b>を<b>［Enabled］</b>に変えます。
+              画面に表示される<b>［Experimental Web Platform features］</b>(テスト中機能)を<b>［Enabled］</b>(有効)に変えます。
             </li>
           </ul>
           <div style="text-align: center;">
@@ -225,7 +224,7 @@
       </div>
     </div>
     <div class="footer">
-      お問い合わせ　　<a onclick="notice_popup_toggle()">ご利用にあたって</a><br />
+      お問い合わせ　　<a onclick="notice_window_toggle('operator')">ご利用にあたって</a><br />
       Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
@@ -250,7 +249,7 @@
       <div style="height: 80px"></div>
     </div>
     <div class="footer">
-      お問い合わせ　　<a onclick="notice_popup_toggle()">ご利用にあたって</a><br />
+      お問い合わせ　　ご利用にあたって<br />
       Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
@@ -314,7 +313,7 @@
       </div>
     </div>
     <div class="footer">
-      お問い合わせ　　<a onclick="notice_popup_toggle()">ご利用にあたって</a><br />
+      お問い合わせ　　<a onclick="notice_window_toggle('enduser')">ご利用にあたって</a><br />
       Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
@@ -355,7 +354,7 @@
       </div>
     </div>
     <div class="footer">
-      お問い合わせ　　<a onclick="notice_popup_toggle()">ご利用にあたって</a><br />
+      お問い合わせ　　ご利用にあたって<br />
       Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
@@ -380,7 +379,7 @@
       </div>
     </div>
     <div class="footer">
-      お問い合わせ　　<a onclick="notice_popup_toggle()">ご利用にあたって</a><br />
+      お問い合わせ　　<a onclick="notice_window_toggle('starting_detection')">ご利用にあたって</a><br />
       Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
@@ -413,7 +412,7 @@
       </div>
     </div>
     <div class="footer">
-      お問い合わせ　　<a onclick="notice_popup_toggle()">ご利用にあたって</a><br />
+      お問い合わせ　　<a onclick="notice_window_toggle('detect_succeed')">ご利用にあたって</a><br />
       Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
@@ -449,7 +448,7 @@
       </div>
     </div>
     <div class="footer">
-      お問い合わせ　　<a onclick="notice_popup_toggle()">ご利用にあたって</a><br />
+      お問い合わせ　　<a onclick="notice_window_toggle('detect_failed')">ご利用にあたって</a><br />
       Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
@@ -503,7 +502,7 @@
       <div class="touch_button_inner">TOPにもどる</div>
     </div>
     <div class="footer">
-      お問い合わせ　　<a onclick="notice_popup_toggle()">ご利用にあたって</a><br />
+      お問い合わせ　　<a onclick="notice_window_toggle('faq_operator')">ご利用にあたって</a><br />
       Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
@@ -557,13 +556,21 @@
       <div class="touch_button_inner">TOPにもどる</div>
     </div>
     <div class="footer">
-      お問い合わせ　　<a onclick="notice_popup_toggle()">ご利用にあたって</a><br />
+      お問い合わせ　　<a onclick="notice_window_toggle('faq_enduser')">ご利用にあたって</a><br />
       Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
 
-  <article class="notice_popup" id="10_1">
+  <article class="window_box_main" id="10_1">
     <div style="height: 20px"></div>
+    <div class="working_header">
+      <div style="margin-left: 23px;">
+        <img src="top.svg" alt="COCOA動作チェッカー" />
+      </div>
+      <div style="text-align: right; margin-right: 23px;">
+        <img src="icon_FAQ.svg" />
+      </div>
+    </div>
     <div class="window_box_content">
       <div class="heading_28px_150p_bold" style="text-align: left;">
         ご利用にあたって
@@ -599,10 +606,14 @@
 
     </div>
     <div style="height: 40px"></div>
-    <div class="touch_button" onclick="notice_popup_toggle();">
-      <div class="touch_button_inner">閉じる</div>
+    <div class="touch_button" onclick="notice_window_toggle('');">
+      <div class="touch_button_inner">TOPにもどる</div>
     </div>
     <div style="height: 20px"></div>
+    <div class="footer">
+      お問い合わせ　　ご利用にあたって<br />
+      Copyright &copy; DeNA Co., Ltd. All rights reserved.
+    </div>
   </article>
 
   <nav id="debug_window" class="debug">
