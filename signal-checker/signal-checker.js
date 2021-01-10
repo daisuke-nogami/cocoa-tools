@@ -58,7 +58,7 @@ function change_window(target_type) {
   }
 }
 
-// ご利用にあたって を開けたり閉じたりする
+// ご利用にあたって へ遷移したり遷移元に戻ったりする
 var prev_window_notice = 0;
 function notice_window_toggle(target) {
   if (target != '') {
@@ -69,6 +69,34 @@ function notice_window_toggle(target) {
   } else {
     // ご利用にあたって　を表示する元の画面にもどす
     change_window(prev_window_notice);
+  }
+}
+
+// よくあるご質問 へ遷移したり戻ったりする
+var prev_window_help = 0;
+function help_window_toggle(target) {
+  if (target != '') {
+    // ご利用にあたって　を呼び出した画面を記憶して
+    prev_window_help = target;
+    // ご利用にあたって　を表示する
+    change_window('faq_operator');
+  } else {
+    // ご利用にあたって　を表示する元の画面にもどす
+    change_window(prev_window_help);
+  }
+}
+
+// FAQ へ遷移したり戻ったりする
+var prev_window_faq = 0;
+function faq_window_toggle(target) {
+  if (target != '') {
+    // ご利用にあたって　を呼び出した画面を記憶して
+    prev_window_faq = target;
+    // ご利用にあたって　を表示する
+    change_window('faq_enduser');
+  } else {
+    // ご利用にあたって　を表示する元の画面にもどす
+    change_window(prev_window_faq);
   }
 }
 

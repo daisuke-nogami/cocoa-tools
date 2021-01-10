@@ -17,7 +17,7 @@
 
   <article class="window_box_boot" id="1_1">
     <div style="height: 24px"></div>
-    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="change_window('faq_operator');">
+    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="help_window_toggle('operator');">
       よくあるご質問
     </div>
     <div class="window_box_content">
@@ -41,7 +41,7 @@
 
   <article class="window_box_boot" id="2_1">
     <div style="height: 24px"></div>
-    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="change_window('faq_operator');">
+    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="help_window_toggle('operator');">
       よくあるご質問
     </div>
     <div class="window_box_content">
@@ -66,7 +66,7 @@
 
   <article class="window_box_boot" id="2_2">
     <div style="height: 24px"></div>
-    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="change_window('faq_operator');">
+    <div class="text_16px_150p" style="text-align: right; margin-right: 23px;" onclick="help_window_toggle('operator');">
       よくあるご質問
     </div>
     <div class="window_box_content">
@@ -236,7 +236,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" onclick="change_window('faq_enduser');" />
+        <img src="icon_FAQ.svg" class="faq_mark" />
       </div>
     </div>
     <div class="window_box_content">
@@ -258,7 +258,7 @@
   <article class="window_box_main" id="4_1">
     <div style="height: 20px"></div>
     <div style="text-align: right; margin-right: 23px;">
-      <img src="icon_FAQ.svg" onclick="change_window('faq_enduser');" />
+      <img src="icon_FAQ.svg" class="faq_mark" onclick="faq_window_toggle('enduser');" />
     </div>
     <div class="window_box_content">
       <div style="height: 70px"></div>
@@ -325,7 +325,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" onclick="change_window('faq_enduser');" />
+        <img src="icon_FAQ.svg" class="faq_mark" />
       </div>
     </div>
     <div class="window_box_content">
@@ -333,7 +333,8 @@
         <div class="loader" id="loader">Loading...</div>
       <div style="height: 40px"></div>
       <div class="heading_28px_150p_bold">
-        信号確認の準備ができるまで、お待ちください。
+        信号確認の準備ができるまで、<br />
+        スマホを画面から離してお待ちください。
       </div>
       <div style="height: 80px"></div>
     </div>
@@ -366,7 +367,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" onclick="change_window('faq_enduser');" />
+        <img src="icon_FAQ.svg" class="faq_mark" onclick="faq_window_toggle('starting_detection');" />
       </div>
     </div>
     <div class="window_box_content">
@@ -391,7 +392,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" onclick="change_window('faq_enduser');" />
+        <img src="icon_FAQ.svg" class="faq_mark" onclick="faq_window_toggle('detect_succeed');" />
       </div>
     </div>
     <div class="window_box_content">
@@ -424,7 +425,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" onclick="change_window('faq_enduser');" />
+        <img src="icon_FAQ.svg" class="faq_mark" onclick="faq_window_toggle('detect_failed');" />
       </div>
     </div>
     <div class="window_box_content">
@@ -460,7 +461,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" onclick="change_window('operator');" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" />
+        <img src="icon_FAQ.svg" class="faq_mark" />
       </div>
     </div>
     <div class="window_box_content">
@@ -499,10 +500,10 @@
     </div>
     <div style="height: 40px"></div>
     <div class="touch_button" onclick="change_window('operator');">
-      <div class="touch_button_inner">TOPにもどる</div>
+      <div class="touch_button_inner">もどる</div>
     </div>
     <div class="footer">
-      お問い合わせ　　<a onclick="notice_window_toggle('faq_operator')">ご利用にあたって</a><br />
+      お問い合わせ　　<a onclick="help_window_toggle('')">ご利用にあたって</a><br />
       Copyright &copy; DeNA Co., Ltd. All rights reserved.
     </div>
   </article>
@@ -514,7 +515,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" onclick="change_window('enduser');" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" />
+        <img src="icon_FAQ.svg" class="faq_mark" />
       </div>
     </div>
     <div class="window_box_content">
@@ -552,8 +553,8 @@
       <div style="height: 32px"></div>
     </div>
     <div style="height: 40px"></div>
-    <div class="touch_button" onclick="change_window('enduser');">
-      <div class="touch_button_inner">TOPにもどる</div>
+    <div class="touch_button" onclick="faq_window_toggle('');">
+      <div class="touch_button_inner">もどる</div>
     </div>
     <div class="footer">
       お問い合わせ　　<a onclick="notice_window_toggle('faq_enduser')">ご利用にあたって</a><br />
@@ -568,7 +569,7 @@
         <img src="top.svg" alt="COCOA動作チェッカー" />
       </div>
       <div style="text-align: right; margin-right: 23px;">
-        <img src="icon_FAQ.svg" />
+        <img src="icon_FAQ.svg" class="faq_mark" />
       </div>
     </div>
     <div class="window_box_content">

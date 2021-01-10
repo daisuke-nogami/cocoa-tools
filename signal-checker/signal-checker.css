@@ -302,6 +302,14 @@ summary.debug {
   padding: var(--half_padding);
 }
 
+/* FAQマークの？の色を変える */
+.faq_mark {
+  filter: grayscale(100%);
+}
+.faq_mark:hover {
+  filter: grayscale(0);
+}
+
 /*
 ローディング中のクルクルは他サイトのものを引用
  */
