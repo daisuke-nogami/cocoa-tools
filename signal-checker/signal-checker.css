@@ -310,6 +310,47 @@ summary.debug {
   filter: grayscale(0);
 }
 
+/* 動作確認直前にスマホを離して貰うアニメーション / 動作確認時にスマホをかざして貰うアニメーション */
+@keyframes frame_prepare_start {
+  0% {
+    left: calc(50% - (76px / 2) - 14px);
+  }
+  100% {
+    left: calc(100% - 90px);
+  }
+}
+@keyframes frame_detection_start {
+  0% {
+    left: calc(100% - 90px);
+  }
+  100% {
+    left: calc(50% - (76px / 2) - 14px);
+  }
+}
+.frame_prepare {
+  position:relative;
+  height:245px;
+}
+.frame_tablet {
+  position: absolute;
+  top:  0px;
+  left: calc(50% - (229px / 2));
+
+}
+.frame_hand_detect,
+.frame_hand_prepare {
+  position: absolute;
+  top:  106px;
+  left: calc(50% - (76px / 2) - 14px);
+}
+.frame_hand_detect {
+  animation: frame_detection_start 3s ease 0s infinite normal forwards paused;
+}
+.frame_hand_prepare {
+  animation: frame_prepare_start 3s ease 0s infinite normal forwards paused;
+}
+
+
 /*
 ローディング中のクルクルは他サイトのものを引用
  */

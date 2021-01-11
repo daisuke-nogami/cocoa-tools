@@ -401,6 +401,8 @@ function perfomance_check() {
 function set_detect_timer() {
   // 画面を切り替える
   change_window("waiting_detect_criteria");
+  // アニメーションを起動する
+  document.getElementById("frame_hand_prepare").style.animationPlayState = 'running';
   // 検知条件の算出をする関数をタイマーで仕掛ける
   // 2秒余分にするのは、端末からスマホを離して貰う時間確保のため
   setTimeout(threshold_calculation, (threshold_calculation_seconds + 2) * 1000);
@@ -440,8 +442,12 @@ function threshold_calculation() {
     detect_criteria = get_max_rssi(nowtime.getSeconds(), detect_criteria);
   }
 
+  // アニメーションをとめて
+  document.getElementById("frame_hand_prepare").style.animationPlayState = 'paused';
   // 画面を切り替えて
   change_window("starting_detection");
+  // アニメーションを起動する
+  document.getElementById("frame_hand_detect").style.animationPlayState = 'running';
   // 判定しなさいフラグを立てて
   running_detection = true;
   // タイムアウト時の処理をするタイマーをセットする
@@ -469,6 +475,8 @@ function device_detection(rssi_score) {
     running_detection = false;
     // タイムアウト処理も解除して
     clearTimeout(timeout_checker);
+    // アニメーションをとめて
+    document.getElementById("frame_hand_detect").style.animationPlayState = 'paused';
     // 計測成功画面に変更する
     change_window("detect_succeed");
     // デバッグ用ウインドウ表示時には
@@ -487,6 +495,8 @@ function detect_timeout() {
   if (running_detection) {
     // 判定しなさいフラグを下ろして
     running_detection = false;
+    // アニメーションをとめて
+    document.getElementById("frame_hand_detect").style.animationPlayState = 'paused';
     // 画面を失敗画面に切り替える
     change_window("detect_failed");
   }
