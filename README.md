@@ -1,4 +1,4 @@
-# cocoa-tools
+# cocoa-checker
 Utility tools for COCOA ( Covid-19 Exposure Notification System in Japan ) using Web-Bluetooth / COCOA(Covid-19接触確認アプリ)の普及状況把握などに用いるためのツール群
 
 ## tools list
