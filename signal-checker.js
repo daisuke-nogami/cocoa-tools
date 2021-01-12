@@ -402,7 +402,7 @@ function set_detect_timer() {
   // 画面を切り替える
   change_window("waiting_detect_criteria");
   // アニメーションを起動する
-  document.getElementById("frame_hand_prepare").style.animationPlayState = 'running';
+  //document.getElementById("frame_hand_prepare").style.animationPlayState = 'running';
   // 検知条件の算出をする関数をタイマーで仕掛ける
   // 2秒余分にするのは、端末からスマホを離して貰う時間確保のため
   setTimeout(threshold_calculation, (threshold_calculation_seconds + 2) * 1000);
@@ -443,9 +443,18 @@ function threshold_calculation() {
   }
 
   // アニメーションをとめて
-  document.getElementById("frame_hand_prepare").style.animationPlayState = 'paused';
+  //document.getElementById("frame_hand_prepare").style.animationPlayState = 'paused';
   // 画面を切り替えて
   change_window("starting_detection");
+
+  // スマホをかざすアニメーションを有効にして
+  document.getElementById("frame_hand_detect").classList.toggle('active');
+  // スマホをかざすアニメーションを1回したら止めるイベントリスナーを1回起動で仕込んで
+  document.getElementById("frame_hand_detect").addEventListener('animationiteration', () => {
+    document.getElementById("frame_hand_detect").style.animationPlayState = 'paused';
+    document.getElementById("frame_hand_detect").classList.toggle('active');
+  }, {once: true});
+
   // アニメーションを起動する
   document.getElementById("frame_hand_detect").style.animationPlayState = 'running';
   // 判定しなさいフラグを立てて

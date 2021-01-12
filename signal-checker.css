@@ -343,10 +343,10 @@ summary.debug {
   top:  106px;
   left: calc(50% - (76px / 2) - 14px);
 }
-.frame_hand_detect {
-  animation: frame_detection_start 3s ease 0s infinite normal forwards paused;
+.frame_hand_detect.active {
+  animation: frame_detection_start 4s ease 0s infinite normal forwards paused;
 }
-.frame_hand_prepare {
+.frame_hand_prepare.active {
   animation: frame_prepare_start 3s ease 0s infinite normal forwards paused;
 }
 
