@@ -11,9 +11,9 @@ COCOA動作チェッカーをご利用の方は、
 
 ## 横浜スタジアムでの技術実証に用いたコード
 
-- [Install Checker - 端末のCOCOAインストール状況チェック](https://daisuke-nogami.github.io/cocoa-tools/tech-demonstration/install-checker.html)
+- [Install Checker - 端末のCOCOAインストール状況チェック](https://daisuke-nogami.github.io/cocoa-tools/install-checker.html)
   - 端末にアプリを表示させることなく、COCOAのインストール状況をBluetooth Advertisingから確認するページ
-- [Counter - COCOAインストール済み端末カウント](https://daisuke-nogami.github.io/cocoa-tools/tech-demonstration/counter.html)
+- [Counter - COCOAインストール済み端末カウント](https://daisuke-nogami.github.io/cocoa-tools/counter.html)
   - 周囲のCOCOAインストール済みの端末数を計測するページ
 
 ## about
